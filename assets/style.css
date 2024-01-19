@@ -146,9 +146,14 @@ Blog Section
   color: #fff;
   background: linear-gradient(to bottom, #48abe000, #5920b42d);
   border-radius: 10px;
-  padding-bottom: 50px
-}
+  padding-bottom: 50px;
+  padding: 10px;
 
+}
+#blog-title .flip-card-inner p{
+  font-size: 20px;
+  word-spacing: 2px;
+}
 .blog-post {
   background: 0 0;
   transition: .3s ease;
