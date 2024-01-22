@@ -351,31 +351,34 @@ Floating Notification
 #notification {
   background-color: #8a20b4;
   color: #fff;
-  padding: 10px;
   font-size: 18px;
   position: fixed;
   bottom: 20px;
-  margin: 0 auto;
-  border-radius: 8px;
+  border-radius: 30px;
   box-shadow: 0 0 15px rgba(0, 0, 0, .5);
   display: none;
   animation: slide-in .5s ease-out;
-  padding-right: 40px;
-  margin-left: 20px;
-  z-index: 999
+  padding: 10px;
+  padding-right: 60px;
+  margin-left: 30%;
+  z-index: 1000;
+ 
 }
+#notification a{
+  text-decoration: dotted;
+  color:#fff;
 
+}
 #notification .close-button {
   position: absolute;
   padding-left: 20px;
   color: #fff;
   font-size: 20px;
   font-weight: 700;
-  cursor: pointer
 }
 
 #notification .close-button:hover {
-  color: #036c45;
+  color: #d31c1c;
   transition: .3s ease
 }
 
@@ -505,39 +508,39 @@ Project
 .grid-project {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 10px;
-  margin: 20px;
+  grid-gap: 1%;
+  margin: 2%;
   align-items: center;
   text-align: center;
 }
 
 .grid-project .project-item {
-  background-color: #222627;
+  background: linear-gradient(#2f0a69,#8a20b4);
   border-radius: 5px;
   transition: .5s ease;
   height: 100px;
   width: 300px;
   align-items: center;
   text-align: center;
+  padding: 10px;
 }
 .grid-project  a{
   text-decoration: none;
-  color:white
+  color:white;
+  text-overflow: clip;
 }
 .grid-project .project-item:hover {
-  background-color: #105072
+  background: linear-gradient(#03346c,#105072)
 }
 
 .grid-project .project-item h3 {
   font-size: 24px;
-  margin-bottom: 10px;
   text-align: center;
 }
 
 .grid-project .project-item p {
   font-size: 16px;
   line-height: 1.5;
-  margin-bottom: 100px;
 }
 
 
