@@ -378,17 +378,21 @@ Floating Notification
 }
 
 #notification .close-button:hover {
-  color: #d31c1c;
-  transition: .3s ease
+  transition: .3s ease;
+  cursor: pointer;
 }
 
 @keyframes slide-in {
   0% {
-      transform: translateY(100%)
+      transform: translateY(100%);
+      opacity: 0;
   }
-
+  50% {
+      opacity: 0.5;
+  }
   100% {
-      transform: translateY(0)
+      transform: translateY(0);
+      opacity: 1;
   }
 }
 
