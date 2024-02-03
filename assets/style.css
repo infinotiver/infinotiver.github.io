@@ -4,17 +4,35 @@
 ----------------------------------------
 */
 body {
-  background: #000;
+  background: #00020c;
   -webkit-font-smoothing: antialiased;
   font: 15px arial;
   color: #fff;
-
+  font-family: JetBrains Mono,monospace;
 }
 
 h1 {
   color: #ebebeb;
   text-align: center
 }
+/*
+a {
+  display: inline-block;
+  border-bottom: 1px solid;
+  color: #d2d7dd;
+  border-color: #64748b;
+  transition-property: color;
+  transition-duration: 200ms;
+  line-height: 1;
+}
+a:hover {
+  border-color: #f0f4f8;
+  color:#fff
+}
+*/
+
+
+
 /*
 ----------------------------------------
 [1] Selection
@@ -279,6 +297,7 @@ Master Navigation Panel
   background: -webkit-linear-gradient(25deg, #049faa, #03346c, #5920b4, #8c048c);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
+  
 }
 
 .menu-tab img {
@@ -339,7 +358,8 @@ Master Navigation Panel
 .menu-tab ul li:hover {
   background-color: #5920b4;
   border-radius: 50px;
-  box-shadow: 0 0 20px 15px #5ee2e2
+  box-shadow: 0 0 20px 15px #5ee2e2;
+  filter: brightness(150%);
 }
 
 /*
