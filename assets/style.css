@@ -15,21 +15,9 @@ h1 {
   color: #ebebeb;
   text-align: center
 }
-/*
-a {
-  display: inline-block;
-  border-bottom: 1px solid;
-  color: #d2d7dd;
-  border-color: #64748b;
-  transition-property: color;
-  transition-duration: 200ms;
-  line-height: 1;
-}
-a:hover {
-  border-color: #f0f4f8;
-  color:#fff
-}
-*/
+
+
+
 
 
 
@@ -276,7 +264,7 @@ Floating Notification
 */
 
 #notification {
-  background-color: #8a20b4;
+  background-color: #2f0a69;
   color: #fff;
   font-size: 18px;
   position: fixed;
@@ -289,13 +277,28 @@ Floating Notification
   padding-right: 60px;
   margin-left: 30%;
   z-index: 1000;
+
  
 }
 #notification a{
-  text-decoration: dotted;
-  color:#fff;
+    text-decoration: none;
+    display: inline-block;
+    border-bottom: 1px solid;
+    color: #ddd7d2;
+    border-color: #64748b;
+    transition-property: color;
+    transition-duration: 200ms;
 
 }
+
+#notification a:hover{
+    border-color: #f0f4f8;
+    color:#fff;
+    border-bottom: 2.55px solid;
+    margin-bottom: 2.5px;
+
+}
+
 #notification .close-button {
   position: absolute;
   padding-left: 20px;
