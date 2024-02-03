@@ -15,7 +15,10 @@ h1 {
   color: #ebebeb;
   text-align: center
 }
-
+.name {
+  font-family: Spy Agency;
+  padding: 0.5px;
+}
 
 
 
@@ -449,7 +452,7 @@ Project
 }
 
 .grid-project .project-item {
-  background: linear-gradient(#2f0a69,#8a20b4);
+  background: #080800;
   border-radius: 5px;
   transition: .5s ease;
   height: 100px;
