@@ -138,99 +138,6 @@ Header Banner
   border-bottom: 8px solid #2092b4
 }
 
-/*
-----------------------------------------
-Blog Section
-----------------------------------------
-*/
-
-#blog-section {
-  padding: 20px
-}
-
-#blog-content {
-  margin-top: 30px
-}
-
-#blog-title {
-  margin-bottom: 30px
-}
-
-#blog-title .flip-card-inner {
-  width: auto;
-  height: auto;
-  text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
-  color: #fff;
-  background: linear-gradient(to bottom, #48abe000, #5920b42d);
-  border-radius: 10px;
-  padding-bottom: 50px;
-  padding: 10px;
-
-}
-#blog-title .flip-card-inner p{
-  font-size: 20px;
-  word-spacing: 2px;
-}
-.blog-post {
-  background: 0 0;
-  transition: .3s ease;
-  color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  position: relative;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: #050505;
-  backdrop-filter: blur(5px)
-}
-
-.cover-image {
-  position: relative;
-  overflow: hidden;
-  border-radius: 5px 5px 5px 5px
-}
-
-.cover-image img {
-  width: 500px;
-  height: auto;
-  display: block;
-  transition: transform .3s ease;
-  filter: blur(10px)
-}
-
-.blog-content {
-  margin-top: 0
-}
-
-.blog-post:hover .cover-image img {
-  transform: scale(1.1);
-  filter: blur(0)
-}
-
-.blog-post h3 {
-  margin-top: 10px
-}
-
-.blog-post p {
-  margin-bottom: 0
-}
-
-.blog-post a {
-  color: #fff;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 10px;
-  background-color: #5920b4;
-  padding: 8px 12px;
-  border-radius: 3px;
-  transition: background-color .3s ease
-}
-
-.blog-post a:hover {
-  background-color: #2f0a69
-}
-
 
 
 
@@ -547,6 +454,15 @@ Project
   align-items: center;
   text-align: center;
   padding: 10px;
+}
+.grid-project .project-item .project-tag {
+  background: #fff;
+  color:#000;
+  border-radius: 25px;
+  height:20%;
+  width:40%;
+  padding:5px;
+  
 }
 .grid-project  a{
   text-decoration: none;
