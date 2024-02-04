@@ -462,6 +462,9 @@ Footer
   text-align: left;
   padding: 10px;
 }
+.grid-project .project-item i {
+  padding:2px
+}
 .grid-project .project-item:hover {
   background: #6b6b6b3f;
 }
@@ -469,6 +472,7 @@ Footer
   display: flex;
   flex-wrap: wrap;   /* Allow tags to wrap within the box if necessary */
   gap: 5px;
+  padding:2px
 }
 
 .grid-project .project-item .project-tag span {
