@@ -1,4 +1,4 @@
-/*CyberSafe
+/*
 ----------------------------------------
 1. General Style 
 ----------------------------------------
@@ -22,7 +22,12 @@ h1 {
 
 
 
-
+.aboutme {
+  margin:20px;
+  word-spacing: 2px;
+  justify-content: center;
+  text-align: center;
+}
 
 /*
 ----------------------------------------
