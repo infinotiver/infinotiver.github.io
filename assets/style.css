@@ -51,7 +51,7 @@ h1 {
 */
 @font-face {
   font-family: Azonix;
-  src: url('font\Azonix.otf');
+  src: url('font/Azonix.otf') format('opentype'); /* Update the font file path and format */
 }
 
 .hal {
@@ -60,7 +60,7 @@ h1 {
   font-weight: 700;
   padding: 10px;
   font-family: Azonix;
-  color:white
+  color: white;
 }
 
 @media screen and (max-width:768px) {
