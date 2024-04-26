@@ -1,4 +1,4 @@
 # Portfolio Website
-for prakarsh.is-a.dev
+for https://infinotiver.is-a.dev
 
 
