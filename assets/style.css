@@ -5,14 +5,26 @@ body {
 }
 
 #title {
-  animation:blink infinite 2s;
-  font-size: 10px;
-  color: #00ff00
+  animation: blink 2s infinite;
+  font-size: min(10px, 1.5vw);
+  color: #00ff00;
+}
+
+@media (max-width: 600px) {
+  #title {
+    font-size: 8px;
+  }
 }
 
 @keyframes blink {
-  50% { opacity: 0% }
-  100% { opacity: 100%; }
+  50% {
+    opacity: 0.1;
+    text-shadow: 0 0 5px #00ff00;
+  }
+  100% {
+    opacity: 1;
+    text-shadow: none;
+  }
 }
 .window-button {
   background-color: rgba(255, 255, 255, 0.1);
