@@ -5,6 +5,9 @@ body {
   overflow: hidden;
 }
 
+
+
+
 #title {
   animation: blink 2s infinite;
   font-size: min(10px, 1.5vw);
@@ -88,14 +91,14 @@ body {
 
 #terminal {
   width: 80%;
+  height: auto;
   margin: 20px auto 0 auto;
   padding: 20px;
   border: 1px solid #aaa;
   border-radius: 5px;
   box-shadow: 0 0 10px 0 #aaa;
-  background-color: #0e131a;
   transition: all 0.2s;
-}
+  }
 
 #terminal:hover {
   box-shadow: 0 0 20px 0 #00ff00;
