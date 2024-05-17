@@ -2,12 +2,18 @@ body {
   font-family: 'Inconsolata', 'Droid Sans Mono', 'Source Code Pro', monospace;
   background-color: #000;
   color: #fff;
+  overflow: hidden;
 }
 
 #title {
   animation: blink 2s infinite;
   font-size: min(10px, 1.5vw);
   color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+#title:hover {
+  animation: flash 0.5s infinite alternate;
 }
 
 @media (max-width: 600px) {
@@ -26,6 +32,19 @@ body {
     text-shadow: none;
   }
 }
+
+
+@keyframes flash {
+  50% {
+    background-color: #00ff00;
+    color: #000;
+  }
+  100% {
+    background-color: transparent;
+    color: #00ff00;
+  }
+}
+
 .window-button {
   background-color: rgba(255, 255, 255, 0.1);
   border: none;
@@ -38,16 +57,35 @@ body {
   justify-content: center;
   align-items: center;
   width: 30px;
+  transition: all 0.2s;
 }
+
+.window-button:hover {
+  background-color: #00ff00;
+  color: #000;
+}
+
 .user {
   color: #960050;
   padding: 2px 4px;
   border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.user:hover {
+  background-color: #960050;
+  color: #fff;
 }
 
 .cmd {
-  color:blue
+  color: blue;
+  transition: all 0.2s;
 }
+
+.cmd:hover {
+  color: #00ff00;
+}
+
 #terminal {
   width: 80%;
   margin: 20px auto 0 auto;
@@ -55,6 +93,12 @@ body {
   border: 1px solid #aaa;
   border-radius: 5px;
   box-shadow: 0 0 10px 0 #aaa;
+  background-color: #0e131a;
+  transition: all 0.2s;
+}
+
+#terminal:hover {
+  box-shadow: 0 0 20px 0 #00ff00;
 }
 
 #terminal p {
@@ -74,14 +118,30 @@ body {
 #terminal li:before {
   content: '$';
   color: #00ff00;
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 #terminal a {
   color: #0ff;
   text-decoration: none;
+  transition: all 0.2s;
 }
 
 #terminal a:hover {
   background-color: #0ff;
   color: #000;
 }
+
+#terminal a:active {
+  transform: scale(0.9);
+}
+
