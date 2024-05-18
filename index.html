@@ -52,8 +52,38 @@
         </div>
         <div class="bottom-bar">
 
-            <p >Last updated: 2023-02-20 16:00:00 IST</p>
+            <p id="battery-status"></p>
         </div>
+        <script>
+if (navigator && navigator.getBattery) {
+  navigator.getBattery()
+    .then(function(battery) {
+      const batteryLevel = Math.floor(battery.level * 100); // Get and format percentage
+      let statusText;
+
+      // Check for plugged-in state (if supported)
+      if (battery && battery.charging) {
+        statusText = `Plugged In (${batteryLevel}%)`;
+      } else {
+        // Check for low battery level (adjustable threshold)
+        if (batteryLevel <= 20) {
+          statusText = "Low Battery!";
+        } else {
+          statusText = `Battery: ${batteryLevel}%`;
+        }
+      }
+
+      document.getElementById("battery-status").innerHTML = statusText;
+    })
+    .catch(function(error) {
+      console.error("Error getting battery information:", error);
+    });
+} else {
+  console.log("Battery information not supported by your browser.");
+}
+
+</script>
+
     </div>
 </body>
 
