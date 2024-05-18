@@ -1,8 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Inconsolata', 'Droid Sans Mono', 'Source Code Pro', monospace;
   background-color: #1a1d23;
   color: #fff;
   overflow: hidden;
+
 }
 
 #title {
@@ -19,6 +24,18 @@ body {
 @media (max-width: 600px) {
   #title {
     font-size: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  #title {
+    font-size: 6px;
+  }
+}
+
+@media (max-width: 300px) {
+  #title {
+    font-size: 4px;
   }
 }
 
@@ -91,9 +108,9 @@ body {
 #terminal {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   height: auto;
-  margin: 20px auto 0 auto;
+  margin-top: 15px;
   padding: 0;
   border: 1px solid #2e4053;
   border-radius: 5px;
@@ -175,7 +192,7 @@ body {
   text-decoration: none;
   transition: all 0.2s;
   padding: 0 5px;
-  border-radius: 5px
+  border-radius: 5px;
 }
 
 #terminal a:hover {
@@ -185,5 +202,25 @@ body {
 
 #terminal a:active {
   transform: scale(0.9);
+}
+
+@media (max-width: 400px) {
+  #terminal .title-bar {
+    height: 20px;
+  }
+
+  #terminal .content {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 300px) {
+  #terminal .title-bar {
+    height: 15px;
+  }
+
+  #terminal .content {
+    padding: 2px;
+  }
 }
 
