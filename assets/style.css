@@ -80,7 +80,7 @@ body {
 }
 
 .cmd {
-  color: #2e4053;
+  color: #a6c8f3;
   transition: all 0.2s;
 }
 
@@ -171,13 +171,15 @@ body {
 }
 
 #terminal a {
-  color: #2e4053;
+  color: #00ff2a;
   text-decoration: none;
   transition: all 0.2s;
+  padding: 0 5px;
+  border-radius: 5px
 }
 
 #terminal a:hover {
-  background-color: #2e4053;
+  background-color: #2e5351;
   color: #fff;
 }
 
