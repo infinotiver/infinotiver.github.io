@@ -17,37 +17,43 @@
 
 <body>
     <div id="terminal">
-        <div class="window-header">
-            <button class="window-button" id="close"><i class='bx bx-x'></i></button>
-            <button class="window-button" id="minimize"><i class='bx bx-square-rounded'></i></button>
-            <button class="window-button" id="maximize"><i class='bx bx-minus'></i></button>
+        <div class="title-bar">
+            <div class="window-buttons">
+                <button class="window-button" id="close"><i class='bx bx-x'></i></button>
+                <button class="window-button" id="minimize"><i class='bx bx-square-rounded'></i></button>
+                <button class="window-button" id="maximize"><i class='bx bx-minus'></i></button>
+            </div>
         </div>
-        <pre id="title">
+        <div class="content">
+            <pre id="title" class="cmd">
+                ██╗███╗   ██╗███████╗██╗███╗   ██╗ ██████╗ ████████╗██╗██╗   ██╗███████╗██████╗ 
+                ██║████╗  ██║██╔════╝██║████╗  ██║██╔═══██╗╚══██╔══╝██║██║   ██║██╔════╝██╔══██╗
+                ██║██╔██╗ ██║█████╗  ██║██╔██╗ ██║██║   ██║   ██║   ██║██║   ██║█████╗  ██████╔╝
+                ██║██║╚██╗██║██╔══╝  ██║██║╚██╗██║██║   ██║   ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+                ██║██║ ╚████║██║     ██║██║ ╚████║╚██████╔╝   ██║   ██║ ╚████╔╝ ███████╗██║  ██║
+                ╚═╝╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝
+            </pre>
+            <p class="user">infinotiver@machine:~$ <span class="cmd">whoami</span></p>
+            <p>infinotiver</p>
+            <p class="user">infinotiver@machine:~$ <span class="cmd">cat about_me.txt</span></p>
+            <p>I am a passionate developer with a knack for building engaging and efficient applications. Skilled in various programming languages and frameworks.</p>
+            <p class="user">infinotiver@machine:~$ <span class="cmd">cat contact_me.txt</span></p>
+            <p>Email: <a href="mailto:contact@infinotiver.anonaddy.com"  target="_blank">contact@infinotiver.anonaddy.com</a></p>
+            <p>X: <a href="https://x.com/infinotiver"  target="_blank">x.com/infinotiver</a></p>
+            <p>GitHub: <a href="https://github.com/infinotiver" target="_blank">github.com/infinotiver</a></p>
+            <p class="user">infinotiver@machine:~$ <span class="cmd">cd projects</span></p>
+            <p class="user">infinotiver@machine:~/projects$ <span class="cmd">ls</span></p>
+            <ul>
+                <li>Project 1 - A cool web app</li>
+                <li>Project 2 - Machine learning model</li>
+                <li>Project 3 - IoT project</li>
+            </ul>
+            <p class="user">infinotiver@machine:~/projects$ <span class="cmd">cd ..</span></p>
+        </div>
+        <div class="bottom-bar">
 
-            ██╗███╗   ██╗███████╗██╗███╗   ██╗ ██████╗ ████████╗██╗██╗   ██╗███████╗██████╗ 
-            ██║████╗  ██║██╔════╝██║████╗  ██║██╔═══██╗╚══██╔══╝██║██║   ██║██╔════╝██╔══██╗
-            ██║██╔██╗ ██║█████╗  ██║██╔██╗ ██║██║   ██║   ██║   ██║██║   ██║█████╗  ██████╔╝
-            ██║██║╚██╗██║██╔══╝  ██║██║╚██╗██║██║   ██║   ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
-            ██║██║ ╚████║██║     ██║██║ ╚████║╚██████╔╝   ██║   ██║ ╚████╔╝ ███████╗██║  ██║
-            ╚═╝╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝
-                                                                                                                                                 
-        </pre>
-        <p class="user">infinotiver@machine:~$ <span class="cmd">whoami</span></p>
-        <p>infinotiver</p>
-        <p class="user">infinotiver@machine:~$ <span class="cmd">cat about_me.txt</span></p>
-        <p>I am a passionate developer with a knack for building engaging and efficient applications. Skilled in various programming languages and frameworks.</p>
-        <p class="user">infinotiver@machine:~$ <span class="cmd">cat contact_me.txt</span></p>
-        <p>Email: <a href="mailto:contact@infinotiver.anonaddy.com"  target="_blank">contact@infinotiver.anonaddy.com</a></p>
-        <p>X: <a href="https://x.com/infinotiver"  target="_blank">x.com/infinotiver</a></p>
-        <p>GitHub: <a href="https://github.com/infinotiver" target="_blank">github.com/infinotiver</a></p>
-        <p class="user">infinotiver@machine:~$ <span class="cmd">cd projects</span></p>
-        <p class="user">infinotiver@machine:~/projects$ <span class="cmd">ls</span></p>
-        <ul>
-            <li>Project 1 - A cool web app</li>
-            <li>Project 2 - Machine learning model</li>
-            <li>Project 3 - IoT project</li>
-        </ul>
-        <p class="user">infinotiver@machine:~/projects$ <span class="cmd">cd ..</span></p>
+            <p >Last updated: 2023-02-20 16:00:00 IST</p>
+        </div>
     </div>
 </body>
 
