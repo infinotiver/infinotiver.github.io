@@ -65,15 +65,18 @@ body {
 }
 
 .user {
-  color: #2e4053;
+  color: #007bff;
   padding: 2px 4px;
   border-radius: 4px;
   transition: all 0.2s;
 }
 
 .user:hover {
-  background-color: #2e4053;
+  background-color: #073669;
   color: #fff;
+  .cmd {
+    color: #34aadc;
+  }
 }
 
 .cmd {
