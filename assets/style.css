@@ -1,18 +1,15 @@
 body {
   font-family: 'Inconsolata', 'Droid Sans Mono', 'Source Code Pro', monospace;
-  background-color: #000;
+  background-color: #1a1d23;
   color: #fff;
   overflow: hidden;
 }
 
-
-
-
 #title {
   animation: blink 2s infinite;
   font-size: min(10px, 1.5vw);
-  color: #00ff00;
-  text-shadow: 0 0 10px #00ff00;
+  color: #34aadc;
+  text-shadow: 0 0 10px #34aadc;
 }
 
 #title:hover {
@@ -28,7 +25,7 @@ body {
 @keyframes blink {
   50% {
     opacity: 0.1;
-    text-shadow: 0 0 5px #00ff00;
+    text-shadow: 0 0 5px #34aadc;
   }
   100% {
     opacity: 1;
@@ -36,23 +33,22 @@ body {
   }
 }
 
-
 @keyframes flash {
   50% {
-    background-color: #00ff00;
-    color: #000;
+    background-color: #34aadc;
+    color: #1a1d23;
   }
   100% {
     background-color: transparent;
-    color: #00ff00;
+    color: #34aadc;
   }
 }
 
 .window-button {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(52, 74, 220, 0.1);
   border: none;
   border-radius: 5px;
-  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px 0 rgba(52, 74, 220, 0.1);
   color: #fff;
   cursor: pointer;
   font-size: 1.2em;
@@ -64,29 +60,29 @@ body {
 }
 
 .window-button:hover {
-  background-color: #00ff00;
-  color: #000;
+  background-color: #34aadc;
+  color: #1a1d23;
 }
 
 .user {
-  color: #960050;
+  color: #2e4053;
   padding: 2px 4px;
   border-radius: 4px;
   transition: all 0.2s;
 }
 
 .user:hover {
-  background-color: #960050;
+  background-color: #2e4053;
   color: #fff;
 }
 
 .cmd {
-  color: blue;
+  color: #2e4053;
   transition: all 0.2s;
 }
 
 .cmd:hover {
-  color: #00ff00;
+  color: #34aadc;
 }
 
 #terminal {
@@ -96,9 +92,9 @@ body {
   height: auto;
   margin: 20px auto 0 auto;
   padding: 0;
-  border: 1px solid #aaa;
+  border: 1px solid #2e4053;
   border-radius: 5px;
-  box-shadow: 0 0 10px 0 #aaa;
+  box-shadow: 0 0 10px 0 #2e4053;
   transition: all 0.2s;
 }
 
@@ -109,8 +105,8 @@ body {
   padding: 2px;
   height: 30px;
   border-radius: 0 0 5px 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid #aaa;
+  background-color: rgba(52, 74, 220, 0.1);
+  border-bottom: 1px solid #2e4053;
 }
 
 #terminal .title-bar .window-buttons {
@@ -128,18 +124,18 @@ body {
   align-items: center;
   padding: 0 10px;
   height: 30px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-top: 1px solid #aaa;
+  background-color: rgba(52, 74, 220, 0.1);
+  border-top: 1px solid #2e4053;
 }
-
 
 #terminal .content {
   display: flex;
   flex-direction: column;
   padding: 10px;
 }
+
 #terminal:hover {
-  box-shadow: 0 0 20px 0 #00ff00;
+  box-shadow: 0 0 20px 0 #34aadc;
 }
 
 #terminal p {
@@ -158,7 +154,7 @@ body {
 
 #terminal li:before {
   content: '$';
-  color: #00ff00;
+  color: #34aadc;
   animation: pulse 2s infinite alternate;
 }
 
@@ -172,14 +168,14 @@ body {
 }
 
 #terminal a {
-  color: #0ff;
+  color: #2e4053;
   text-decoration: none;
   transition: all 0.2s;
 }
 
 #terminal a:hover {
-  background-color: #0ff;
-  color: #000;
+  background-color: #2e4053;
+  color: #fff;
 }
 
 #terminal a:active {
