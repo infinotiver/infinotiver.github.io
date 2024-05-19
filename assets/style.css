@@ -207,7 +207,7 @@ body {
 
 @media (max-width: 400px) {
   #terminal .title-bar {
-    height: 20px;
+    height: 30px;
   }
 
   #terminal .content {
