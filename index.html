@@ -1,101 +1,79 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <link rel="stylesheet" href="assets/style.css">
-    <link href="assets\boxicons\css\boxicons.min.css" rel="stylesheet">
-    <title>Infinotiver</title>
-    <meta content="Hi I am infinotiver! A passionate developer from the digital odyssey" name="description">
-    <meta content="portfolio" name="keywords">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <!-- Favicons -->
-    <link rel="icon" href="assets\img\dp.png" />
-    <link href="assets\img\dp.png" rel="apple-touch-icon">
-    <style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="">
+  <title>1NF1N0T1V3R's Portfolio</title>
+  <link rel="stylesheet" href="style.css">
 
-    </style>
+  <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
-    <div id="terminal">
-        <div class="title-bar">
-            <div class="window-buttons">
-                <button class="window-button" id="close"><i class='bx bx-x'></i></button>
-                <button class="window-button" id="minimize"><i class='bx bx-square-rounded'></i></button>
-                <button class="window-button" id="maximize"><i class='bx bx-minus'></i></button>
-            </div>
-        </div>
-        <div class="content">
-            <pre id="title" class="cmd">
-                ██╗███╗   ██╗███████╗██╗███╗   ██╗ ██████╗ ████████╗██╗██╗   ██╗███████╗██████╗ 
-                ██║████╗  ██║██╔════╝██║████╗  ██║██╔═══██╗╚══██╔══╝██║██║   ██║██╔════╝██╔══██╗
-                ██║██╔██╗ ██║█████╗  ██║██╔██╗ ██║██║   ██║   ██║   ██║██║   ██║█████╗  ██████╔╝
-                ██║██║╚██╗██║██╔══╝  ██║██║╚██╗██║██║   ██║   ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
-                ██║██║ ╚████║██║     ██║██║ ╚████║╚██████╔╝   ██║   ██║ ╚████╔╝ ███████╗██║  ██║
-                ╚═╝╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝
-            </pre>
-            <p class="user">infinotiver@machine:~$ <span class="cmd">whoami</span></p>
-            <p style="margin-left:10px">infinotiver</p>
-            <p class="user">infinotiver@machine:~$ <span class="cmd">cat about_me.txt</span></p>
-            <p style="margin-left:10px">I am a passionate developer with a knack for building engaging and efficient applications. Skilled in various programming languages and frameworks.</p>
-            <p class="user">infinotiver@machine:~$ <span class="cmd">cat contact_me.txt</span></p>
-            <p style="margin-left:10px">Email: <a href="mailto:contact@infinotiver.anonaddy.com"  target="_blank">contact@infinotiver.anonaddy.com</a></p>
-            <p style="margin-left:10px">X: <a href="https://x.com/infinotiver"  target="_blank">x.com/infinotiver</a></p>
-            <p style="margin-left:10px">GitHub: <a href="https://github.com/infinotiver" target="_blank">github.com/infinotiver</a></p>
-            <p class="user">infinotiver@machine:~$ <span class="cmd">cd projects</span></p>
-            <p class="user">infinotiver@machine:~/projects$ <span class="cmd">ls</span></p>
-            <ul>
-                <li>Project 1 - A cool web app</li>
-                <li>Project 2 - Machine learning model</li>
-                <li>Project 3 - IoT project</li>
-            </ul>
-            <p class="user">infinotiver@machine:~/projects$ <span class="cmd">skills</span></p>
-            <p>
-                <p style="margin-left:10px">
-                    Py.: ▰▰▰▰▰▰▰▰▱ &nbsp; HTML &nbsp;&nbsp;: ▰▰▰▰▱▱▱▱▱<br>
-                    CSS: ▰▱▱▱▱▱▱▱▱ &nbsp; JavaSc.: ▰▱▱▱▱▱▱▱▱<br>
-                    C++: ▰▱▱▱▱▱▱▱▱ &nbsp; UI Des.: ▰▱▱▱▱▱▱▱▱
-                  </p>
-                  
-              </p>
-              
-            
 
-        </div>
-        <div class="bottom-bar">
+  <!-- Navbar  -->
+  <header class="navbar">
 
-            <p id="battery-status"></p>
-        </div>
-        <script>
-if (navigator && navigator.getBattery) {
-  navigator.getBattery()
-    .then(function(battery) {
-      const batteryLevel = Math.floor(battery.level * 100); // Get and format percentage
-      let statusText;
-
-      // Check for plugged-in state (if supported)
-      if (battery && battery.charging) {
-        statusText = `Plugged In (${batteryLevel}%)`;
-      } else {
-        // Check for low battery level (adjustable threshold)
-        if (batteryLevel <= 20) {
-          statusText = "Low Battery!";
-        } else {
-          statusText = `Battery: ${batteryLevel}%`;
-        }
-      }
-
-      document.getElementById("battery-status").innerHTML = statusText;
-    })
-    .catch(function(error) {
-      console.error("Error getting battery information:", error);
-    });
-} else {
-  console.log("Battery information not supported by your browser.");
-}
-
-</script>
-
+    <div class="brand">
+      <img src="assets/logo.png" alt="1NF1N0T1V3R Logo">
+      <span>1NF1N0T1V3R</span>
     </div>
+    <nav class="nav-links">
+      <div class="links-group">
+        <a href="#">Home</a>
+        <a href="https://linkedin.com/" target="_blank">About</a>
+        <a href="https://github.com/" target="_blank">Projects</a>
+        <a href="mailto:email@example.com">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="hero">
+    <section class="hero-left">
+
+      <h1>Hi there,</h1>
+      <h2>I'm <strong>INFINOTIVER</strong></h2>
+      <h3>Creative Designer and Programmer</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur ut ad a autem unde harum sit, debitis, maiores
+        reiciendis eum quisquam expedita officia pariatur officiis.</p>
+
+      <div class="icons">
+        <i class="fab fa-python"></i>
+        <i class="fab fa-js-square"></i>
+        <i class="fab fa-html5"></i>
+        <i class="fab fa-css3-alt"></i>
+      </div>
+
+      <div class="cta-buttons">
+        <a link="" class="btn primary">Portfolio</a>
+        <a link="" class="btn secondary">Curriculum Vitae <div class="btn-icon"><i
+              class="fa-solid fa-arrow-up-right-from-square"></i></div></a>
+      </div>
+    </section>
+
+    <section class="hero-right">
+      <img src="assets/hero-image.png" alt="Illustration" srcset="">
+      <div class="footer">
+        <div class="label">INFINOTIV3R</div>
+        <div class="social-icons">
+          <a href="https://github.com/infinotiver" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="mailto:infinotiver@proton.me"><i class="fas fa-at"></i></a>
+          <!-- <a href="#"><i class="fa-brands fa-spotify"></i></a> -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 
 </html>
