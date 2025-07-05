@@ -1,4 +1,5 @@
-
+.gitignore
+.prettierrc
 ### Node ###
 # Logs
 logs
