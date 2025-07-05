@@ -1,1 +1,9 @@
 @import "tailwindcss";
+@layer base {
+    h1 {
+        font-family: "Roboto Mono", monospace;
+    }
+    body {
+        font-family: "Space Mono", monospace;
+    }
+  }

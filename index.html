@@ -12,12 +12,18 @@
   <link rel="apple-touch-icon" href="assets/logo.png">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body class="bg-zinc-900 text-white">
 
   <!-- Navbar -->
-  <header class="flex items-center justify-between p-4 bg-zinc-900 backdrop-blur-2xl border-b border-zinc-600">
+  <header
+    class="sticky top-0 flex flex-wrap items-center justify-between p-4 bg-zinc-900 backdrop-blur-2xl border-b border-zinc-600 md:text-center">
     <div class="flex items-center space-x-2">
       <img src="assets/logo.png" alt="1NF1N0T1V3R Logo" class="h-8 w-8">
       <span class="text-lg font-bold">1NF1N0T1V3R</span>
@@ -31,30 +37,41 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="flex items-center justify-between px-14 py-10  text-white">
-    <!-- Left Side: Hero Text -->
-    <div class="w-1/2 space-y-6">
-      <div class="text-4xl font-semibold text-zinc-300">
-        Hi, I'm
-      </div>
-      <div class="text-4xl font-bold text-white">1NF1N0T1V3R</div>
-      <p class="text-zinc-400">
-        Discover my projects, learn more about me, and get in touch. Let's build something amazing together!
-      </p>
-      <div class="space-x-4">
-        <a href="#projects" class="px-4 py-2.5 border border-neutral-500 text-white rounded-4xl hover:bg-slate-950">
-          View Projects
-        </a>
+  <section class="h-screen flex flex-col items-center justify-center px-6 py-6 text-white space-y-6">
 
-      </div>
+    <div class="text-3xl font-semibold text-zinc-300">
+      Hi, I'm
+    </div>
+    <h1 class="text-[120px] font-bold text-white text-center">1NF1N0T1V3R</h1>
+    <p class="text-zinc-400 text-center px-4">
+      Discover my projects, learn more about me, and get in touch. Let's build something amazing together!
+    </p>
+    <div class="mt-4">
+      <a href="#projects"
+        class="px-4 py-2 border border-neutral-500 text-white transition-all ease-in duration-100  hover:bg-slate-800">
+        View Projects
+      </a>
     </div>
 
-    <!-- Right Side: Hero Image -->
-    <div class="w-[400px]">
-      <img src="assets/hero-image.png" alt="Hero Image" class="rounded-lg shadow-lg">
+  </section>
+  <!-- Projects Section -->
+  <section id="projects" class="h-screen px-14 py-10 border border-zinc-800 text-white">
+    <h1 class="text-3xl font-bold mb-6">Projects</h1>
+    <div class="flex flex-wrap gap-6 ">
+      <!-- Project 1 -->
+      <div
+        class="flex-1 w-full sm:w-[300px] border border-zinc-700 p-4 shadow-lg  transition-all ease-in duration-100 hover:bg-zinc-800 flex align-center">
+        <img src="assets/project1.png" alt="Project 1" class="w-[200px]">
+        <div class="ml-4">
+          <h3 class="text-xl font-semibold mb-2">Project Title 1</h3>
+          <p class="text-zinc-400 mb-4">Brief description of the project goes here.</p>
+          <a href="#" class="my-4 p-2 border border-zinc-700 hover:border-blue-900">View Project</a>
+        </div>
+      </div>
+
+
     </div>
   </section>
-
   <script src="assets/script.js"></script>
 </body>
 
