@@ -1,9 +1,15 @@
 @import "tailwindcss";
+
 @layer base {
     h1 {
         font-family: "Roboto Mono", monospace;
     }
+
     body {
         font-family: "Space Mono", monospace;
+        background-color: #030712;
+        background-image: radial-gradient(#3c3c3c 1px, transparent 0);
+        background-size: 20px 20px;
+        color: white;
     }
-  }
+}
