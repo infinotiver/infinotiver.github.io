@@ -14,3 +14,55 @@
     }
 
 }
+
+@theme {
+    --animate-glitch: glitch-anim 2.5s ease-in-out forwards;
+    @keyframes glitch-anim {
+            0% {
+                text-shadow: none;
+                clip-path: inset(0 0 0 0);
+                opacity: 0;
+                transform: translate(0, 0);
+            }
+    
+            20% {
+                opacity: 1;
+                text-shadow:
+                    2px 0 red,
+                    -2px 0 cyan;
+                clip-path: inset(2% 0 10% 0);
+                transform: translate(-2px, 0);
+            }
+    
+            40% {
+                text-shadow:
+                    -2px 0 red,
+                    2px 0 cyan;
+                clip-path: inset(10% 0 2% 0);
+                transform: translate(2px, -2px);
+            }
+    
+            60% {
+                text-shadow:
+                    2px 2px red,
+                    -2px -2px cyan;
+                clip-path: inset(5% 0 5% 0);
+                transform: translate(-1px, 2px);
+            }
+    
+            80% {
+                text-shadow:
+                    1px 0 red,
+                    -1px 0 cyan;
+                clip-path: inset(0 0 0 0);
+                transform: translate(0, 0);
+            }
+    
+            100% {
+                text-shadow: none;
+                clip-path: inset(0 0 0 0);
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+        }
+}
