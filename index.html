@@ -25,39 +25,67 @@
     />
   </head>
 
-  <body>
-    <!-- Navbar -->
+  <body class="">
+    <!-- Sidebar Navigation -->
     <header
-      class="sticky top-0 flex flex-wrap items-center justify-between py-2.5 px-4 bg-gray-950/75 backdrop-blur-2xl border-b border-zinc-600 md:text-center z-50"
+      class="fixed top-1/2 right-0 transform -translate-y-1/2 flex flex-col items-center mx-[2em] rounded-4xl py-4"
     >
-      <div class="flex items-center space-x-2 ">
-        <img src="assets/logo.png" alt="1NF1N0T1V3R Logo" class="h-8 w-8" />
-        <span class="text-lg font-bold ">1NF1N0T1V3R</span>
+      <!-- Logo -->
+      <div class="mb-8">
+      <img src="assets/logo.png" alt="1NF1N0T1V3R Logo" class="h-10 w-auto" />
       </div>
-      <nav class="space-x-6 sm:space-x-4 sm:text-sm">
-        <a href="#" class="text-zinc-400 hover:text-zinc-300">Home</a>
-        <a
-          href="https://linkedin.com/"
-          target="_blank"
-          class="text-zinc-400 hover:text-zinc-200"
-          >About</a
+      <!-- Navigation Dots -->
+      <nav class="flex flex-col items-center space-y-4 bg-zinc-400/20 py-4 px-2.5 rounded-4xl">
+      <a
+        href="#home"
+        class="w-3 h-3 rounded-full bg-zinc-600 hover:bg-zinc-400 transition relative group"
+        title="Home"
+      >
+        <span
+        class="absolute left-[-6rem] top-1/2 transform -translate-y-1/2 bg-zinc-800 text-white text px-4 py-1 rounded opacity-0 group-hover:opacity-100 transition"
         >
-        <a
-          href="https://github.com/"
-          target="_blank"
-          class="text-zinc-400 hover:text-zinc-200"
-          >Projects</a
+        Home
+        </span>
+      </a>
+      <a
+        href="#about"
+        class="w-3 h-3 rounded-full bg-zinc-600 hover:bg-zinc-400 transition relative group"
+        title="About"
+      >
+        <span
+        class="absolute left-[-6rem] top-1/2 transform -translate-y-1/2 bg-zinc-800 text-white text px-4 py-1 rounded opacity-0 group-hover:opacity-100 transition"
         >
-        <a
-          href="mailto:email@example.com"
-          class="text-zinc-400 hover:text-zinc-200"
-          >Contact</a
+        About
+        </span>
+      </a>
+      <a
+        href="#projects"
+        class="w-3 h-3 rounded-full bg-zinc-600 hover:bg-zinc-400 transition relative group"
+        title="Projects"
+      >
+        <span
+        class="absolute left-[-6rem] top-1/2 transform -translate-y-1/2 bg-zinc-800 text-white text px-4 py-1 rounded opacity-0 group-hover:opacity-100 transition"
         >
+        Projects
+        </span>
+      </a>
+      <a
+        href="mailto:infinotiver@proton.me"
+        class="w-3 h-3 rounded-full bg-zinc-600 hover:bg-zinc-400 transition relative group"
+        title="Contact"
+      >
+        <span
+        class="absolute left-[-6rem] top-1/2 transform -translate-y-1/2 bg-zinc-800 text-white text px-4 py-1 rounded opacity-0 group-hover:opacity-100 transition"
+        >
+        Contact
+        </span>
+      </a>
       </nav>
     </header>
 
     <!-- Hero Section -->
     <section
+      id="home"
       class="h-screen flex flex-col items-center justify-center px-6 py-2 text-white "
     >
       <p class="text-zinc-600">/home</p>
