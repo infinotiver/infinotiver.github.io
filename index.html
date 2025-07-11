@@ -28,7 +28,7 @@
   <body>
     <!-- Navbar -->
     <header
-      class="sticky top-0 flex flex-wrap items-center justify-between py-2.5 px-4 bg-gray-950 backdrop-blur-2xl border-b border-zinc-600 md:text-center"
+      class="sticky top-0 flex flex-wrap items-center justify-between py-2.5 px-4 bg-gray-950/75 backdrop-blur-2xl border-b border-zinc-600 md:text-center"
     >
       <div class="flex items-center space-x-2">
         <img src="assets/logo.png" alt="1NF1N0T1V3R Logo" class="h-8 w-8" />
@@ -61,8 +61,15 @@
       class="h-screen flex flex-col items-center justify-center px-6 py-2 text-white "
     >
       <p class="text-zinc-600">/home</p>
-      <div class="text-3xl font-semibold text-slate-500">Hi, I'm</div>
+      <div class="text-3xl font-semibold text-zinc-400">Hi, I'm</div>
       <h1 class="text-9xl font-[VT323] text-white text-center">1NF1N0T1V3R</h1>
+      <div class="absolute top-[15%] left-4 font-[VT323] text-gray-400">
+        <div class="text-gray-200">build@<span id="build-version">v3.0.1alpha</span></div>
+        <div class="text-gray-200">last_commit: <span id="last-commit">3a9f1e2</span></div>
+        <div class="text-gray-200">updated: <span id="last-update">error</span></div>
+      <div>Code is poetry</div>
+      </div>
+
       <p class="text-zinc-400 text-center px-4">
         Discover my projects, learn more about me, and get in touch. Let's build
         something amazing together!
@@ -70,7 +77,7 @@
       <div class="mt-4 flex gap-4">
         <a
           href="#projects"
-          class="my-2 px-4 py-2 border border-neutral-500 text-white transition-all ease-in duration-100 hover:bg-slate-800"
+          class="my-2 px-4 py-2 border border-neutral-500 text-white transition-all ease-in duration-100 hover:bg-slate-800 "
         >
           View Projects
         </a>
@@ -162,7 +169,7 @@
               <h3 class="text-xl font-semibold">2025</h3>
               <p class="text-zinc-400">Completing Frontend skills</p>
             </div>
-          </div>
+            
         </div>
       </div>
     </section>
