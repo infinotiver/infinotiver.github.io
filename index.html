@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <title>1NF1N0T1V3R's Portfolio</title>
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/output.css" />
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="assets/logo.png" />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="scroll-smooth">
+    <header
+      class="fixed top-0 py-4 px-6 w-full z-50 flex items-center justify-between"
+    >
+      <!-- Logo -->
+      <div class="relative">
+        <img
+          id="logo"
+          src="assets/logo.png"
+          alt="1NF1N0T1V3R Logo"
+          class="h-12 w-auto duration-300"
+        />
+      </div>
+
+      <!-- Links -->
+      <div
+        class="flex space-x-6 text-gray-400 font-semibold ml-auto bg-zinc-700/50 rounded-xl px-6 py-2 backdrop-blur-3xl"
+      >
+        <a href="#home" class="hover:text-gray-200">Home</a>
+        <a href="#about" class="hover:text-gray-200">About</a>
+      </div>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside
+      class="fixed top-1/2 right-0 transform -translate-y-1/2 flex flex-col items-center mx-[2em] rounded-4xl"
+    >
+      <!-- Navigation Dots -->
+      <nav
+        class="flex flex-col items-center space-y-4 py-6 px-2 rounded-4xl z-0"
+      >
+        <a href="#home" title="Home">
+          <div
+            class="w-2 h-2 rounded-full bg-gray-500 hover:bg-gray-300 transition"
+          ></div>
+        </a>
+        <a href="#projects" title="Projects">
+          <div
+            class="w-2 h-2 rounded-full bg-gray-500 hover:bg-gray-300 transition"
+          ></div>
+        </a>
+        <a href="#about" title="About">
+          <div
+            class="w-2 h-2 rounded-full bg-gray-500 hover:bg-gray-300 transition"
+          ></div>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="h-screen flex flex-col items-center justify-center px-6 py-2 text-white"
+    >
+      <p class="text-gray-500 tracking-widest">/home</p>
+      <div class="text-4xl font-bold text-gray-300 mt-4">Hello, I'm</div>
+      <h1
+        class="text-9xl font-[VT323] text-white text-center py-6 w-full flex justify-center items-center"
+      >
+        <canvas id="pixelCanvas"></canvas>
+      </h1>
+      <div class="absolute top-0 right-2 -z-10">
+        <div class="absolute top-0 right-1/4 w-40 h-40 bg-blue-500 rounded-full blur-3xl opacity-20"></div>
+        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-20"></div>
+      </div>
+      <div class="flex space-x-4 items-center absolute top-20 right-6">
+        <div
+          class="px-4 py-2 text-xl font-semibold text-gray-200/50 hover:text-white rounded-full border border-zinc-600 hover:border-zinc-500 shadow-md transition ease-in-out"
+        >
+          Fullstack Developer
+        </div>
+        <div class="text-gray-100/50 font-[VT323]">
+          GMT+ 5.30
+        </div>
+      </div>
+
+      <div class="mt-4 flex gap-4">
+        <a
+          href="#projects"
+          class="my-10 px-6 py-3 text-white font-semibold shadow-lg transform transition-all ease-in duration-200 border border-zinc-800 hover:scale-105 hover:shadow-2xl hover:border-gray-50"
+        >
+          View Projects
+        </a>
+      </div>
+      <div
+        class="absolute top-[15%] left-4 font-[VT323] text-gray-400/50 hover:text-gray-400 transition ease"
+      >
+        <div class="text-gray-200/50 hover:text-gray-200 transition ease">
+          build@<span id="build-version">v3.0.1alpha</span>
+        </div>
+        <div class="text-gray-200/50 hover:text-gray-200 transition ease">
+          last_commit: <span id="last-commit">3a9f1e2</span>
+        </div>
+        <div class="text-gray-200/50 hover:text-gray-200 transition ease">
+          updated: <span id="last-update">error</span>
+        </div>
+        <div>Code is poetry</div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section
+      id="projects"
+      class="min-h-screen px-14 py-10 border-y border-gray-700 text-white w-full"
+    >
+      <div>
+        <p class="text-gray-600">/projects</p>
+        <h1 class="text-6xl font-bold mb-6">Projects</h1>
+      </div>
+      <div class="flex flex-wrap gap-6 w-full">
+        <!-- Project Template -->
+        <a
+          href="http://infinotiver.is-a.dev/emergency-numbers/"
+          class="basis-full sm:basis-[calc(50%-0.75rem)] lg:basis-[calc(33.333%-1rem)] border border-zinc-900 p-4 bg-zinc-800/25 rounded-sm hover:border-zinc-500/50 hover:scale-105 transition"
+        >
+          <img
+            src="assets/project1.png"
+            alt="Emergency Numbers Lookup"
+            class="w-full mb-4 rounded-sm h-60"
+          />
+          <h3 class="text-xl font-semibold mb-2">Emergency Numbers Lookup</h3>
+          <p class="text-gray-400 mb-4">
+            A simple utility to get emergency numbers based on your location
+          </p>
+          <div
+            class="px-4 py-2 text-center rounded-sm border border-zinc-800 hover:scale-105 hover:shadow-2xl hover:border-gray-50"
+          >
+            View Project
+          </div>
+        </a>
+
+        <a
+          href="http://infinotiver.is-a.dev/aesthetic-pomodoro/"
+          class="basis-full sm:basis-[calc(50%-0.75rem)] lg:basis-[calc(33.333%-1rem)] border border-zinc-900 p-4 bg-zinc-800/25 rounded-sm hover:border-zinc-500/50 hover:scale-105 transition"
+        >
+          <img
+            src="assets/project2.png"
+            alt="Aesthetic Pomodoro"
+            class="w-full rounded-xl mb-4 h-60"
+          />
+          <h3 class="text-xl font-semibold mb-2">Aesthetic Pomodoro</h3>
+          <p class="text-gray-400 mb-4">
+            A cosy little Pomodoro companion that blends focus, flow, and
+            feel-good vibes.
+          </p>
+          <div
+            class="px-4 py-2 text-center rounded-sm border border-zinc-800 hover:scale-105 hover:shadow-2xl hover:border-gray-50"
+          >
+            View Project
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section
+      id="about"
+      class="min-h-screen px-14 py-10 border-y border-gray-700 text-white w-full flex items-center"
+    >
+      <div class="flex flex-wrap w-full">
+      <!-- Left Side: Text -->
+      <div class="basis-full lg:basis-1/2 px-4">
+        <p class="text-gray-600">/about</p>
+        <h1 class="text-6xl font-bold mb-6">About Me</h1>
+        <p class="text-gray-400 mb-4">
+        Hi, I'm 1NF1N0T1V3R. I like to imagine stuff and try to build it
+        (even if I'm not successful every time). I am a teenager constantly
+        fighting against odds (and lots of homework) to learn something new.
+        </p>
+        <p class="text-gray-400 mb-6">
+        Let's connect and create something extraordinary together!
+        </p>
+
+        <!-- GitHub Stats -->
+        <div class="mt-6">
+        <h2 class="text-2xl font-[VT323] font-bold mb-4">GitHub Stats</h2>
+        <div class="flex flex-wrap gap-4">
+            <img
+            src="https://github-readme-stats.vercel.app/api?username=infinotiver&show_icons=true&theme=transparent"
+            alt="GitHub Stats"
+            class="w-[calc(50%-0.5rem)] h-auto max-h-80"
+            />
+        </div>
+        </div>
+      </div>
+
+      <!-- Right Side: Timeline and Skills -->
+      <div class="basis-full lg:basis-1/2 px-4">
+        <!-- Timeline -->
+        <div class="space-y-6 mb-10">
+        <h2 class="text-3xl font-bold font-[VT323] mb-4">Timeline</h2>
+        <div class="border-l-2 border-gray-600 pl-4">
+          <h3 class="text-xl font-semibold">2020</h3>
+          <p class="text-gray-400">Started learning HTML</p>
+        </div>
+        <div class="border-l-2 border-gray-600 pl-4">
+          <h3 class="text-xl font-semibold">2021</h3>
+          <p class="text-gray-400">Introduced to Python</p>
+        </div>
+        <div class="border-l-2 border-gray-600 pl-4">
+          <h3 class="text-xl font-semibold">2025</h3>
+          <p class="text-gray-400">Completing Frontend skills</p>
+        </div>
+        <div class="border-l-2 border-gray-600 pl-4">
+          <h3 class="text-xl font-semibold">2025</h3>
+          <p class="text-gray-400">Participated in Summer of Making by Hackclub</p>
+        </div>
+        </div>
+
+        <!-- Skills -->
+       
+      </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer
+      class="py-6 px-4 bg-gray-950 text-center text-white border-t border-gray-700 flex items-center gap-4"
+    >
+      <img
+        src="assets/ascii.png"
+        alt="ASCII art of my pfp"
+        class="max-w-[10vw]"
+      />
+      <p class="text-gray-400 mt-4">&COPY; 2025 1NF1N0T1V3R</p>
+      <p class="text-gray-400 mt-4 hover:text-white">
+        Contact: infinotiver@proton.me
+      </p>
+    </footer>
+    <script src="assets/script.js"></script>
+    <script src="assets/textArt.js"></script>
+    <script src="assets/rotateLogo.js"></script>
+  </body>
+</html>
