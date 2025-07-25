@@ -17,19 +17,3 @@ async function updateBuildInfo() {
 }
 
 updateBuildInfo();
-
-const text = "1nf1n0t1v3r";
-const container = document.getElementById('typewriter');
-let index = 0;
-
-function type() {
-    if (index < text.length) {
-        container.textContent += text.charAt(index);
-        index++;
-        setTimeout(type, 100);  // typing speed in ms
-    } else {
-        container.style.borderRight = "none"; // hide cursor after done
-    }
-}
-
-type();
