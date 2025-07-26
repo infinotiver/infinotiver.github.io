@@ -4,8 +4,8 @@ canvas.width = window.innerWidth * 0.8; // 80% of viewport width
 // canvas.height = window.innerHeight * 0.5; // 50% of viewport height
 
 // 🎛️ Tuning Parameters
-let mouse = { x: null, y: null, radius: 60 };
-let repulsionStrength = 6;
+let mouse = { x: null, y: null, radius: 40 };
+let repulsionStrength = 2;
 
 let particles = [];
 
@@ -28,7 +28,7 @@ function drawTextToCanvas(text) {
     tempCanvas.width = canvas.width;
     tempCanvas.height = canvas.height;
     tempCtx.fillStyle = '#fff';
-    tempCtx.font = 'bold 128px VT323';
+    tempCtx.font = 'bold 10rem VT323';
     tempCtx.textAlign = 'center';
     tempCtx.textBaseline = 'middle';
     tempCtx.fillText(text, canvas.width / 2, canvas.height / 2);
@@ -91,7 +91,7 @@ function animateParticles() {
 
         // Draw
         ctx.fillStyle = '#fff';
-        ctx.fillRect(p.x, p.y, 4, 4);
+        ctx.fillRect(p.x, p.y, 5, 5);
     }
 
     requestAnimationFrame(animateParticles);
