@@ -38,21 +38,22 @@
    </head>
    </head>
    <body class="scroll-smooth">
-      <header
-         class="fixed top-0 py-4 px-6 w-full z-50 flex items-center justify-between"
-         >
-         <!-- Logo -->
+        <!-- Logo -->
          <div class="relative">
             <img
                id="logo"
                src="assets/logo.png"
                alt="1NF1N0T1V3R Logo"
-               class="h-12 w-auto duration-300"
+               class="fixed top-0 h-14 m-4 w-auto duration-300 z-50"
                />
          </div>
+      <header
+         class="absolute py-4 px-6 w-full z-50 flex items-center justify-end"
+         >
+   
          <!-- Links -->
          <div
-            class="flex space-x-6 text-gray-400 font-semibold ml-auto bg-zinc-700/50 rounded-xl px-6 py-2 backdrop-blur-3xl"
+            class="flex space-x-6 text-gray-400 font-semibold bg-gray-800/50 border border-gray-600 rounded-xl px-6 py-2 backdrop-blur-3xl"
             >
             <a href="#home" class="hover:text-gray-200">Home</a>
             <a href="#about" class="hover:text-gray-200">About</a>
@@ -88,16 +89,20 @@
          id="home"
          class="h-screen flex flex-col items-center justify-center px-6 py-2 text-white"
          >
-        <div class="font-[VT323] text-gray-500 text-3xl tracking-wide">
-          @infinotiver
-         </div>
+       
          <div class="text-4xl font-bold text-gray-300 mt-4">Hello, I'm</div>
          <h1
-            class="text-9xl font-[VT323] text-white text-center py-6 w-full flex justify-center items-center"
+            class="text-9xl font-[VT323] text-white text-center pt-6 pb-4 my-2 w-full flex justify-center items-center"
             >
             <canvas id="pixelCanvas"></canvas>
-         </h1>
-         
+          </h1>
+         <div class="text-gray-300 text-2xl font-bold flex items-center gap-2">
+            <span class="font-[VT323] text-3xl text-gray-400"> @infinotiver </span>
+            <span class="text-gray-500">•</span>
+            <span> Fullstack Dev </span>
+            <span class="text-gray-500">•</span>
+            <span> High Schooler </span>
+         </div>
          <div class="absolute top-0 right-2 -z-10">
             <div
                class="absolute top-0 right-1/4 w-40 h-40 bg-blue-500 rounded-full blur-3xl opacity-20"
@@ -106,16 +111,7 @@
                class="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-20"
                ></div>
          </div>
-         <div class="flex space-x-4 items-center absolute top-20 right-6">
-            <div
-               class="px-4 py-2 text-xl font-semibold text-gray-200/50 hover:text-white rounded-full border border-zinc-600 hover:border-zinc-500 shadow-md transition ease-in-out"
-               >
-               Fullstack Developer
-            </div>
-            <div class="text-gray-100/50 font-[VT323]">GMT+ 5.30</div>
-         </div>
-        
-          <div class="flex gap-4 mt-2 items-center justify-center">
+          <div class="flex gap-4 mt-4 items-center justify-center">
             <a
                href="#projects"
                class="text-gray-400 hover:text-white transition"
