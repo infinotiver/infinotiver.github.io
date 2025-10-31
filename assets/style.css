@@ -25,8 +25,33 @@
 
     /* Reusable project card styles used in HTML via the `project-card` class */
     .project-card {
-        @apply w-full max-w-sm bg-gray-900/80 backdrop-blur-xl border border-gray-300/10 rounded-md p-5 hover:shadow-2xl transition-transform transform hover:-translate-y-1 hover:border-white/10;
+        @apply w-full max-w-sm bg-gray-900/80 backdrop-blur-xl border border-gray-300/10 rounded-md p-5 transition-transform transform hover:-translate-y-1 hover:border-white/10;
+        /* smoother transform and will-change for performant animation */
+        will-change: transform;
+        transition-property: transform, box-shadow, border-color;
+        transition-duration: 220ms;
+        transition-timing-function: cubic-bezier(.2,.8,.2,1);
     }
+
+    /* stronger hover/active effects */
+    .project-card:hover{
+        @apply scale-105 shadow-2xl ring-1 ring-white/5;
+    }
+
+    /* subtle entrance animation for cards */
+    @keyframes card-enter {
+        from { opacity: 0; transform: translateY(10px) scale(.995); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .project-card { animation: card-enter .36s ease both; }
+
+    /* Featured modifier for the large card */
+    .project-card--featured {
+        @apply w-full bg-gray-900/90 md:border-l-4 md:border-l-gray-700/40 p-6 rounded-md;
+        box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+    }
+    
 
     /* Reusable SVG/icon styles */
     .svg-icon {
