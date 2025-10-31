@@ -28,6 +28,16 @@
         @apply w-full max-w-sm bg-gray-900/80 backdrop-blur-xl border border-gray-300/10 rounded-md p-5 hover:shadow-2xl transition-transform transform hover:-translate-y-1 hover:border-white/10;
     }
 
+    /* Reusable SVG/icon styles */
+    .svg-icon {
+        @apply w-20 h-20;
+    }
+
+    .svg-progress {
+        /* color applied via currentColor on the path */
+        @apply text-gray-300 transition-all duration-300 ease-out;
+    }
+
     /* Reusable chip/tag styles */
     .chip {
         @apply inline-flex items-center gap-2 px-2 py-1 rounded text-xs bg-gray-800/30 text-gray-300;
