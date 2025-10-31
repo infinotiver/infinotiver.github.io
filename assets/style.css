@@ -23,6 +23,11 @@
         @apply basis-full lg:basis-[calc(33.333%-1rem)] border border-gray-700 p-4 bg-zinc-800/25 backdrop-blur-3xl rounded-sm hover:border-zinc-500/50 hover:scale-110 transition;
     }
 
+    /* Reusable project card styles used in HTML via the `project-card` class */
+    .project-card {
+        @apply w-full max-w-sm bg-gray-900/80 backdrop-blur-xl border border-gray-300/10 rounded-md p-5 hover:shadow-2xl transition-transform transform hover:-translate-y-1 hover:border-white/10;
+    }
+
     .card .cover {
         @apply w-fit mb-4 rounded-sm h-50;
     }
