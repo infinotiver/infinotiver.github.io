@@ -38,6 +38,21 @@
         @apply text-gray-300 transition-all duration-300 ease-out;
     }
 
+    /* Reusable nav link and label */
+    .nav-link {
+        @apply flex items-center gap-2 text-gray-300 px-3 py-2 rounded-full transition-colors duration-200 ease-out hover:bg-gray-700/60 focus:outline-none focus:ring-2 focus:ring-gray-500/30;
+    }
+
+    .nav-label {
+        /* base for the hidden-to-revealed label; keep group-hover reveal in HTML */
+        @apply overflow-hidden max-w-0 transition-all duration-200 ease-out opacity-0 whitespace-nowrap text-sm;
+    }
+
+    /* Reusable icon button (used in hero/footer) */
+    .icon-btn {
+        @apply inline-flex items-center justify-center p-2 rounded-full bg-gray-800/20 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-gray-500/30;
+    }
+
     /* Reusable chip/tag styles */
     .chip {
         @apply inline-flex items-center gap-2 px-2 py-1 rounded text-xs bg-gray-800/30 text-gray-300;
