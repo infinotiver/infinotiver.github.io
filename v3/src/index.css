@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+.glass-ui {
+  background: color-mix(in oklab, var(--background) 68%, transparent);
+  border: 1px solid color-mix(in oklab, var(--border) 65%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.home-breathe-glow {
+  animation: homeBreatheGlow 7s ease-in-out infinite;
+}
+
+@keyframes homeBreatheGlow {
+  0% {
+    opacity: 0.2;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  50% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
