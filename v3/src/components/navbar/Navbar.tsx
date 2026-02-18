@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FolderKanban, Github, Home, User, Wrench } from "lucide-react";
 import type { DrawerAction, NavbarProps } from "@/components/navbar/types";
@@ -53,66 +53,60 @@ const Navbar: React.FC<NavbarProps> = ({ tabs, activeTab, onTabChange }) => {
     };
   }, [drawerOpen]);
 
-  const actions: DrawerAction[] = useMemo(
-    () => [
-      {
-        id: "home",
-        label: "Open Home",
-        keywords: "home start workspace",
-        icon: Home,
-        onSelect: () => {
-          onTabChange("home");
-          closeDrawer();
-        },
+  const actions: DrawerAction[] = [
+    {
+      id: "home",
+      label: "Open Home",
+      keywords: "home start workspace",
+      icon: Home,
+      onSelect: () => {
+        onTabChange("home");
+        closeDrawer();
       },
-      {
-        id: "projects",
-        label: "Open Projects",
-        keywords: "projects work portfolio",
-        icon: FolderKanban,
-        onSelect: () => {
-          onTabChange("projects");
-          closeDrawer();
-        },
+    },
+    {
+      id: "projects",
+      label: "Open Projects",
+      keywords: "projects work portfolio",
+      icon: FolderKanban,
+      onSelect: () => {
+        onTabChange("projects");
+        closeDrawer();
       },
-      {
-        id: "about",
-        label: "Open About",
-        keywords: "about bio profile",
-        icon: User,
-        onSelect: () => {
-          onTabChange("about");
-          closeDrawer();
-        },
+    },
+    {
+      id: "about",
+      label: "Open About",
+      keywords: "about bio profile",
+      icon: User,
+      onSelect: () => {
+        onTabChange("about");
+        closeDrawer();
       },
-      {
-        id: "github",
-        label: "Open GitHub",
-        keywords: "github repo code",
-        icon: Github,
-        onSelect: () => {
-          window.open("https://github.com/infinotiver", "_blank", "noopener,noreferrer");
-          closeDrawer();
-        },
+    },
+    {
+      id: "github",
+      label: "Open GitHub",
+      keywords: "github repo code",
+      icon: Github,
+      onSelect: () => {
+        window.open("https://github.com/infinotiver", "_blank", "noopener,noreferrer");
+        closeDrawer();
       },
-      {
-        id: "tools",
-        label: "Utility Tools",
-        keywords: "tools utility",
-        icon: Wrench,
-        onSelect: () => {
-          closeDrawer();
-        },
-      },
-    ],
-    [onTabChange],
-  );
+    },
+    {
+      id: "tools",
+      label: "Utility Tools",
+      keywords: "tools utility",
+      icon: Wrench,
+      onSelect: closeDrawer,
+    },
+  ];
 
-  const filteredActions = useMemo(() => {
-    const value = query.trim().toLowerCase();
-    if (!value) return actions;
-    return actions.filter((item) => `${item.label} ${item.keywords}`.toLowerCase().includes(value));
-  }, [actions, query]);
+  const queryValue = query.trim().toLowerCase();
+  const filteredActions = queryValue
+    ? actions.filter((item) => `${item.label} ${item.keywords}`.toLowerCase().includes(queryValue))
+    : actions;
 
   return (
     <motion.nav
@@ -135,14 +129,15 @@ const Navbar: React.FC<NavbarProps> = ({ tabs, activeTab, onTabChange }) => {
 
       <motion.div
         initial={false}
-        animate={{ width: expanded ? "auto" : 110, height: expanded ? 42 : 16 }}
+        animate={{ width: expanded ? "auto" : 186, height: 42 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
-        className="overflow-hidden"
+        className="overflow-visible"
       >
         {expanded ? (
           <ExpandedDock
             tabs={tabs}
             activeTab={activeTab}
+            isMobile={isMobile}
             pinned={pinned}
             drawerOpen={drawerOpen}
             onToggleDrawer={() => setDrawerOpen((prev) => !prev)}
@@ -153,7 +148,18 @@ const Navbar: React.FC<NavbarProps> = ({ tabs, activeTab, onTabChange }) => {
             onTogglePin={() => setPinned((prev) => !prev)}
           />
         ) : (
-          <CollapsedDock onExpand={() => setPinned(true)} />
+          <CollapsedDock
+            tabs={tabs}
+            activeTab={activeTab}
+            onTabChange={(tab) => {
+              onTabChange(tab);
+              closeDrawer();
+            }}
+            onToggleDrawer={() => {
+              setPinned(true);
+              setDrawerOpen(true);
+            }}
+          />
         )}
       </motion.div>
     </motion.nav>

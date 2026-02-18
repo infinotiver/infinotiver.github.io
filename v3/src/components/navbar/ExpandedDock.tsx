@@ -6,6 +6,7 @@ import { dockStyles } from "@/components/navbar/styles";
 interface ExpandedDockProps {
   tabs: TabItem[];
   activeTab: TabId;
+  isMobile: boolean;
   pinned: boolean;
   drawerOpen: boolean;
   onToggleDrawer: () => void;
@@ -19,6 +20,7 @@ const stateClass = (active: boolean) =>
 const ExpandedDock: React.FC<ExpandedDockProps> = ({
   tabs,
   activeTab,
+  isMobile,
   pinned,
   drawerOpen,
   onToggleDrawer,
@@ -48,20 +50,22 @@ const ExpandedDock: React.FC<ExpandedDockProps> = ({
               className={stateClass(isActive)}
             >
               <Icon className="h-3.5 w-3.5" />
-              <span className="hidden md:inline">{tab.label}</span>
+              {!isMobile && <span className="hidden md:inline">{tab.label}</span>}
             </button>
           );
         })}
       </div>
 
-      <button
-        type="button"
-        onClick={onTogglePin}
-        className={stateClass(pinned)}
-        aria-label={pinned ? "Unpin dock" : "Pin dock"}
-      >
-        {pinned ? <PinOff className="h-3.5 w-3.5" /> : <Pin className="h-3.5 w-3.5" />}
-      </button>
+      {!isMobile && (
+        <button
+          type="button"
+          onClick={onTogglePin}
+          className={stateClass(pinned)}
+          aria-label={pinned ? "Unpin dock" : "Pin dock"}
+        >
+          {pinned ? <PinOff className="h-3.5 w-3.5" /> : <Pin className="h-3.5 w-3.5" />}
+        </button>
+      )}
     </div>
   );
 };
