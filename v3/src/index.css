@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 .glass-ui {
-  background: color-mix(in oklab, var(--background) 68%, transparent);
-  border: 1px solid color-mix(in oklab, var(--border) 65%, transparent);
-  backdrop-filter: blur(10px);
+    background: color-mix(in oklab, var(--background) 72%, transparent);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.24);
 }
-
 .home-breathe-glow {
   animation: homeBreatheGlow 7s ease-in-out infinite;
 }

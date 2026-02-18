@@ -35,7 +35,7 @@ const QuickHubModal: React.FC<QuickHubModalProps> = ({ open, activeTab, onClose,
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.16, ease: "easeOut" }}
-            className="glass-ui w-full max-w-sm rounded-2xl p-3"
+            className="glass-ui w-full max-w-sm rounded-2xl bg-background/70 p-3"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="mb-2 flex items-center justify-between">
@@ -63,7 +63,7 @@ const QuickHubModal: React.FC<QuickHubModalProps> = ({ open, activeTab, onClose,
                         onTabChange(targetTab);
                         onClose();
                       }}
-                      className="glass-ui flex items-center gap-2 rounded-xl px-3 py-2 text-left text-sm"
+                      className="glass-ui flex items-center gap-2 rounded-xl bg-background/60 px-3 py-2 text-left text-sm"
                     >
                       <Icon className="h-4 w-4" />
                       {action.label}
@@ -77,7 +77,7 @@ const QuickHubModal: React.FC<QuickHubModalProps> = ({ open, activeTab, onClose,
                     href={action.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="glass-ui flex items-center gap-2 rounded-xl px-3 py-2 text-sm"
+                    className="glass-ui flex items-center gap-2 rounded-xl bg-background/60 px-3 py-2 text-sm"
                     onClick={onClose}
                   >
                     <Icon className="h-4 w-4" />

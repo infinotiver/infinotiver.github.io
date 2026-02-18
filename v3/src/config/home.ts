@@ -13,9 +13,10 @@ export interface QuickHubAction {
 }
 
 export const homeStats: HomeStat[] = [
-  { label: "Shipped This Year", value: "06" },
-  { label: "Client Builds", value: "15" },
-  { label: "Avg Delivery", value: "9d" },
+  { label: "Total Coding", value: "--" },
+  { label: "Daily Average", value: "--" },
+  { label: "Top Language", value: "N/A" },
+  { label: "Activity Breakdown", value: "Coding -- | Browsing --" },
 ];
 
 export const quickHubActions: QuickHubAction[] = [

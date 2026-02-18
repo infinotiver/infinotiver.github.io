@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import logo from "@/assets/assets/logo.png";
 
 interface ChipIdentity {
@@ -27,64 +27,61 @@ const identities: ChipIdentity[] = [
 
 const UsernameChip: React.FC = () => {
   const [activeId, setActiveId] = useState(identities[0].id);
-  const activeIdentity = useMemo(
-    () => identities.find((item) => item.id === activeId) ?? identities[0],
-    [activeId],
-  );
+  const [tooltipId, setTooltipId] = useState<string | null>(null);
+  const activeIdentity = identities.find((item) => item.id === activeId) ?? identities[0];
 
   return (
     <div
-      className="glass-ui relative inline-flex max-w-full items-center gap-1.5 rounded-full px-1.5 py-1 transition-colors duration-200"
+      className="relative inline-flex max-w-full items-center rounded-full px-1.5 py-1 transition-colors duration-200"
       style={{ borderColor: `${activeIdentity.accent}70` }}
-      onMouseLeave={() => setActiveId(identities[0].id)}
+      onMouseLeave={() => {
+        setActiveId(identities[0].id);
+        setTooltipId(null);
+      }}
     >
-      <span
-        className="pointer-events-none absolute inset-0 rounded-full opacity-60"
-        style={{
-          background: `linear-gradient(135deg, ${activeIdentity.accent}20, transparent 55%)`,
-        }}
-      />
+      <span className="pointer-events-none absolute inset-0 rounded-full  opacity-60" />
 
       <div className="relative z-10 flex items-center rounded-full">
         {identities.map((item, idx) => (
           <button
             key={item.id}
             type="button"
-            onMouseEnter={() => setActiveId(item.id)}
-            onFocus={() => setActiveId(item.id)}
-            className={`${idx > 0 ? "-ml-2" : ""} relative overflow-hidden rounded-full border-2 bg-background p-0.5 `}
-            style={{
-              borderColor: activeId === item.id ? item.accent : "transparent",
-              zIndex: identities.length - idx,
+            onMouseEnter={() => {
+              setActiveId(item.id);
+              setTooltipId(item.id);
             }}
+            onMouseLeave={() => setTooltipId(null)}
+            onFocus={() => {
+              setActiveId(item.id);
+              setTooltipId(item.id);
+            }}
+            onBlur={() => setTooltipId(null)}
+            className={`${idx > 0 ? "-ml-2" : ""} ${
+              idx === 0 ? "z-20" : "z-10"
+            } relative overflow-visible rounded-full border-2 bg-background p-0.5 transition-transform duration-150 hover:-translate-y-0.5 ${
+              activeId === item.id ? "shadow-[0_0_0_2px_rgba(255,255,255,0.15)]" : "border-transparent"
+            }`}
+            style={activeId === item.id ? { borderColor: item.accent } : undefined}
+            aria-label={item.label}
           >
+            {tooltipId === item.id && (
+              <span className="pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border/60 bg-background/90 px-1.5 py-0.5 text-[10px] font-semibold text-foreground shadow-sm">
+                {item.label}
+              </span>
+            )}
             {item.src ? (
               <img
                 src={item.src}
                 alt={item.label}
-                className="h-5 w-5 rounded-full object-cover md:h-6 md:w-6"
+                className="h-7 w-7 rounded-full object-cover md:h-8 md:w-8"
               />
             ) : (
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-muted text-[9px] font-bold md:h-6 md:w-6 md:text-[10px]">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-muted text-[10px] font-bold md:h-8 md:w-8 md:text-xs">
                 {item.initials}
               </span>
             )}
           </button>
         ))}
-      </div>
-
-      <div className="relative z-10 flex min-w-0 items-center gap-1 pr-0.5 leading-tight">
-        <span
-          className="h-1 w-1 rounded-full"
-          style={{ backgroundColor: activeIdentity.accent }}
-          aria-hidden="true"
-        />
-        <p
-          className="w-24 text-left font-mono text-xs font-semibold text-foreground transition-colors duration-200 md:w-28 md:text-sm"
-          style={{ color: activeId === identities[0].id ? "var(--foreground)" : activeIdentity.accent }}
-        >
-          {activeIdentity.label}
-        </p>
       </div>
     </div>
   );
