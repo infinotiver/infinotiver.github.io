@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import "./index.css";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -12,10 +12,7 @@ const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabId>("home");
   const [homeHubOpen, setHomeHubOpen] = useState(false);
 
-  const activeLabel = useMemo(
-    () => tabs.find((tab) => tab.id === activeTab)?.label ?? "Home",
-    [activeTab],
-  );
+  const activeLabel = tabs.find((tab) => tab.id === activeTab)?.label ?? "Home";
 
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden bg-background px-3 py-4 text-foreground md:px-8 md:py-8">
@@ -28,14 +25,9 @@ const App: React.FC = () => {
       />
       <div className="relative z-10 mx-auto min-h-[calc(100vh-6rem)] w-full max-w-7xl pb-24 pt-3 md:min-h-[calc(100vh-4.5rem)] md:pb-24 md:pt-8">
         <main>
-          <div className="flex items-center mb-3 text-[8px] uppercase tracking-[0.16em] text-muted-foreground md:mb-4 md:tracking-[0.18em]">
-            <div className="bg-white rounded-full px-2 py-1 flex items-center">
-              <span className="mr-2">Workspace:</span>
-              <span className="bg-black text-white rounded-full px-2 py-0.5">
-                {activeLabel}
-              </span>
-            </div>
-          </div>
+          <p className="mb-3 text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:mb-4 md:tracking-[0.18em]">
+            Workspace: {activeLabel}
+          </p>
           <WorkspaceContent
             activeTab={activeTab}
             onOpenQuickHub={() => setHomeHubOpen(true)}
@@ -62,7 +54,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      <div className="fixed left-1/2 z-50 -translate-x-1/2 bottom-10">
+      <div className="fixed bottom-10 left-1/2 z-50 -translate-x-1/2">
         <Navbar tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
     </div>

@@ -52,14 +52,15 @@ const QuickHubModal: React.FC<QuickHubModalProps> = ({ open, activeTab, onClose,
             <div className="grid gap-2">
               {quickHubActions.map((action) => {
                 const Icon = iconMap[action.id];
+                const targetTab = action.tab;
 
-                if (action.tab) {
+                if (targetTab) {
                   return (
                     <button
                       key={action.id}
                       type="button"
                       onClick={() => {
-                        onTabChange(action.tab);
+                        onTabChange(targetTab);
                         onClose();
                       }}
                       className="glass-ui flex items-center gap-2 rounded-xl px-3 py-2 text-left text-sm"
