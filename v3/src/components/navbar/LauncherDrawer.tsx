@@ -29,18 +29,18 @@ const LauncherDrawer: React.FC<LauncherDrawerProps> = ({
       className={dockStyles.drawer}
     >
       <div className="mb-1.5 flex items-center justify-between">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-white/65">Launcher</p>
-        <p className="text-[10px] text-white/50">{activeTab}</p>
+        <p className="text-[10px] uppercase tracking-[0.2em] text-black/65">Launcher</p>
+        <p className="text-[10px] text-black/50">{activeTab}</p>
       </div>
 
       <div className={dockStyles.searchWrap}>
-        <Search className="h-3.5 w-3.5 text-white/70" />
+        <Search className="h-3.5 w-3.5 text-black/70" />
         <input
           ref={searchRef}
           value={query}
           onChange={(event) => onQueryChange(event.target.value)}
           placeholder="Search actions..."
-          className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/50"
+          className="w-full bg-transparent text-sm text-black outline-none placeholder:text-black/50"
         />
       </div>
 
@@ -55,7 +55,7 @@ const LauncherDrawer: React.FC<LauncherDrawerProps> = ({
           );
         })}
         {actions.length === 0 && (
-          <div className="rounded-lg border border-white/15 px-2.5 py-1.5 text-sm text-white/60 md:col-span-2">
+          <div className="rounded-lg border border-white/15 px-2.5 py-1.5 text-sm text-black/60 md:col-span-2">
             No results
           </div>
         )}
