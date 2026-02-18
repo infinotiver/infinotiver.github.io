@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FolderKanban, Github, Home, User, Wrench } from "lucide-react";
+import { ChevronUp, FolderKanban, Github, Home, User, Wrench } from "lucide-react";
 import type { DrawerAction, NavbarProps } from "@/components/navbar/types";
 import LauncherDrawer from "@/components/navbar/LauncherDrawer";
 import ExpandedDock from "@/components/navbar/ExpandedDock";
-import CollapsedDock from "@/components/navbar/CollapsedDock";
+import { dockStyles } from "@/components/navbar/styles";
 import useMediaQuery from "@/hooks/useMediaQuery";
 
 const Navbar: React.FC<NavbarProps> = ({ tabs, activeTab, onTabChange }) => {
@@ -127,41 +127,48 @@ const Navbar: React.FC<NavbarProps> = ({ tabs, activeTab, onTabChange }) => {
         )}
       </AnimatePresence>
 
-      <motion.div
-        initial={false}
-        animate={{ width: expanded ? "auto" : 186, height: 42 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
-        className="overflow-visible"
-      >
+      <AnimatePresence mode="wait">
         {expanded ? (
-          <ExpandedDock
-            tabs={tabs}
-            activeTab={activeTab}
-            isMobile={isMobile}
-            pinned={pinned}
-            drawerOpen={drawerOpen}
-            onToggleDrawer={() => setDrawerOpen((prev) => !prev)}
-            onTabChange={(tab) => {
-              onTabChange(tab);
-              closeDrawer();
-            }}
-            onTogglePin={() => setPinned((prev) => !prev)}
-          />
+          <motion.div
+            key="expanded"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="overflow-visible"
+          >
+            <ExpandedDock
+              tabs={tabs}
+              activeTab={activeTab}
+              isMobile={isMobile}
+              pinned={pinned}
+              drawerOpen={drawerOpen}
+              onToggleDrawer={() => setDrawerOpen((prev) => !prev)}
+              onTabChange={(tab) => {
+                onTabChange(tab);
+                closeDrawer();
+              }}
+              onTogglePin={() => setPinned((prev) => !prev)}
+            />
+          </motion.div>
         ) : (
-          <CollapsedDock
-            tabs={tabs}
-            activeTab={activeTab}
-            onTabChange={(tab) => {
-              onTabChange(tab);
-              closeDrawer();
-            }}
-            onToggleDrawer={() => {
-              setPinned(true);
-              setDrawerOpen(true);
-            }}
-          />
+          <motion.button
+            key="collapsed"
+            type="button"
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            className={dockStyles.collapsedPill}
+            onMouseEnter={() => setIsHovered(true)}
+            onFocus={() => setIsHovered(true)}
+            onClick={() => setPinned(true)}
+            aria-label="Expand dock"
+          >
+            <ChevronUp className="h-3.5 w-3.5" />
+          </motion.button>
         )}
-      </motion.div>
+      </AnimatePresence>
     </motion.nav>
   );
 };
