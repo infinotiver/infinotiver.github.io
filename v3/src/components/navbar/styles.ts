@@ -7,17 +7,9 @@ export const dockStyles = {
   // Selected/active control state.
   controlActive: "border-white/65 !bg-black !text-white",
   // Main nav links container.
-  rail: "glass-ui flex items-center gap-1 overflow-x-auto rounded-full border-white/20 !bg-black/30 p-1",
+  rail: "glass-ui flex items-center gap-1 overflow-x-auto rounded-full border-white/20 !bg-black/80 p-1",
   // Outer wrapper for expanded dock controls.
   expandedWrap: "flex items-center gap-1 p-1",
-  // Floating launcher panel container.
-  drawer:
-    "absolute bottom-12 left-1/2 w-[min(22rem,calc(100vw-0.75rem))] -translate-x-1/2 rounded-2xl bg-[#11131a]/90 p-2.5 shadow-md glass-ui md:w-[26rem]",
-  // Search input row inside launcher panel.
-  searchWrap: "glass-ui mb-2 flex items-center gap-2 rounded-lg border-white/20 bg-black/35 px-2.5 py-1.5",
-  // Action buttons inside launcher panel.
-  actionBtn:
-    "glass-ui flex items-center gap-2 rounded-lg border-white/20 bg-black/35 px-2.5 py-1.5 text-left text-sm text-black/90 hover:!bg-black/20",
   // Small collapsed trigger pill.
   collapsedPill:
     "glass-ui flex h-8 w-12 items-center justify-center rounded-full border-white/30 !bg-black/85 text-white/90 transition-colors hover:border-white/45 hover:!bg-black hover:text-white",

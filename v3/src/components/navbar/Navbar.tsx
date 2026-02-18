@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronUp, FolderKanban, Github, Home, User, Wrench } from "lucide-react";
-import type { DrawerAction, NavbarProps } from "@/components/navbar/types";
-import LauncherDrawer from "@/components/navbar/LauncherDrawer";
+import { ChevronUp } from "lucide-react";
+import type { NavbarProps } from "@/components/navbar/types";
 import ExpandedDock from "@/components/navbar/ExpandedDock";
 import { dockStyles } from "@/components/navbar/styles";
 import useMediaQuery from "@/hooks/useMediaQuery";
@@ -10,123 +9,11 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 const Navbar: React.FC<NavbarProps> = ({ tabs, activeTab, onTabChange }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [pinned, setPinned] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [query, setQuery] = useState("");
   const isMobile = useMediaQuery("(max-width: 768px)");
-
-  const containerRef = useRef<HTMLElement | null>(null);
-  const searchRef = useRef<HTMLInputElement | null>(null);
   const expanded = isMobile || pinned || isHovered;
 
-  const closeDrawer = () => {
-    setDrawerOpen(false);
-    setQuery("");
-  };
-
-  useEffect(() => {
-    if (!expanded) closeDrawer();
-  }, [expanded]);
-
-  useEffect(() => {
-    if (drawerOpen) searchRef.current?.focus();
-  }, [drawerOpen]);
-
-  useEffect(() => {
-    if (!drawerOpen) return;
-
-    const onPointerDown = (event: PointerEvent) => {
-      const target = event.target as Node;
-      if (containerRef.current && !containerRef.current.contains(target)) {
-        closeDrawer();
-      }
-    };
-
-    const onEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeDrawer();
-    };
-
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onEscape);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onEscape);
-    };
-  }, [drawerOpen]);
-
-  const actions: DrawerAction[] = [
-    {
-      id: "home",
-      label: "Open Home",
-      keywords: "home start workspace",
-      icon: Home,
-      onSelect: () => {
-        onTabChange("home");
-        closeDrawer();
-      },
-    },
-    {
-      id: "projects",
-      label: "Open Projects",
-      keywords: "projects work portfolio",
-      icon: FolderKanban,
-      onSelect: () => {
-        onTabChange("projects");
-        closeDrawer();
-      },
-    },
-    {
-      id: "about",
-      label: "Open About",
-      keywords: "about bio profile",
-      icon: User,
-      onSelect: () => {
-        onTabChange("about");
-        closeDrawer();
-      },
-    },
-    {
-      id: "github",
-      label: "Open GitHub",
-      keywords: "github repo code",
-      icon: Github,
-      onSelect: () => {
-        window.open("https://github.com/infinotiver", "_blank", "noopener,noreferrer");
-        closeDrawer();
-      },
-    },
-    {
-      id: "tools",
-      label: "Utility Tools",
-      keywords: "tools utility",
-      icon: Wrench,
-      onSelect: closeDrawer,
-    },
-  ];
-
-  const queryValue = query.trim().toLowerCase();
-  const filteredActions = queryValue
-    ? actions.filter((item) => `${item.label} ${item.keywords}`.toLowerCase().includes(queryValue))
-    : actions;
-
   return (
-    <motion.nav
-      ref={containerRef}
-      className="relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <AnimatePresence>
-        {expanded && drawerOpen && (
-          <LauncherDrawer
-            activeTab={activeTab}
-            query={query}
-            onQueryChange={setQuery}
-            actions={filteredActions}
-            searchRef={searchRef}
-          />
-        )}
-      </AnimatePresence>
-
+    <motion.nav className="relative" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <AnimatePresence mode="wait">
         {expanded ? (
           <motion.div
@@ -142,12 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ tabs, activeTab, onTabChange }) => {
               activeTab={activeTab}
               isMobile={isMobile}
               pinned={pinned}
-              drawerOpen={drawerOpen}
-              onToggleDrawer={() => setDrawerOpen((prev) => !prev)}
-              onTabChange={(tab) => {
-                onTabChange(tab);
-                closeDrawer();
-              }}
+              onTabChange={onTabChange}
               onTogglePin={() => setPinned((prev) => !prev)}
             />
           </motion.div>

@@ -7,6 +7,7 @@ import { tabs } from "@/config/navigation";
 import type { TabId } from "@/types/navigation";
 import WorkspaceContent from "@/components/workspace/WorkspaceContent";
 import QuickHubModal from "@/components/home/QuickHubModal";
+import DockBar from "@/components/dockbar/DockBar";
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabId>("home");
@@ -38,27 +39,7 @@ const App: React.FC = () => {
         onTabChange={setActiveTab}
       />
 
-      <div className="fixed bottom-4 left-4 z-40 hidden md:block">
-        <div className="glass-ui flex items-center gap-2 rounded-full bg-background/60 px-3 py-1.5 text-xs text-foreground/90">
-          <span className="upper">WORKSPACE:</span>{" "}
-          <span className="upper rounded-full bg-black text-[10px] px-2 py-0.5 font-semibold tracking-[0.12em] text-white">
-            {activeLabel}
-          </span>
-        </div>
-      </div>
-
-      <div className="fixed bottom-4 right-4 z-40 hidden md:block">
-        <div className="glass-ui rounded-full bg-background/60 px-3 py-1.5 text-xs">
-          <a
-            className="text-foreground/90 hover:underline"
-            href="https://github.com/infinotiver"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </a>
-        </div>
-      </div>
+      <DockBar activeLabel={activeLabel} />
 
       <div className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2">
         <Navbar tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />

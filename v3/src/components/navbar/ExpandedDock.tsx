@@ -1,5 +1,5 @@
 import type React from "react";
-import { Command, Pin, PinOff } from "lucide-react";
+import { Pin, PinOff } from "lucide-react";
 import type { TabId, TabItem } from "@/types/navigation";
 import { dockStyles } from "@/components/navbar/styles";
 
@@ -8,8 +8,6 @@ interface ExpandedDockProps {
   activeTab: TabId;
   isMobile: boolean;
   pinned: boolean;
-  drawerOpen: boolean;
-  onToggleDrawer: () => void;
   onTabChange: (tab: TabId) => void;
   onTogglePin: () => void;
 }
@@ -22,22 +20,11 @@ const ExpandedDock: React.FC<ExpandedDockProps> = ({
   activeTab,
   isMobile,
   pinned,
-  drawerOpen,
-  onToggleDrawer,
   onTabChange,
   onTogglePin,
 }) => {
   return (
     <div className={dockStyles.expandedWrap}>
-      <button
-        type="button"
-        onClick={onToggleDrawer}
-        className={stateClass(drawerOpen)}
-        aria-label="Open launcher"
-      >
-        <Command className="h-3.5 w-3.5" />
-      </button>
-
       <div className={dockStyles.rail}>
         {tabs.map((tab) => {
           const Icon = tab.icon;
