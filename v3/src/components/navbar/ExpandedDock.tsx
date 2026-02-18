@@ -8,8 +8,6 @@ interface ExpandedDockProps {
   activeTab: TabId;
   pinned: boolean;
   drawerOpen: boolean;
-  onOpenDrawer: () => void;
-  onCloseDrawerDelayed: () => void;
   onToggleDrawer: () => void;
   onTabChange: (tab: TabId) => void;
   onTogglePin: () => void;
@@ -23,8 +21,6 @@ const ExpandedDock: React.FC<ExpandedDockProps> = ({
   activeTab,
   pinned,
   drawerOpen,
-  onOpenDrawer,
-  onCloseDrawerDelayed,
   onToggleDrawer,
   onTabChange,
   onTogglePin,
@@ -33,8 +29,6 @@ const ExpandedDock: React.FC<ExpandedDockProps> = ({
     <div className={dockStyles.expandedWrap}>
       <button
         type="button"
-        onMouseEnter={onOpenDrawer}
-        onMouseLeave={onCloseDrawerDelayed}
         onClick={onToggleDrawer}
         className={stateClass(drawerOpen)}
         aria-label="Open launcher"

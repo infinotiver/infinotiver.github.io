@@ -10,8 +10,6 @@ interface LauncherDrawerProps {
   query: string;
   onQueryChange: (value: string) => void;
   actions: DrawerAction[];
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
   searchRef: React.RefObject<HTMLInputElement | null>;
 }
 
@@ -20,8 +18,6 @@ const LauncherDrawer: React.FC<LauncherDrawerProps> = ({
   query,
   onQueryChange,
   actions,
-  onMouseEnter,
-  onMouseLeave,
   searchRef,
 }) => {
   return (
@@ -30,8 +26,6 @@ const LauncherDrawer: React.FC<LauncherDrawerProps> = ({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.985 }}
       transition={{ duration: 0.16, ease: "easeOut" }}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
       className={dockStyles.drawer}
     >
       <div className="mb-1.5 flex items-center justify-between">
