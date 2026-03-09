@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Folder, User } from "lucide-react";
+import { Folder } from "lucide-react";
 import { siGithub } from "simple-icons";
 
 interface QuickHubActionsProps {
   accent: string;
-  onQuickNavigate: (tab: "projects" | "about") => void;
 }
 
 interface QuickAction {
@@ -15,25 +14,10 @@ interface QuickAction {
   onClick: () => void;
 }
 
-const QuickHubActions: React.FC<QuickHubActionsProps> = ({
-  accent,
-  onQuickNavigate,
-}) => {
+const QuickHubActions: React.FC<QuickHubActionsProps> = ({ accent }) => {
   const [tooltipId, setTooltipId] = useState<string | null>(null);
 
   const actions: QuickAction[] = [
-    {
-      id: "projects",
-      label: "Projects",
-      icon: Folder,
-      onClick: () => onQuickNavigate("projects"),
-    },
-    {
-      id: "about",
-      label: "About",
-      icon: User,
-      onClick: () => onQuickNavigate("about"),
-    },
     {
       id: "github",
       label: "GitHub",
@@ -73,7 +57,11 @@ const QuickHubActions: React.FC<QuickHubActionsProps> = ({
               </span>
             )}
             {action.brandPath ? (
-              <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 text-black">
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                className="h-4 w-4 text-black"
+              >
                 <path d={action.brandPath} fill="currentColor" />
               </svg>
             ) : (

@@ -1,10 +1,17 @@
 import type { PropsWithChildren } from "react";
 import Noise from "@/components/Noise";
+import bg from "@/assets/assets/bg.png";
 
 const Environment = ({ children }: PropsWithChildren) => (
-  <div className="relative h-screen w-full overflow-hidden bg-linear-to-br from-background via-background to-secondary/30 text-foreground">
-    <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
-    <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
+  <div className="relative h-screen w-full overflow-hidden text-foreground">
+    <img
+      src={bg}
+      alt=""
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 h-full w-full object-cover grayscale blur-sm"
+    />
+    <div className="pointer-events-none absolute inset-0 bg-background/45" />
+    <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/8 via-transparent to-black/18" />
 
     <Noise
       patternSize={200}
@@ -13,7 +20,7 @@ const Environment = ({ children }: PropsWithChildren) => (
       patternRefreshInterval={2}
       patternAlpha={15}
     />
-    <div className="relative z-10 h-full overflow-y-auto px-4 py-5 pb-24 md:px-10 md:py-8 md:pb-24">
+    <div className="relative z-10 h-full overflow-y-auto px-6 py-6 pb-20 md:px-12 md:py-10 md:pb-20">
       {children}
     </div>
   </div>

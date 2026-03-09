@@ -1,18 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { apps } from "@/os/apps/registry";
+import { apps, getApp } from "@/os/apps/registry";
 import TitleBar from "@/os/TitleBar";
 import AppGrid from "@/os/AppGrid";
 import DesktopWidgets from "@/os/DesktopWidgets";
 import Environment from "@/os/Environment";
 import Dock from "@/os/Dock";
 import useSession from "@/os/useSession";
-
-const windowClass = {
-  maximized:
-    "flex h-full w-full flex-col rounded-2xl border border-border bg-background overflow-hidden",
-  windowed:
-    "max-w-4xl w-full rounded-2xl border-2 border-border bg-background/50 p-4 backdrop-blur-sm min-h-[50vh] max-h-[75vh] overflow-y-auto",
-} as const;
 
 const getGreeting = () => {
   const h = new Date().getHours();
@@ -30,9 +23,10 @@ const formatDate = () =>
 
 const Shell = () => {
   const session = useSession();
-  const ActiveComponent = session.openApp?.component;
-  const showDesktop = !session.openApp || session.windowState === "windowed";
-  const isWindowed = session.windowState === "windowed";
+  const hasMaximized = session.windows.some(
+    (w) => w.windowState === "maximized",
+  );
+  const showDesktop = !hasMaximized;
 
   return (
     <Environment>
@@ -66,46 +60,72 @@ const Shell = () => {
         </div>
       )}
 
-      <AnimatePresence mode="wait">
-        {session.openApp && ActiveComponent && (
-          <div
-            className={
-              isWindowed
-                ? "absolute inset-0 z-30 flex items-start justify-center pt-8 pointer-events-none"
-                : "absolute inset-0 z-30 flex items-center justify-center p-4 pb-20"
-            }
-          >
+      {/* ── windows layer ── */}
+      <AnimatePresence>
+        {session.windows.map((win) => {
+          const appDef = getApp(win.id);
+          const Component = appDef.component;
+          const isWindowed = win.windowState === "windowed";
+          const isFocused = session.focusedId === win.id;
+
+          return (
             <motion.div
-              key={`${session.openApp.id}-${session.windowState}`}
+              key={win.id}
+              style={{ zIndex: win.zIndex }}
+              className={`fixed inset-0 pointer-events-none ${
+                isWindowed
+                  ? "flex items-center justify-center p-6 pb-24"
+                  : "flex flex-col pb-16"
+              }`}
               initial={{ opacity: 0, y: 20, scale: 0.985 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 14, scale: 0.99 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className={`${windowClass[session.windowState]} ${isWindowed ? "pointer-events-auto" : ""}`}
-              drag={isWindowed}
-              dragMomentum={false}
-              dragElastic={0}
             >
-              <TitleBar
-                title={session.openApp.title}
-                windowState={session.windowState}
-                onToggleMaximize={session.toggleMaximize}
-                onClose={session.close}
-              />
-              <div
-                className={`pt-1 ${!isWindowed ? "flex-1 overflow-y-auto" : ""}`}
+              <motion.div
+                className={`pointer-events-auto ${
+                  isWindowed
+                    ? "max-w-4xl w-full flex flex-col rounded-2xl border-2 border-border bg-background/85 backdrop-blur-md min-h-[50vh] max-h-[75vh] transition-all"
+                    : "flex flex-1 min-h-0 w-full flex-col rounded-xl border border-border bg-background overflow-hidden"
+                } ${
+                  isWindowed && isFocused
+                    ? "shadow-2xl shadow-black/20 border-border"
+                    : ""
+                } ${isWindowed && !isFocused ? "opacity-90 shadow-sm" : ""}`}
+                drag={isWindowed}
+                dragMomentum={false}
+                dragElastic={0}
+                initial={
+                  isWindowed ? { x: win.offset.x, y: win.offset.y } : { x: 0, y: 0 }
+                }
+                animate={
+                  isWindowed ? {} : { x: 0, y: 0 }
+                }
+                onPointerDownCapture={() => session.focus(win.id)}
               >
-                <ActiveComponent isActive />
-              </div>
+                <TitleBar
+                  title={appDef.title}
+                  windowState={win.windowState}
+                  onToggleMaximize={() => session.toggleMaximize(win.id)}
+                  onClose={() => session.close(win.id)}
+                />
+                <div
+                  className={`flex-1 overflow-y-auto min-h-0 ${isWindowed ? "" : ""}`}
+                >
+                  <Component isActive={isFocused} />
+                </div>
+              </motion.div>
             </motion.div>
-          </div>
-        )}
+          );
+        })}
       </AnimatePresence>
 
       <Dock
         apps={apps}
-        activeAppId={session.openAppId}
-        onShowDesktop={session.close}
+        activeAppId={session.focusedId}
+        onShowDesktop={() => {
+          if (session.focusedId) session.close(session.focusedId);
+        }}
         onOpenApp={session.open}
       />
     </Environment>
