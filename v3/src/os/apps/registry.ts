@@ -1,5 +1,5 @@
-import { FolderKanban, NotepadText } from "lucide-react";
-import NotesApp from "@/os/apps/notes/NotesApp";
+import { Clock, FolderKanban } from "lucide-react";
+import ClockApp from "@/os/apps/clock/ClockApp";
 import PortfolioApp from "@/os/apps/portfolio/PortfolioApp";
 import type { AppDefinition, AppId } from "@/os/apps/types";
 
@@ -12,11 +12,11 @@ export const apps: AppDefinition[] = [
     component: PortfolioApp,
   },
   {
-    id: "notes",
-    title: "Notes",
-    description: "Placeholder utility app for desktop expansion.",
-    icon: NotepadText,
-    component: NotesApp,
+    id: "clock",
+    title: "Clock",
+    description: "Full-screen clock display.",
+    icon: Clock,
+    component: ClockApp,
   },
 ];
 

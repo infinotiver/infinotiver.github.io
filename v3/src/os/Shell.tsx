@@ -22,6 +22,17 @@ const formatDate = () =>
     day: "numeric",
   });
 
+/* ── Spring pop-in variant ── */
+const popIn = {
+  initial: { opacity: 0, y: 18, scale: 0.93 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring" as const, stiffness: 380, damping: 26 },
+  },
+};
+
 /* ── Desktop (shown when no maximized window) ── */
 interface DesktopProps {
   selectedId: AppId | null;
@@ -29,27 +40,39 @@ interface DesktopProps {
   onOpen: (id: AppId) => void;
 }
 const Desktop = ({ selectedId, onSelect, onOpen }: DesktopProps) => (
-  <div className="flex flex-col gap-6 lg:flex-row lg:gap-10">
-    <div className="flex-1 space-y-6">
-      <div className="space-y-1.5">
+  <motion.div
+    className="flex flex-col gap-6 lg:flex-row lg:gap-10"
+    initial="initial"
+    animate="animate"
+    variants={{
+      animate: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } },
+    }}
+  >
+    <motion.div variants={popIn} className="flex-1 space-y-6">
+      <motion.div variants={popIn} className="space-y-1.5">
         <h1 className="text-3xl font-black tracking-tighter text-foreground sm:text-4xl md:text-6xl">
           {getGreeting()}
         </h1>
         <p className="text-sm font-semibold text-muted-foreground md:text-lg">
           {formatDate()}
         </p>
-      </div>
-      <AppGrid
-        apps={apps}
-        selectedId={selectedId}
-        onSelect={onSelect}
-        onOpen={onOpen}
-      />
-    </div>
-    <aside className="hidden shrink-0 lg:block lg:w-72 xl:w-80">
+      </motion.div>
+      <motion.div variants={popIn}>
+        <AppGrid
+          apps={apps}
+          selectedId={selectedId}
+          onSelect={onSelect}
+          onOpen={onOpen}
+        />
+      </motion.div>
+    </motion.div>
+    <motion.aside
+      variants={popIn}
+      className="hidden shrink-0 lg:block lg:w-72 xl:w-80"
+    >
       <DesktopWidgets />
-    </aside>
-  </div>
+    </motion.aside>
+  </motion.div>
 );
 
 /* ── AppWindow (one per open window) ── */
@@ -77,7 +100,7 @@ const AppWindow = ({
       className={`fixed inset-0 pointer-events-none ${
         isWindowed
           ? "flex items-center justify-center p-6 pb-24"
-          : "flex flex-col pb-16"
+          : "flex flex-col p-6"
       }`}
       initial={{ opacity: 0, y: 20, scale: 0.985 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
