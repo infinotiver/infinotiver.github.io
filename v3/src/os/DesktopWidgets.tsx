@@ -1,63 +1,50 @@
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { ClockWidget } from "@/components/widgets/ClockWidget";
+import { WeatherWidget } from "@/components/widgets/WeatherWidget";
+import { QuickControls } from "@/components/widgets/QuickControls";
 
-/* ── shared card shell ── */
-const Card = ({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <div
-    className={`rounded-2xl border border-border/60 bg-card/50 p-4 backdrop-blur-sm ${className}`}
-  >
-    {children}
-  </div>
-);
-
-/* ── Clock widget ── */
-const ClockWidget = () => {
-  const [now, setNow] = useState(new Date());
-
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  const time = now.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
-
-  const seconds = now.toLocaleTimeString("en-US", {
-    second: "2-digit",
-  });
-
-  return (
-    <Card>
-      <p className="font-mono text-5xl font-black tracking-tighter text-foreground">
-        {time}
-      </p>
-      <p className="mt-1 font-mono text-sm font-bold text-muted-foreground">
-        :{seconds.padStart(2, "0")}s
-      </p>
-    </Card>
-  );
+/* ── pop-in spring variant used by each card ── */
+const popIn = {
+  initial: { opacity: 0, y: 18, scale: 0.93 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring" as const, stiffness: 380, damping: 26 },
+  },
+  exit: { opacity: 0, y: -10, scale: 0.95, transition: { duration: 0.14 } },
 };
 
-/* ── Composed widget stack (sidebar) ── */
-const DesktopWidgets = () => (
-  <div className="flex h-full flex-col">
-    <div className="flex flex-col gap-3">
-      <ClockWidget />
-    </div>
-    <div className="mt-auto pt-6">
-      <p className="text-right text-4xl font-black tracking-tighter text-muted-foreground/20 lg:text-5xl">
-        karretOS
-      </p>
-    </div>
-  </div>
-);
+/* ── Widget Island ── */
+const DesktopWidgets = () => {
+  return (
+    <motion.div
+      className="flex h-full flex-col gap-3"
+      initial="initial"
+      animate="animate"
+      variants={{
+        animate: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+      }}
+    >
+      <motion.div variants={popIn}>
+        <ClockWidget />
+      </motion.div>
+
+      <motion.div variants={popIn}>
+        <WeatherWidget />
+      </motion.div>
+
+      <motion.div variants={popIn}>
+        <QuickControls />
+      </motion.div>
+
+      <motion.div variants={popIn} className="mt-auto pt-4">
+        <p className="text-right text-4xl font-black tracking-tighter text-muted-foreground/20 lg:text-5xl">
+          karretOS
+        </p>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 export default DesktopWidgets;
