@@ -17,7 +17,7 @@ const QuickHubButton: React.FC<QuickHubButtonProps> = ({ onOpen }) => {
     <button
       type="button"
       onClick={onOpen}
-      className="glass-ui relative h-11 w-11 rounded-full bg-background/60 p-1"
+      className="relative h-11 w-11 rounded-full bg-background/60 p-1"
       aria-label="Open quick hub"
       title="Open quick hub"
     >

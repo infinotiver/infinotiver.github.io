@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo_new from "@/assets/assets/logo_new.png";
 import logo from "@/assets/assets/logo.png";
 
-interface ChipIdentity {
+export interface ChipIdentity {
   id: string;
   label: string;
   accent: string;
@@ -10,7 +10,7 @@ interface ChipIdentity {
   initials: string;
 }
 
-const identities: ChipIdentity[] = [
+export const identities: ChipIdentity[] = [
   {
     id: "infinotiver",
     label: "@infinotiver",
@@ -27,7 +27,11 @@ const identities: ChipIdentity[] = [
   },
 ];
 
-const UsernameChip: React.FC = () => {
+interface UsernameChipProps {
+  onActiveIdentityChange?: (identity: ChipIdentity) => void;
+}
+
+const UsernameChip: React.FC<UsernameChipProps> = ({ onActiveIdentityChange }) => {
   const [activeId, setActiveId] = useState(identities[0].id);
   const [tooltipId, setTooltipId] = useState<string | null>(null);
   const activeIdentity =
@@ -40,6 +44,7 @@ const UsernameChip: React.FC = () => {
       onMouseLeave={() => {
         setActiveId(identities[0].id);
         setTooltipId(null);
+        onActiveIdentityChange?.(identities[0]);
       }}
     >
       <span className="pointer-events-none absolute inset-0 rounded-full  opacity-60" />
@@ -52,15 +57,17 @@ const UsernameChip: React.FC = () => {
             onMouseEnter={() => {
               setActiveId(item.id);
               setTooltipId(item.id);
+              onActiveIdentityChange?.(item);
             }}
             onMouseLeave={() => setTooltipId(null)}
             onFocus={() => {
               setActiveId(item.id);
               setTooltipId(item.id);
+              onActiveIdentityChange?.(item);
             }}
             onBlur={() => setTooltipId(null)}
-            className={`${idx > 0 ? "-ml-2" : ""} ${
-              idx === 0 ? "z-20" : "z-10"
+            className={`${idx > 0 ? "-ml-4" : ""} ${
+              idx === 0 ? "z-60" : "z-10"
             } relative overflow-visible rounded-full border-3 bg-background p-0.5 transition-transform duration-150 hover:-translate-y-0.5 ${
               activeId === item.id
                 ? "shadow-[0_0_0_2px_rgba(255,255,255,0.15)]"

@@ -1,14 +1,14 @@
 import type React from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import HomeView from "@/components/portfolio/home/HomeView";
 import type { TabId } from "@/types/navigation";
-import HomeView from "@/components/home/HomeView";
 
-interface WorkspaceContentProps {
+interface PortfolioWorkspaceProps {
   activeTab: TabId;
-  onOpenQuickHub: () => void;
+  onQuickNavigate: (tab: TabId) => void;
 }
 
-const WorkspaceContent: React.FC<WorkspaceContentProps> = ({ activeTab, onOpenQuickHub }) => {
+const PortfolioWorkspace: React.FC<PortfolioWorkspaceProps> = ({ activeTab, onQuickNavigate }) => {
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -18,7 +18,7 @@ const WorkspaceContent: React.FC<WorkspaceContentProps> = ({ activeTab, onOpenQu
         exit={{ opacity: 0, x: -14 }}
         transition={{ duration: 0.22, ease: "easeOut" }}
       >
-        {activeTab === "home" && <HomeView onOpenQuickHub={onOpenQuickHub} />}
+        {activeTab === "home" && <HomeView onQuickNavigate={onQuickNavigate} />}
 
         {activeTab === "projects" && (
           <div className="space-y-4">
@@ -44,4 +44,4 @@ const WorkspaceContent: React.FC<WorkspaceContentProps> = ({ activeTab, onOpenQu
   );
 };
 
-export default WorkspaceContent;
+export default PortfolioWorkspace;
