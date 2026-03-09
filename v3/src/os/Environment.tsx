@@ -20,9 +20,7 @@ const Environment = ({ children }: PropsWithChildren) => (
       patternRefreshInterval={2}
       patternAlpha={15}
     />
-    <div className="relative z-10 h-full overflow-y-auto px-6 py-6 pb-20 md:px-12 md:py-10 md:pb-20">
-      {children}
-    </div>
+    <div className="relative h-full w-full">{children}</div>
   </div>
 );
 
