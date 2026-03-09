@@ -32,10 +32,10 @@ const Desktop = ({ selectedId, onSelect, onOpen }: DesktopProps) => (
   <div className="flex flex-col gap-6 lg:flex-row lg:gap-10">
     <div className="flex-1 space-y-6">
       <div className="space-y-1.5">
-        <h1 className="text-4xl font-black tracking-tighter text-foreground md:text-6xl">
+        <h1 className="text-3xl font-black tracking-tighter text-foreground sm:text-4xl md:text-6xl">
           {getGreeting()}
         </h1>
-        <p className="text-base font-semibold text-muted-foreground md:text-lg">
+        <p className="text-sm font-semibold text-muted-foreground md:text-lg">
           {formatDate()}
         </p>
       </div>
@@ -46,7 +46,7 @@ const Desktop = ({ selectedId, onSelect, onOpen }: DesktopProps) => (
         onOpen={onOpen}
       />
     </div>
-    <aside className="w-full shrink-0 lg:w-72 xl:w-80">
+    <aside className="hidden shrink-0 lg:block lg:w-72 xl:w-80">
       <DesktopWidgets />
     </aside>
   </div>
