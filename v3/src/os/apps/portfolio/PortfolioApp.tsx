@@ -1,16 +1,15 @@
-import type { AppProps } from "@/os/apps/types";
 import Hero from "@/components/portfolio/hero/hero";
 import StatsPanel from "@/components/portfolio/home/widgets/StatsPanel";
 import useWakaTimeStats from "@/hooks/useWakaTimeStats";
 
-const PortfolioApp = (_props: AppProps) => {
+const PortfolioApp = () => {
   const stats = useWakaTimeStats();
 
   return (
     <main className="space-y-8 p-4 md:p-6">
-      {/* ── hero + stats ── */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <section className="md:col-span-3">
+      {/* ── hero + about + stats (2-col grid) ── */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <section className="space-y-4">
           <Hero />
         </section>
         <StatsPanel stats={stats} />
@@ -24,15 +23,6 @@ const PortfolioApp = (_props: AppProps) => {
           <li>Automation Tools — workflow scripts.</li>
           <li>Mini SaaS Lab — MVP experiments.</li>
         </ul>
-      </section>
-
-      {/* ── about ── */}
-      <section className="max-w-2xl space-y-2">
-        <h2 className="text-2xl font-black tracking-tight">About</h2>
-        <p className="text-sm text-muted-foreground">
-          Student and full-stack developer focused on building things that
-          people actually use.
-        </p>
       </section>
     </main>
   );
