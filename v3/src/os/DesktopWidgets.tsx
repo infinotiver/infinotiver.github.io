@@ -15,12 +15,6 @@ const Card = ({
   </div>
 );
 
-// const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-//   <p className="mb-3 flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-muted-foreground">
-//     {children}
-//   </p>
-// );
-
 /* ── Clock widget ── */
 const ClockWidget = () => {
   const [now, setNow] = useState(new Date());
@@ -42,7 +36,6 @@ const ClockWidget = () => {
 
   return (
     <Card>
-    
       <p className="font-mono text-5xl font-black tracking-tighter text-foreground">
         {time}
       </p>
@@ -52,7 +45,6 @@ const ClockWidget = () => {
     </Card>
   );
 };
-
 
 /* ── Composed widget stack (sidebar) ── */
 const DesktopWidgets = () => (

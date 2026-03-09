@@ -15,7 +15,6 @@ interface Session {
   selectedId: AppId | null;
   windows: WindowEntry[];
   focusedId: AppId | null;
-  openAppIds: AppId[];
   select: (id: AppId) => void;
   open: (id: AppId) => void;
   close: (id: AppId) => void;
@@ -34,8 +33,6 @@ const useSession = (): Session => {
     if (windows.length === 0) return null;
     return windows.reduce((best, w) => (w.zIndex > best.zIndex ? w : best)).id;
   }, [windows]);
-
-  const openAppIds = useMemo(() => windows.map((w) => w.id), [windows]);
 
   const focus = useCallback((id: AppId) => {
     zCounter += 1;
@@ -87,7 +84,6 @@ const useSession = (): Session => {
     selectedId,
     windows,
     focusedId,
-    openAppIds,
     select: setSelectedId,
     open,
     close,
