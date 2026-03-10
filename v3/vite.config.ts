@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
     : undefined;
 
   return {
-    base: "/v3/",
+    base: "/",
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
