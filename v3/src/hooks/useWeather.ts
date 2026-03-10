@@ -67,8 +67,21 @@ export const useWeather = () => {
     if (cached) {
       setData(cached);
       setLoading(false);
+      setError(null);
       return;
     }
+
+    setLoading(true);
+    setError(null);
+
+    if (!navigator.geolocation) {
+      setError("Geolocation not available");
+      setLoading(false);
+      return;
+    }
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     navigator.geolocation.getCurrentPosition(
       async ({ coords: { latitude, longitude } }) => {
@@ -78,33 +91,76 @@ export const useWeather = () => {
           url.searchParams.set("longitude", String(longitude));
           url.searchParams.set(
             "current",
-            "temperature_2m,weathercode,windspeed_10m",
+            "temperature_2m,weather_code,wind_speed_10m",
           );
 
-          const res = await fetch(url.toString());
-          if (!res.ok) throw new Error("API error");
+          const res = await fetch(url.toString(), {
+            signal: controller.signal,
+          });
+
+          if (!res.ok) {
+            throw new Error(`API error: ${res.status}`);
+          }
 
           const json = await res.json();
-          const { temperature_2m, weathercode, windspeed_10m } = json.current;
-          const weatherData = {
+
+          if (!json?.current) {
+            throw new Error("Invalid API response");
+          }
+
+          const { temperature_2m, weather_code, wind_speed_10m } = json.current;
+
+          if (
+            temperature_2m === null ||
+            weather_code === null ||
+            wind_speed_10m === null
+          ) {
+            throw new Error("Missing weather data");
+          }
+
+          const weatherData: WeatherData = {
             temp: Math.round(temperature_2m),
-            wind: Math.round(windspeed_10m),
-            ...wmoMeta(weathercode),
+            wind: Math.round(wind_speed_10m),
+            ...wmoMeta(weather_code),
           };
+
           setData(weatherData);
           setCache(weatherData);
-        } catch {
-          setError("Weather unavailable");
+          setError(null);
+        } catch (err) {
+          const message =
+            err instanceof Error
+              ? err.message === "The operation was aborted."
+                ? "Request timeout"
+                : err.message
+              : "Weather fetch failed";
+          setError(message);
+          setData(null);
         } finally {
           setLoading(false);
+          clearTimeout(timeoutId);
         }
       },
-      () => {
-        setError("Location denied");
+      (err) => {
+        const message =
+          err.code === 1
+            ? "Location access denied"
+            : err.code === 2
+              ? "Location unavailable"
+              : err.code === 3
+                ? "Location timeout"
+                : "Geolocation error";
+        setError(message);
         setLoading(false);
+        clearTimeout(timeoutId);
       },
       { timeout: 8000 },
     );
+
+    return () => {
+      controller.abort();
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   return { data, loading, error };
