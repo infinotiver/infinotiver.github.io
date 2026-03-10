@@ -108,7 +108,7 @@ const AppWindow = ({
       transition={{ duration: 0.2, ease: "easeOut" }}
     >
       <motion.div
-        className={`pointer-events-auto ${
+        className={`pointer-events-auto h-full ${
           isWindowed
             ? "max-w-4xl w-full flex flex-col rounded-2xl border-2 border-border bg-background/85 backdrop-blur-md min-h-[50vh] max-h-[75vh] transition-all"
             : "flex flex-1 min-h-0 w-full flex-col rounded-xl border border-border bg-background overflow-hidden"
@@ -130,7 +130,7 @@ const AppWindow = ({
           onToggleMaximize={onToggleMaximize}
           onClose={onClose}
         />
-        <div className="flex-1 overflow-y-auto min-h-0">
+        <div className="flex-1 min-h-0 overflow-y-auto flex flex-col rounded-[inherit]">
           <Component isActive={isFocused} />
         </div>
       </motion.div>
