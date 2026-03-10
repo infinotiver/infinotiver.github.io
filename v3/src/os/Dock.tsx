@@ -6,9 +6,9 @@ import type { AppDefinition, AppId } from "@/os/apps/types";
 
 /* ── dock style tokens ── */
 const style = {
-  base: "glass-ui flex h-10 shrink-0 items-center gap-2 rounded-full !bg-black/85 px-4 text-sm !text-white transition-colors border",
-  idle: "border-white hover:border-white/40 hover:!bg-black/75",
-  active: "border-white/70 !bg-black ring-2 ring-white/25",
+  base: "glass-ui flex h-10 shrink-0 items-center gap-2 rounded-full !bg-black/85 px-4 text-sm !text-white transition-colors border-2",
+  idle: "border-white/30 !bg-transparent !text-white/70 hover:!text-white hover:border-white/50",
+  active: "border-white !bg-white/15 !text-white",
   rail: "glass-ui flex items-center gap-2 overflow-x-auto rounded-full border border-white/20 !bg-black/80 p-1.5",
   wrap: "flex items-center gap-2 p-1",
   pill: "glass-ui flex h-10 w-14 items-center justify-center rounded-full border border-white/20 !bg-black/85 text-white/90 transition-colors hover:border-white/40 hover:!bg-black hover:text-white",

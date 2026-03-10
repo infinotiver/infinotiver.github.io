@@ -17,7 +17,7 @@ const TitleBar = ({
   onToggleMaximize,
   onClose,
 }: TitleBarProps) => (
-  <header className="flex items-center justify-between px-4 pt-3 pb-3 cursor-grab active:cursor-grabbing">
+  <header className="flex items-center justify-between px-4 py-2 cursor-grab active:cursor-grabbing bg-gray-200/50">
     {/* spacer — draggable area */}
     <div className="flex-1" />
 
