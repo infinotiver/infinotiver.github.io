@@ -10,7 +10,7 @@ export const BootScreen = ({ onBootComplete }: BootScreenProps) => {
 
   useEffect(() => {
     const bootSequence = async () => {
-      // Simulate boot sequence: 0 -> 100% over 3.2 seconds
+      // Simulate boot sequence: 0 -> 100% over 4 seconds
       const steps = 20;
       const stepDuration = 200; 
 
@@ -42,9 +42,7 @@ export const BootScreen = ({ onBootComplete }: BootScreenProps) => {
         <h1 className="text-5xl font-black tracking-tighter text-foreground md:text-7xl">
           karretOS
         </h1>
-        <p className="mt-2 text-sm font-semibold text-muted-foreground">
-          Booting system...
-        </p>
+       
       </motion.div>
 
       {/* Progress bar */}
@@ -62,17 +60,6 @@ export const BootScreen = ({ onBootComplete }: BootScreenProps) => {
         </p>
       </div>
 
-      {/* Boot messages */}
-      <motion.div
-        className="mt-16 space-y-1 text-center font-mono text-xs text-muted-foreground/60"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-      >
-        <p>Initializing environment...</p>
-        <p>Loading shell components...</p>
-        <p>Mounting widgets...</p>
-      </motion.div>
     </motion.div>
   );
 };
