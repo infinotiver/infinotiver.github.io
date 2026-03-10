@@ -12,7 +12,10 @@ export default defineConfig(({ mode }) => {
     : undefined;
 
   return {
-    base: "/",
+    base: "/", // This ensures it looks at the root domain, not /v3/
+    build: {
+      outDir: "dist", // Ensure the output folder is named dist
+    },
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
