@@ -1,9 +1,10 @@
-import { Briefcase, Clock, TimerIcon, TerminalIcon, Paperclip } from "lucide-react";
+import { Briefcase, Clock, TimerIcon, TerminalIcon, Paperclip, Settings2Icon } from "lucide-react";
 import ClockApp from "@/os/apps/clock/ClockApp";
 import PortfolioApp from "@/os/apps/portfolio/PortfolioApp";
 import PomodoroApp from "./pomodoro/PomodoroApp";
 import TerminalApp from "./terminal/TerminalApp";
 import NotesApp from "./notes/NotesApp";
+import SettingsApp from "./settings/SettingsApp";
 import type { AppDefinition, AppId } from "@/os/apps/types";
 
 export const apps: AppDefinition[] = [
@@ -41,6 +42,13 @@ export const apps: AppDefinition[] = [
     description: "Interactive shell",
     component: TerminalApp,
     icon: TerminalIcon
+  },
+  {
+    id: "settings",
+    title: "Settings",
+    description: "Make karretOS all yours",
+    component: SettingsApp,
+    icon: Settings2Icon
   }
 ];
 

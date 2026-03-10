@@ -19,7 +19,7 @@ export const ClockWidget = () => {
   // const secs = String(now.getSeconds()).padStart(2, "0");
   const currentDate = new Date().toLocaleDateString();
   return (
-    <Card>
+    <Card className="self-start">
       <div className="flex items-center gap-6">
         <div className="shrink-0">
           <Clock value={now} size={120} />
