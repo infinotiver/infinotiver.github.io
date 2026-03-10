@@ -23,7 +23,7 @@ const ClockApp = () => {
   });
 
   return (
-    <main className="flex h-full flex-col items-center justify-center gap-8 p-6">
+    <main className="flex h-full w-full flex-col items-center justify-center gap-8 p-6">
       <div className="text-center">
         <h1 className="text-7xl font-black tracking-tighter text-foreground md:text-8xl">
           {time}

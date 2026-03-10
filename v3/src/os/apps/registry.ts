@@ -1,7 +1,9 @@
-import { Briefcase, Clock, TimerIcon } from "lucide-react";
+import { Briefcase, Clock, TimerIcon, TerminalIcon, Paperclip } from "lucide-react";
 import ClockApp from "@/os/apps/clock/ClockApp";
 import PortfolioApp from "@/os/apps/portfolio/PortfolioApp";
 import PomodoroApp from "./pomodoro/PomodoroApp";
+import TerminalApp from "./terminal/TerminalApp";
+import NotesApp from "./notes/NotesApp";
 import type { AppDefinition, AppId } from "@/os/apps/types";
 
 export const apps: AppDefinition[] = [
@@ -26,6 +28,20 @@ export const apps: AppDefinition[] = [
     component: PomodoroApp,
     icon: TimerIcon,
   },
+  {
+    id: "notes",
+    title: "kNotes",
+    description: "Take Notes",
+    component: NotesApp,
+    icon: Paperclip,
+  },
+  {
+    id: "terminal",
+    title: "Terminal",
+    description: "Interactive shell",
+    component: TerminalApp,
+    icon: TerminalIcon
+  }
 ];
 
 export const getApp = (id: AppId): AppDefinition =>

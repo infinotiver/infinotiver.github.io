@@ -6,7 +6,7 @@ const PortfolioApp = () => {
   const stats = useWakaTimeStats();
 
   return (
-    <main className="space-y-8 p-4 md:p-6">
+    <main className="h-full flex flex-col space-y-8 p-6 overflow-y-auto">
       {/* ── hero + about + stats (2-col grid) ── */}
       <div className="grid gap-4 md:grid-cols-2">
         <section className="space-y-4">

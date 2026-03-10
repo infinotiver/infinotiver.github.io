@@ -1,6 +1,6 @@
 import type React from "react";
 
-export type AppId = "portfolio" | "clock" | "pomodoro";
+export type AppId = "portfolio" | "clock" | "pomodoro" | "terminal" | "notes";
 
 export interface AppProps {
   isActive: boolean;
