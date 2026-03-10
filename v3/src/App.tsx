@@ -4,18 +4,21 @@ import "./index.css";
 import "./globals.css";
 import { BootScreen } from "@/os/BootScreen";
 import Shell from "@/os/Shell";
+import { ThemeProvider } from "@/hooks/useTheme";
 
 const App = () => {
   const [bootComplete, setBootComplete] = useState(false);
 
   return (
-    <AnimatePresence mode="wait">
-      {!bootComplete ? (
-        <BootScreen key="boot" onBootComplete={() => setBootComplete(true)} />
-      ) : (
-        <Shell key="shell" />
-      )}
-    </AnimatePresence>
+    <ThemeProvider>
+      <AnimatePresence mode="wait">
+        {!bootComplete ? (
+          <BootScreen key="boot" onBootComplete={() => setBootComplete(true)} />
+        ) : (
+          <Shell key="shell" />
+        )}
+      </AnimatePresence>
+    </ThemeProvider>
   );
 };
 
