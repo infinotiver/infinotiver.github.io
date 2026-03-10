@@ -31,18 +31,18 @@ jobs:
         with:
           node-version: "20"
           cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          # point to cache in v3/
+          cache-dependency-path: v3/pnpm-lock.yaml
 
       - name: Build
         run: |
           cd v3
-          pnpm install
+          pnpm install --frozen-lockfile
           pnpm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Take the output of build and put it at root
           publish_dir: ./v3/dist
