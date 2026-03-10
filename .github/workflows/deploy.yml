@@ -39,10 +39,12 @@ jobs:
           cd v3
           pnpm install --no-frozen-lockfile
           pnpm run build
+          echo "--- DEBUG: Listing contents of v3/dist ---"
+          ls -R dist # This will show us if index.html and assets exist
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./v3/dist
-          force_orphan: true
+          force_orphan: true # This wipes the gh-pages branch clean before pushing
