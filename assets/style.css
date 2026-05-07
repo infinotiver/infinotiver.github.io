@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
 @layer base {
-    h1 {
-        font-family: "VT323";
-    }
 
     body {
         font-family: "Roboto Mono" serif;
