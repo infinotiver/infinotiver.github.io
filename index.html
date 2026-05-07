@@ -25,19 +25,21 @@
     href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
 </head>
 
-<body class="min-h-screen bg-background font-sans antialiased max-w-4xl mx-auto py-12 sm:py-24 px-6">
-  <!-- Logo -->
-  <div class="relative">
-    <img id="logo" src="assets/logo.png" alt="1NF1N0T1V3R Logo" class="fixed top-4 h-14 w-auto duration-300 z-50" />
-  </div>
-
+<body class="min-h-screen bg-neutral-900 antialiased max-w-4xl mx-auto py-12 sm:py-24 px-6">
   <!-- Hero Section -->
-  <section id="home" class="h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 py-2 text-white">
+  <section id="home" class="flex flex-col justify-center px-6 md:px-12 lg:px-24 py-2 text-white">
     <div class="flex flex-col">
       <p class="text-sm font-mono text-gray-400 mb-2">Welcome to my portfolio</p>
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-[VT323] text-white mb-6 w-full leading-tight">
-        <canvas id="pixelCanvas" class="block w-full h-auto"></canvas>
-      </h1>
+
+      <!-- Logo and Canvas -->
+      <div class="flex items-center gap-4 mb-6">
+
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-[VT323] text-white w-full leading-tight">
+          <canvas id="pixelCanvas" class="block w-full h-auto"></canvas>
+        </h1>
+        <img id="logo" src="assets/logo.png" alt="1NF1N0T1V3R Logo" class="h-16 md:h-20 w-auto duration-300 shrink-0" />
+      </div>
+
       <div class="mb-4 text-sm font-mono text-gray-500">@infinotiver</div>
       <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-6">
         I'm a developer passionate about building clean, functional web experiences.

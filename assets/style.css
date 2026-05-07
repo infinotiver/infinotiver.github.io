@@ -4,11 +4,7 @@
 
     body {
         font-family: "Roboto Mono" serif;
-        background-color: #030712;
-        background-image:
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)),
-            radial-gradient(#3c3c3c 1px, transparent 0);
-        background-size: 20px 20px;
+       
         color: white;
     }
 
@@ -17,7 +13,7 @@
 
 @layer components {
     .card {
-        @apply basis-full lg:basis-[calc(33.333%-1rem)] border border-gray-700 p-4 bg-zinc-800/25 backdrop-blur-3xl rounded-sm hover:border-zinc-500/50 hover:scale-110 transition;
+        @apply basis-full lg:basis-[calc(33.333%-1rem)] border border-neutral-700 p-4 bg-zinc-800/25 backdrop-blur-3xl rounded-sm hover:border-zinc-500/50 hover:scale-110 transition;
     }
 
     /* Reusable project card styles */
@@ -26,33 +22,24 @@
     }
 
 
-    /* Reusable SVG/icon styles */
-    .svg-icon {
-        @apply w-20 h-20;
-    }
-
-    .svg-progress {
-        /* color applied via currentColor on the path */
-        @apply text-gray-300 transition-all duration-300 ease-out;
-    }
 
     /* Reusable nav link and label */
     .nav-link {
-        @apply inline-flex items-center justify-center p-2 rounded-full text-gray-300 hover:text-white transition-colors duration-200;
+        @apply inline-flex items-center justify-center p-2 rounded-full text-neutral-300 hover:text-white transition-colors duration-200;
     }
 
     /* Reusable icon button (used in hero/footer) */
     .icon-btn {
-        @apply inline-flex items-center justify-center p-2 rounded-full bg-gray-800/20 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-gray-500/30;
+        @apply inline-flex items-center justify-center p-2 rounded-full bg-neutral-800 text-neutral-300 hover:bg-neutral-700/50 hover:text-white transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-neutral-500/30;
     }
 
     /* Reusable chip/tag styles */
     .chip {
-        @apply inline-flex items-center gap-2 px-2 py-1 rounded text-xs bg-gray-800/30 text-gray-300;
+        @apply inline-flex items-center gap-2 px-2 py-1 rounded text-xs bg-neutral-300 text-neutral-800;
     }
 
-    .chip--hover {
-        @apply hover:bg-gray-700/60 hover:text-white transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-gray-500/30;
+    .chip:hover {
+        @apply hover:bg-neutral-700/60 hover:text-white transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-neutral-500/30;
     }
 
     /* Skill chip variant - circular icon with label below */
@@ -65,7 +52,7 @@
     }
 
     .skill-chip__label {
-        @apply text-xs text-gray-400 text-center;
+        @apply text-xs text-neutral-400 text-center;
     }
 
     .card .cover {

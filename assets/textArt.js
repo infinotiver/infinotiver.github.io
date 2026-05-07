@@ -13,7 +13,7 @@ function drawTextToCanvas(text) {
     tempCtx.font = 'bold 10rem VT323';
     tempCtx.textAlign = 'left';
     tempCtx.textBaseline = 'middle';
-    tempCtx.fillText(text, 40, canvas.height / 2);
+    tempCtx.fillText(text, 0, canvas.height / 2);
     return tempCtx.getImageData(0, 0, canvas.width, canvas.height);
 }
 
