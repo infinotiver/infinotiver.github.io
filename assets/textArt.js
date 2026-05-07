@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth * 0.8; // 80% of viewport width
 // canvas.height = window.innerHeight * 0.5; // 50% of viewport height
 
-// 🎛️ Tuning Parameters
+//  Tuning Parameters
 let mouse = { x: null, y: null, radius: 40 };
 let repulsionStrength = 2;
 
