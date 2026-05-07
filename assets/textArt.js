@@ -1,6 +1,7 @@
 const canvas = document.getElementById('pixelCanvas');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth * 0.8;
+canvas.width = window.innerWidth * 0.6;
+canvas.height = Math.max(120, window.innerHeight * 0.12);
 
 let particles = [];
 

@@ -545,12 +545,12 @@
   src: url('./fonts/VT323-Regular.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'VT323';
-  src: url('./fonts/VT323-Regular.ttf') format('truetype');
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto-VariableFont_wdth\,wght.ttf') format('truetype');
 }
 @layer base {
   body {
-    font-family: "Roboto Mono" serif;
+    font-family: "Roboto" sans-serif;
     color: white;
   }
 }
