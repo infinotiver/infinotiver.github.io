@@ -2,19 +2,7 @@ const canvas = document.getElementById('pixelCanvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth * 0.8;
 
-const mouse = { x: null, y: null, radius: 40 };
 let particles = [];
-
-canvas.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-});
-
-canvas.addEventListener('mouseleave', () => {
-    mouse.x = null;
-    mouse.y = null;
-});
 
 function drawTextToCanvas(text) {
     const tempCanvas = document.createElement('canvas');
@@ -52,18 +40,6 @@ function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach(p => {
-        if (mouse.x !== null) {
-            const dx = p.x - mouse.x;
-            const dy = p.y - mouse.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist < mouse.radius) {
-                const force = (mouse.radius - dist) / mouse.radius * 2;
-                p.vx += (dx / dist) * force;
-                p.vy += (dy / dist) * force;
-            }
-        }
-
         p.vx += (p.targetX - p.x) * 0.01;
         p.vy += (p.targetY - p.y) * 0.01;
         p.vx *= 0.9;
