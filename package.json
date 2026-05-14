@@ -4,6 +4,6 @@
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "sharp": "^0.34.5"
+    "esbuild": "^0.28.0"
   }
 }
