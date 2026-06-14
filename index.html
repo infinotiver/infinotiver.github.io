@@ -4,302 +4,183 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="keywords" content="" />
   <title>1nf1n0t1v3r (@infinotiver)</title>
   <link rel="stylesheet" href="assets/style.css" />
-  <link rel="stylesheet" href="assets/output.css" />
   <link rel="shortcut icon" href="assets/logo_new.webp" type="image/webp" />
   <link rel="apple-touch-icon" href="assets/logo_new.webp" />
   <meta name="description" content="Infinotiver's Portfolio - A showcase of projects, skills, and more." />
   <meta name="author" content="Infinotiver" />
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet" /> -->
-  <link rel="preload" href="assets/fonts/VT323.ttf" as="font" type="font/ttf" crossorigin />
-  <link rel="preload" href="assets/fonts/Roboto-VariableFont_wdth,wght.ttf" as="font" type="font/ttf" crossorigin />
-
 </head>
 
-<body class="min-h-screen bg-neutral-900 antialiased max-w-4xl mx-auto py-12 sm:py-24 px-6">
-  <!-- Hero Section -->
-  <section id="home" class="flex flex-col justify-center px-6 md:px-12 lg:px-24 py-2 text-white">
-    <div class="flex flex-col">
-      <p class="text-sm font-mono text-neutral-300 mb-2">Hello, I'm</p>
+<body>
 
-      <!-- Logo and Canvas -->
-      <div class="flex items-center gap-2 mb-6">
-        <h1 class="text-5xl md:text-7xl lg:text-8xl font-[VT323] text-white w-full leading-tight">
-          <canvas id="pixelCanvas" class="block w-full h-auto"></canvas>
-        </h1>
-        <img id="logo" src="assets/logo_new.webp" alt="My profile Logo" width="1024" height="1024" loading="eager"
-          fetchpriority="high" decoding="async" class="h-16 md:h-20 w-auto duration-300 shrink-0" />
-      </div>
-
-      <div class="mb-4 text-xl font-mono text-neutral-300">@infinotiver</div>
-      <p class="text-neutral-300 text-sm md:text-base leading-relaxed mb-6">
-        I'm a developer passionate about building clean, functional web experiences.
-        Currently exploring full-stack development with React, Python, and modern JavaScript.
-        When I'm not coding, you'll find me experimenting with design and open-source projects.
-      </p>
-      <div class="flex flex-wrap gap-2">
-        <span class="chip font-semibold"><i class="fa-brands fa-python text-sm mr-1"></i>Python</span>
-        <span class="chip font-semibold"><i class="fa-brands fa-js text-sm mr-1"></i>JavaScript</span>
-        <span class="chip font-semibold"><i class="fa-brands fa-html5 text-sm mr-1"></i>HTML5</span>
-        <span class="chip font-semibold"><i class="fa-brands fa-css3-alt text-sm mr-1"></i>Tailwind CSS</span>
-        <span class="chip font-semibold"><i class="fa-brands fa-react text-sm mr-1"></i>React</span>
-        <span class="chip font-semibold"><i class="fa-solid fa-bolt text-sm mr-1"></i>FastAPI</span>
-        <span class="chip font-semibold"><i class="fa-solid fa-flask text-sm mr-1"></i>Flask</span>
-        <span class="chip font-semibold"><i class="fa-solid fa-leaf text-sm mr-1"></i>MongoDB</span>
-        <span class="chip font-semibold"><i class="fa-brands fa-git-alt text-sm mr-1"></i>Git</span>
-        <span class="chip font-semibold"><i class="fa-brands fa-linux text-sm mr-1"></i>Linux</span>
-        <span class="chip font-semibold"><i class="fa-brands fa-docker text-sm mr-1"></i>Docker</span>
-        <span class="chip font-semibold"><i class="fa-solid fa-code text-sm mr-1"></i>Visual Studio Code</span>
-
-      </div>
-      <div class="flex gap-2 my-8">
-        <a href="https://github.com/infinotiver" target="_blank" class="icon-btn" title="GitHub">
-          <i class="fa-brands fa-github text-lg"></i>
-        </a>
-        <a href="mailto:infinotiver@proton.me" class="icon-btn" title="Email">
-          <i class="fa-solid fa-envelope text-lg"></i>
-        </a>
-      </div>
-
+  <section id="home">
+    <div class="hero-logo-row">
+      <div class="hero-heading serif">Infinotiver</div>
+      <img id="logo" src="assets/logo_new.webp" alt="Profile logo" width="1024" height="1024" loading="eager"
+        fetchpriority="high" decoding="async" />
+    </div>
+    <div class="hero-handle">@infinotiver</div>
+    <p class="hero-bio">
+      Hi, I'm a developer passionate about building clean, functional web experiences.
+      Currently exploring full-stack development with React, Python, and modern JavaScript.
+      When I'm not coding, you'll find me experimenting with design and open-source projects.
+    </p>
+    <div class="hero-chips">
+      <span class="chip"><i class="fa-brands fa-python"></i>Python</span>
+      <span class="chip"><i class="fa-brands fa-js"></i>JavaScript</span>
+      <span class="chip"><i class="fa-brands fa-html5"></i>HTML5</span>
+      <span class="chip"><i class="fa-brands fa-css3-alt"></i>CSS</span>
+      <span class="chip"><i class="fa-brands fa-react"></i>React</span>
+      <span class="chip"><i class="fa-brands fa-git-alt"></i>Git</span>
+      <span class="chip"><i class="fa-brands fa-linux"></i>Linux</span>
+    </div>
+    <div class="hero-social">
+      <a href="https://github.com/infinotiver" target="_blank" class="icon-btn" title="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a href="mailto:infinotiver@proton.me" class="icon-btn" title="Email">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="min-h-screen px-6 md:px-12 lg:px-24 py-10 text-white w-full">
-    <div class="mb-8">
-      <p class="text-sm font-mono text-neutral-300 mb-3 tracking-wide">/projects</p>
-      <h2 class="text-5xl md:text-6xl font-[VT323] text-white">Projects</h2>
-    </div>
-    <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2 max-w-[900px] mx-auto w-full">
-      <article class="project-card flex flex-col gap-2">
+  <section id="projects">
+    <h2 class="serif">Projects</h2>
+    <div class="project-grid">
+
+      <article class="project-card">
         <img src="assets/project_slangtype.png" alt="Slangtype" width="1280" height="720" loading="lazy"
-          decoding="async" class="w-full h-40 object-cover rounded-md" />
-        <div class="flex items-start justify-between gap-2">
-          <h3 class="text-lg md:text-xl font-[VT323] text-white leading-tight">
-            Slangtype
-          </h3>
-          <div class="flex items-center gap-2 shrink-0">
-            <a href="https://github.com/infinotiver/slangtype" target="_blank" rel="noopener noreferrer"
-              class="icon-btn" title="GitHub repo">
-              <i class="fa-brands fa-github text-base"></i>
-            </a>
-            <a href="https://slangtype.vercel.app/" target="_blank" rel="noopener noreferrer" class="icon-btn"
-              title="Live demo">
-              <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
-            </a>
+          decoding="async" class="project-card-thumb" />
+        <div class="project-card-header">
+          <h3 class="project-card-title serif">Slangtype</h3>
+          <div class="project-card-actions">
+            <a href="https://github.com/infinotiver/slangtype" target="_blank" rel="noopener" class="icon-btn"
+              title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://slangtype.vercel.app/" target="_blank" rel="noopener" class="icon-btn" title="Live demo"><i
+                class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
-        <p class="text-neutral-300 text-sm leading-relaxed">
-          A modern typing speed test with support for slang and ai.
-        </p>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="chip font-semibold">React</span>
-          <span class="chip font-semibold">NeonDB</span>
-          <span class="chip font-semibold">Framer</span>
+        <p class="project-card-desc">A modern typing speed test with support for slang and ai.</p>
+        <div class="project-card-tags">
+          <span class="chip">React</span><span class="chip">NeonDB</span><span class="chip">Framer</span>
         </div>
       </article>
-      <article class="project-card flex flex-col gap-2">
+
+      <article class="project-card">
         <img src="assets/project_karretos.webp" alt="Karret Os" width="1280" height="720" loading="lazy"
-          decoding="async" class="w-full h-40 object-cover rounded-md" />
-        <div class="flex items-start justify-between gap-2">
-          <h3 class="text-lg md:text-xl font-[VT323] text-white leading-tight">
-            Karret OS
-          </h3>
-          <div class="flex items-center gap-2 shrink-0">
-            <a href="https://github.com/infinotiver/karretos" target="_blank" rel="noopener noreferrer" class="icon-btn"
-              title="GitHub repo">
-              <i class="fa-brands fa-github text-base"></i>
-            </a>
-            <a href="https://karretos.vercel.app/" target="_blank" rel="noopener noreferrer" class="icon-btn"
-              title="Live demo">
-              <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
-            </a>
+          decoding="async" class="project-card-thumb" />
+        <div class="project-card-header">
+          <h3 class="project-card-title serif">Karret OS</h3>
+          <div class="project-card-actions">
+            <a href="https://github.com/infinotiver/karretos" target="_blank" rel="noopener" class="icon-btn"
+              title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://karretos.vercel.app/" target="_blank" rel="noopener" class="icon-btn" title="Live demo"><i
+                class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
-        <p class="text-neutral-300 text-sm leading-relaxed">
-          A minimalist, smooth WebOS and portfolio hybrid built for the future.
-        </p>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="chip font-semibold">React</span>
-          <span class="chip font-semibold">WebOS</span>
-          <span class="chip font-semibold">Framer</span>
+        <p class="project-card-desc">A minimalist, smooth WebOS and portfolio hybrid built for the future.</p>
+        <div class="project-card-tags">
+          <span class="chip">React</span><span class="chip">WebOS</span><span class="chip">Framer</span>
         </div>
       </article>
-      <article class="project-card flex flex-col gap-2">
+
+      <article class="project-card">
         <img src="assets/featured.webp" alt="Mind Sink" width="1280" height="720" loading="lazy" decoding="async"
-          class="w-full h-40 object-cover rounded-md" />
-        <div class="flex items-start justify-between gap-2">
-          <h3 class="text-lg md:text-xl font-[VT323] text-white leading-tight">
-            Mind Sink
-          </h3>
-          <div class="flex items-center gap-2 shrink-0">
-            <a href="https://github.com/infinotiver/mind-sink" target="_blank" rel="noopener noreferrer"
-              class="icon-btn" title="GitHub repo">
-              <i class="fa-brands fa-github text-base"></i>
-            </a>
-            <a href="https://mind-sink-6llu.onrender.com" target="_blank" rel="noopener noreferrer" class="icon-btn"
-              title="Live demo">
-              <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
-            </a>
+          class="project-card-thumb" />
+        <div class="project-card-header">
+          <h3 class="project-card-title serif">Mind Sink</h3>
+          <div class="project-card-actions">
+            <a href="https://github.com/infinotiver/mind-sink" target="_blank" rel="noopener" class="icon-btn"
+              title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://mind-sink-6llu.onrender.com" target="_blank" rel="noopener" class="icon-btn"
+              title="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
-        <p class="text-neutral-300 text-sm leading-relaxed">
-          An ad-free, distraction-minimizing web app for collecting and showcasing creative inspiration.
-        </p>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="chip font-semibold">React</span>
-          <span class="chip font-semibold">MongoDB</span>
-          <span class="chip font-semibold">Shadcn</span>
+        <p class="project-card-desc">An ad-free, distraction-minimizing web app for collecting and showcasing creative
+          inspiration.</p>
+        <div class="project-card-tags">
+          <span class="chip">React</span><span class="chip">MongoDB</span><span class="chip">Shadcn</span>
         </div>
       </article>
 
-      <article class="project-card flex flex-col gap-2">
+      <article class="project-card">
         <img src="assets/project1.webp" alt="Emergency Numbers Lookup" width="1280" height="720" loading="lazy"
-          decoding="async" class="w-full h-40 object-cover rounded-md" />
-        <div class="flex items-start justify-between gap-2">
-          <h3 class="text-lg md:text-xl font-[VT323] text-white leading-tight">
-            Emergency Numbers Lookup
-          </h3>
-          <div class="flex items-center gap-2 shrink-0">
-            <a href="https://github.com/infinotiver/emergency-numbers" target="_blank" rel="noopener noreferrer"
-              class="icon-btn" title="GitHub repo">
-              <i class="fa-brands fa-github text-base"></i>
-            </a>
-            <a href="http://infinotiver.is-a.dev/emergency-numbers/" target="_blank" rel="noopener noreferrer"
-              class="icon-btn" title="Live demo">
-              <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
-            </a>
+          decoding="async" class="project-card-thumb" />
+        <div class="project-card-header">
+          <h3 class="project-card-title serif">Emergency Numbers Lookup</h3>
+          <div class="project-card-actions">
+            <a href="https://github.com/infinotiver/emergency-numbers" target="_blank" rel="noopener" class="icon-btn"
+              title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="http://infinotiver.is-a.dev/emergency-numbers/" target="_blank" rel="noopener" class="icon-btn"
+              title="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
-        <p class="text-neutral-300 text-sm leading-relaxed">
-          A simple utility to get emergency numbers based on your location.
-        </p>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="chip font-semibold">React</span>
-          <span class="chip font-semibold">Tailwind</span>
-          <span class="chip font-semibold">JS</span>
+        <p class="project-card-desc">A simple utility to get emergency numbers based on your location.</p>
+        <div class="project-card-tags">
+          <span class="chip">React</span><span class="chip">Tailwind</span><span class="chip">JS</span>
         </div>
       </article>
 
-      <article class="project-card flex flex-col gap-2">
+      <article class="project-card">
         <img src="assets/project3.webp" alt="Memento Mori Status" width="1280" height="720" loading="lazy"
-          decoding="async" class="w-full h-40 object-cover rounded-md" />
-        <div class="flex items-start justify-between gap-2">
-          <h3 class="text-lg md:text-xl font-[VT323] text-white leading-tight">
-            Memento Mori Status
-          </h3>
-          <div class="flex items-center gap-2 shrink-0">
-            <a href="https://github.com/infinotiver/memento-mori-status" target="_blank" rel="noopener noreferrer"
-              class="icon-btn" title="GitHub repo">
-              <i class="fa-brands fa-github text-base"></i>
-            </a>
+          decoding="async" class="project-card-thumb" />
+        <div class="project-card-header">
+          <h3 class="project-card-title serif">Memento Mori Status</h3>
+          <div class="project-card-actions">
+            <a href="https://github.com/infinotiver/memento-mori-status" target="_blank" rel="noopener" class="icon-btn"
+              title="GitHub"><i class="fa-brands fa-github"></i></a>
             <a href="https://marketplace.visualstudio.com/items?itemName=infinotiver.memento-mori-status"
-              target="_blank" rel="noopener noreferrer" class="icon-btn" title="Live demo / marketplace">
-              <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
-            </a>
+              target="_blank" rel="noopener" class="icon-btn" title="Marketplace"><i
+                class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
-        <p class="text-neutral-300 text-sm leading-relaxed">
-          A VS Code extension that visualizes time and progress in a compact status bar.
-        </p>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="chip font-semibold">VS Code</span>
-          <span class="chip font-semibold">Extension</span>
-          <span class="chip font-semibold">TypeScript</span>
+        <p class="project-card-desc">A VS Code extension that visualizes time and progress in a compact status bar.</p>
+        <div class="project-card-tags">
+          <span class="chip">VS Code</span><span class="chip">Extension</span><span class="chip">TypeScript</span>
         </div>
       </article>
 
-      <article class="project-card flex flex-col gap-2">
+      <article class="project-card">
         <img src="assets/project2.webp" alt="Aesthetic Pomodoro" width="1280" height="720" loading="lazy"
-          decoding="async" class="w-full h-40 object-cover rounded-md" />
-        <div class="flex items-start justify-between gap-2">
-          <h3 class="text-lg md:text-xl font-[VT323] text-white leading-tight">
-            Aesthetic Pomodoro
-          </h3>
-          <div class="flex items-center gap-2 shrink-0">
-            <a href="https://github.com/infinotiver/aesthetic-pomodoro" target="_blank" rel="noopener noreferrer"
-              class="icon-btn" title="GitHub repo">
-              <i class="fa-brands fa-github text-base"></i>
-            </a>
-            <a href="http://infinotiver.is-a.dev/aesthetic-pomodoro/" target="_blank" rel="noopener noreferrer"
-              class="icon-btn" title="Live demo">
-              <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
-            </a>
+          decoding="async" class="project-card-thumb" />
+        <div class="project-card-header">
+          <h3 class="project-card-title serif">Aesthetic Pomodoro</h3>
+          <div class="project-card-actions">
+            <a href="https://github.com/infinotiver/aesthetic-pomodoro" target="_blank" rel="noopener" class="icon-btn"
+              title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="http://infinotiver.is-a.dev/aesthetic-pomodoro/" target="_blank" rel="noopener" class="icon-btn"
+              title="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
-        <p class="text-neutral-300 text-sm leading-relaxed">
-          A cosy Pomodoro app focused on calm, aesthetic timers.
-        </p>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <span class="chip font-semibold">JavaScript</span>
-          <span class="chip font-semibold">UI</span>
-          <span class="chip font-semibold">Timer</span>
+        <p class="project-card-desc">A cosy Pomodoro app focused on calm, aesthetic timers.</p>
+        <div class="project-card-tags">
+          <span class="chip">JavaScript</span><span class="chip">UI</span><span class="chip">Timer</span>
         </div>
       </article>
 
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="px-6 md:px-12 lg:px-24 py-10 text-white w-full">
-    <div class="mb-8">
-      <p class="text-sm font-mono text-neutral-300 mb-3 tracking-wide">/contact</p>
-      <h2 class="text-5xl md:text-6xl font-[VT323] text-white">Contact Me</h2>
-    </div>
-
-    <div class="project-card max-w-[900px] mx-auto">
-      <p class="text-neutral-300 text-sm md:text-base leading-relaxed mb-5">
-        Open to collaborating on interesting products, open-source, and creative web experiences.
-      </p>
-
-      <div class="flex flex-wrap items-center gap-3">
-        <a href="https://github.com/infinotiver" target="_blank" rel="noopener noreferrer" class="icon-btn"
-          title="GitHub profile">
-          <i class="fa-brands fa-github text-base"></i>
-        </a>
-        <span class="chip font-semibold">infinotiver@proton.me</span>
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-label">© 2024-26</div>
+        <div class="footer-label">infinotiver@proton.me</div>
       </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-12 px-6 md:px-12 lg:px-24 bg-transparent text-white">
-    <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 text-sm font-mono text-neutral-400">
-      <!-- Left Side -->
-      <div class="flex flex-col items-start gap-2">
-        <span class="text-neutral-300">© 2024-26</span>
-        <span class="text-neutral-300">Code is poetry</span>
-      </div>
-
-      <!-- Right Side -->
-      <div class="flex flex-col items-start md:items-end gap-2">
-        <div>last_commit: <span id="last-commit" class="text-neutral-300">611e002</span></div>
-        <div>updated: <span id="last-update" class="text-neutral-300">2026-04-28</span></div>
+      <div>
+        <div>last_commit: <span id="last-commit" class="footer-label">611e002</span></div>
+        <div>updated: <span id="last-update" class="footer-label">2026-04-28</span></div>
       </div>
     </div>
   </footer>
 
-  <!-- Floating bottom navbar -->
-  <nav
-    class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-neutral-800 border border-neutral-700/50 rounded-full px-3 py-2 flex items-center gap-2 z-50 transition-colors duration-200 hover:bg-neutral-800">
-    <a href="#home" class="nav-link" title="Home">
-      <i class="fa-solid fa-house text-lg"></i>
-    </a>
-
-    <a href="#projects" class="nav-link" title="Projects">
-      <i class="fa-solid fa-folder-open text-lg"></i>
-    </a>
-
-    <a href="https://github.com/infinotiver" target="_blank" class="nav-link" title="GitHub">
-      <i class="fa-brands fa-github text-lg"></i>
-    </a>
+  <nav class="bottom-nav">
+    <a href="#home" class="nav-link" title="Home"><i class="fa-solid fa-house"></i></a>
+    <a href="#projects" class="nav-link" title="Projects"><i class="fa-solid fa-folder-open"></i></a>
+    <a href="https://github.com/infinotiver" target="_blank" class="nav-link" title="GitHub"><i
+        class="fa-brands fa-github"></i></a>
   </nav>
 
   <script src="assets/script.min.js"></script>
