@@ -119,6 +119,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    cursor: pointer
 }
 
 .hero-social {
@@ -209,6 +210,7 @@ h2 {
     background: #e5e5e5;
     color: #171717;
     transition: background 0.2s, color 0.2s;
+    cursor: pointer
 }
 
 .chip:hover {
