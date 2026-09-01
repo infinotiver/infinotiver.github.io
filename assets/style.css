@@ -55,7 +55,7 @@ main,
   align-items: center;
   gap: 8px;
   font-size: 14px;
-  color: var(--muted);
+  color: var(--fg);
 }
 
 .nav-mark img {
@@ -64,6 +64,7 @@ main,
 
 .site-nav nav {
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 
@@ -79,8 +80,11 @@ main,
 .site-nav nav a.nav-btn {
   color: var(--bg);
   background: var(--fg);
-  padding: 6px 14px;
-  border-radius: 999px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 
 .site-nav nav a.nav-btn:hover {
