@@ -1,4 +1,5 @@
 // oneko.js: https://github.com/adryd325/oneko.js
+// breeds and sprite layouts from https://github.com/ABSanthosh/neko-ts
 
 (function oneko() {
     const isReducedMotion =
@@ -7,22 +8,11 @@
 
     if (isReducedMotion) return;
 
-    const nekoEl = document.createElement("div");
-    let persistPosition = true;
+    const scriptEl = document.currentScript;
+    const basePath = scriptEl ? scriptEl.src.replace(/[^/]+$/, "") : "./";
 
-    let nekoPosX = 32;
-    let nekoPosY = 32;
-
-    let mousePosX = 0;
-    let mousePosY = 0;
-
-    let frameCount = 0;
-    let idleTime = 0;
-    let idleAnimation = null;
-    let idleAnimationFrame = 0;
-
-    const nekoSpeed = 10;
-    const spriteSets = {
+    // Sprite layout for the original oneko.gif (8 cols x 4 rows, no gap)
+    const gifSpriteSets = {
         idle: [[-3, -3]],
         alert: [[-7, -3]],
         scratchSelf: [
@@ -85,47 +75,130 @@
         ],
     };
 
-    function init() {
-        let nekoFile = "./oneko.gif"
-        const curScript = document.currentScript
-        if (curScript && curScript.dataset.cat) {
-            nekoFile = curScript.dataset.cat
-        }
-        if (curScript && curScript.dataset.persistPosition) {
-            if (curScript.dataset.persistPosition === "") {
-                persistPosition = true;
-            } else {
-                persistPosition = JSON.parse(curScript.dataset.persistPosition.toLowerCase());
-            }
-        }
+    // Sprite layout for other breed PNGs (8 cols x 4 rows, 1px gap).
+    // This is a DIFFERENT grid arrangement from gifSpriteSets as taken from
+    // https://github.com/ABSanthosh/neko-ts
+    const breedSpriteSets = {
+        idle: [[0, 0]],
+        alert: [[-7, 0]],
+        scratchSelf: [
+            [-2, 0],
+            [-3, 0],
+        ],
+        scratchWallN: [
+            [-4, -3],
+            [-5, -3],
+        ],
+        scratchWallS: [
+            [0, -3],
+            [-1, -3],
+        ],
+        scratchWallE: [
+            [-2, -3],
+            [-3, -3],
+        ],
+        scratchWallW: [
+            [-6, -3],
+            [-7, -3],
+        ],
+        tired: [[-4, 0]],
+        sleeping: [
+            [-5, 0],
+            [-6, 0],
+        ],
+        N: [
+            [0, -2],
+            [-1, -2],
+        ],
+        NE: [
+            [-6, -1],
+            [-7, -1],
+        ],
+        E: [
+            [-4, -1],
+            [-5, -1],
+        ],
+        SE: [
+            [-2, -1],
+            [-3, -1],
+        ],
+        S: [
+            [0, -1],
+            [-1, -1],
+        ],
+        SW: [
+            [-6, -2],
+            [-7, -2],
+        ],
+        W: [
+            [-4, -2],
+            [-5, -2],
+        ],
+        NW: [
+            [-2, -2],
+            [-3, -2],
+        ],
+    };
 
-        if (persistPosition) {
-            let storedNeko = JSON.parse(window.localStorage.getItem("oneko"));
-            if (storedNeko !== null) {
-                nekoPosX = storedNeko.nekoPosX;
-                nekoPosY = storedNeko.nekoPosY;
-                mousePosX = storedNeko.mousePosX;
-                mousePosY = storedNeko.mousePosY;
-                frameCount = storedNeko.frameCount;
-                idleTime = storedNeko.idleTime;
-                idleAnimation = storedNeko.idleAnimation;
-                idleAnimationFrame = storedNeko.idleAnimationFrame;
-                nekoEl.style.backgroundPosition = storedNeko.bgPos;
-            }
-        }
+    // gap = pixel gap between cells in the sheet.
+    const breeds = {
+        cat: { src: basePath + "breeds/oneko.gif", gap: 0, spriteSets: gifSpriteSets },
+
+        ace: { src: basePath + "breeds/ace.png", gap: 1, spriteSets: breedSpriteSets },
+        black: { src: basePath + "breeds/black.png", gap: 1, spriteSets: breedSpriteSets },
+        calico: { src: basePath + "breeds/calico.png", gap: 1, spriteSets: breedSpriteSets },
+        ghost: { src: basePath + "breeds/ghost.png", gap: 1, spriteSets: breedSpriteSets },
+        rainbow: { src: basePath + "breeds/rainbow.png", gap: 1, spriteSets: breedSpriteSets },
+    };
+    const breedNames = Object.keys(breeds);
+
+    const nekoEl = document.createElement("div");
+
+    let nekoPosX = 32;
+    let nekoPosY = 32;
+
+    let mousePosX = 0;
+    let mousePosY = 0;
+
+    let frameCount = 0;
+    let idleTime = 0;
+    let idleAnimation = null;
+    let idleAnimationFrame = 0;
+    let currentBreed = breedNames[0];
+    let currentGap = breeds[currentBreed].gap;
+    let currentSpriteSets = breeds[currentBreed].spriteSets;
+
+    const nekoSpeed = 10;
+
+    function applyBreed(name) {
+        if (!breeds[name]) return;
+        currentBreed = name;
+        currentGap = breeds[name].gap;
+        currentSpriteSets = breeds[name].spriteSets;
+        nekoEl.style.backgroundImage = `url(${breeds[name].src})`;
+    }
+
+    function nextBreed() {
+        const i = breedNames.indexOf(currentBreed);
+        applyBreed(breedNames[(i + 1) % breedNames.length]);
+    }
+
+    function init() {
+        applyBreed(currentBreed);
 
         nekoEl.id = "oneko";
         nekoEl.ariaHidden = true;
         nekoEl.style.width = "32px";
         nekoEl.style.height = "32px";
         nekoEl.style.position = "fixed";
-        nekoEl.style.pointerEvents = "none";
+        nekoEl.style.pointerEvents = "auto";
+        nekoEl.style.cursor = "pointer";
         nekoEl.style.imageRendering = "pixelated";
         nekoEl.style.left = `${nekoPosX - 16}px`;
         nekoEl.style.top = `${nekoPosY - 16}px`;
         nekoEl.style.zIndex = 2147483647;
 
-        nekoEl.style.backgroundImage = `url(${nekoFile})`;
+        nekoEl.addEventListener("click", nextBreed);
 
         document.body.appendChild(nekoEl);
 
@@ -134,21 +207,15 @@
             mousePosY = event.clientY;
         });
 
-        if (persistPosition) {
-            window.addEventListener("beforeunload", function (event) {
-                window.localStorage.setItem("oneko", JSON.stringify({
-                    nekoPosX: nekoPosX,
-                    nekoPosY: nekoPosY,
-                    mousePosX: mousePosX,
-                    mousePosY: mousePosY,
-                    frameCount: frameCount,
-                    idleTime: idleTime,
-                    idleAnimation: idleAnimation,
-                    idleAnimationFrame: idleAnimationFrame,
-                    bgPos: nekoEl.style.backgroundPosition
-                }));
-            });
-        }
+        // Lets you build your own switcher UI (dropdown, buttons, etc.)
+        window.oneko = {
+            breeds: breedNames.slice(),
+            get current() {
+                return currentBreed;
+            },
+            setBreed: (name) => applyBreed(name),
+            nextBreed,
+        };
 
         window.requestAnimationFrame(onAnimationFrame);
     }
@@ -171,8 +238,12 @@
     }
 
     function setSprite(name, frame) {
-        const sprite = spriteSets[name][frame % spriteSets[name].length];
-        nekoEl.style.backgroundPosition = `${sprite[0] * 32}px ${sprite[1] * 32}px`;
+        const frames = currentSpriteSets[name];
+        if (!frames) return;
+        const sprite = frames[frame % frames.length];
+        // cell pitch = sprite size (32px) + gap between cells for this breed
+        const step = 32 + currentGap;
+        nekoEl.style.backgroundPosition = `${sprite[0] * step}px ${sprite[1] * step}px`;
     }
 
     function resetIdleAnimation() {
@@ -275,5 +346,11 @@
         nekoEl.style.top = `${nekoPosY - 16}px`;
     }
 
-    init();
+    // Ensure document.body exists before we try to append to it,
+    // in case this script runs from <head> without defer/async.
+    if (document.body) {
+        init();
+    } else {
+        document.addEventListener("DOMContentLoaded", init);
+    }
 })();

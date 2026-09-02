@@ -17,6 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="assets/oneko.js"></script>
 </head>
 
 <body>
@@ -46,6 +47,29 @@
             <h2>Selected work</h2>
 
             <ul class="work-list">
+                <li class="work-item">
+                    <div class="work-item-row">
+
+                        <h3>Tessarect Discord Bot</h3>
+                        <a class="work-code" href="https://github.com/infinotiver/tessarect-bot" target="_blank"
+                            rel="noopener"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <p>A powerful moderation, economy and utility bot for your discord server.</p>
+                    <p class="work-stack">discord.py · mongodb</p>
+                </li>
+
+                <li class="work-item">
+                    <div class="work-item-row">
+                        <a class="work-item-link" href="https://github.com/infinotiver/wakadash/releases"
+                            target="_blank" rel="noopener">
+                            <h3>WakaDash <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
+                        </a>
+                        <a class="work-code" href="https://github.com/infinotiver/wakadash" target="_blank"
+                            rel="noopener"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <p>A React Native client for viewing WakaTime statistics on Android.</p>
+                    <p class="work-stack">ReactNative · Expo · TypeScript</p>
+                </li>
 
                 <li class="work-item">
                     <div class="work-item-row">
@@ -111,18 +135,6 @@
                     <p class="work-stack">TypeScript</p>
                 </li>
 
-                <li class="work-item">
-                    <div class="work-item-row">
-                        <a class="work-item-link" href="http://infinotiver.is-a.dev/aesthetic-pomodoro/" target="_blank"
-                            rel="noopener">
-                            <h3>Aesthetic Pomodoro <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
-                        </a>
-                        <a class="work-code" href="https://github.com/infinotiver/aesthetic-pomodoro" target="_blank"
-                            rel="noopener"><i class="fa-brands fa-github"></i></a>
-                    </div>
-                    <p>A calm, aesthetic Pomodoro timer for focused work sessions.</p>
-                    <p class="work-stack">JavaScript</p>
-                </li>
 
             </ul>
         </section>
@@ -139,11 +151,17 @@
         <span class="footer-build"><code id="last-commit">611e002</code> · updated <span
                 id="last-update">2026-04-28</span>
             · <a href="compact.html">compact view</a></span>
+        <span class="footer-note">
+            PS: click the cat to change it, or
+            <button type="button" class="footer-cat-btn" onclick="window.oneko && window.oneko.nextBreed()">
+                change it here
+            </button>
+        </span>
     </footer>
 
 
     <script src="assets/script.min.js"></script>
-    <script src="assets/oneko.js" data-cat="assets/oneko.gif"></script>
+
 </body>
 
 </html>
