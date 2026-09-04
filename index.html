@@ -29,18 +29,29 @@
         </a>
         <nav>
             <a href="#work">Work</a>
-            <a href="https://github.com/infinotiver" target="_blank" rel="noopener">GitHub</a>
             <a href="mailto:infinotiver@proton.me" class="nav-btn">Email</a>
         </nav>
     </header>
 
     <main>
         <section id="home" class="hero">
-            <h1 class="hero-name">Infino</h1>
+            <h1 class="hero-name" data-alt="Pr0njal">Infino</h1>
             <p class="hero-bio">
                 I build for fun - mostly with React,
                 TypeScript, and Python (and ship stuff no one asked for)
             </p>
+            <div class="social-links">
+                <a href="https://github.com/infinotiver" title="GitHub" data-name="@infinotiver" target="_blank"
+                    rel="noopener">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+              
+                <a href="https://discord.com/users/900992402356043806" title="Discord" data-name="@mavvvy.fr"
+                    target="_blank" rel="noopener">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+              
+            </div>
         </section>
 
         <section id="work" class="work">
@@ -142,20 +153,14 @@
     </main>
 
     <footer class="site-footer">
-        <div class="footer-socials">
-            <a href="https://github.com/infinotiver" target="_blank" rel="noopener" title="GitHub"><i
-                    class="fa-brands fa-github"></i></a>
-            <a href="mailto:infinotiver@proton.me" title="Email"><i class="fa-solid fa-envelope"></i></a>
-        </div>
-        <span class="footer-copy">© 2024–26 Infinotiver</span>
-        <span class="footer-build"><code id="last-commit">611e002</code> · updated <span
-                id="last-update">2026-04-28</span>
-            · <a href="compact.html">compact view</a></span>
-        <span class="footer-note">
+        <span>© 2024–26 Infinotiver</span>
+        <span>
+            <code id="last-commit">611e002</code> · updated <span id="last-update">2026-04-28</span>
+            · <a href="compact.html">compact view</a>
+        </span>
+        <span>
             PS: click the cat to change it, or
-            <button type="button" class="footer-cat-btn" onclick="window.oneko && window.oneko.nextBreed()">
-                change it here
-            </button>
+            <button type="button" onclick="window.oneko && window.oneko.nextBreed()">change it here</button>
         </span>
     </footer>
 
