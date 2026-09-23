@@ -267,6 +267,15 @@ main,
   color: var(--muted);
 }
 
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+
+
 /* social links */
 
 .social-links {

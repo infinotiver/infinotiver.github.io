@@ -32,8 +32,9 @@ async function updateBuildInfo() {
         const sha = commit?.sha.substring(0, 7);
         const date = commit?.commit.author.date;
         const localDate = date ? new Date(date).toLocaleString('en-US', {
-            year: 'numeric', month: 'short', day: 'numeric',
-            hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
+            year: 'numeric',
+            day: 'numeric',
+            
         }) : null;
 
         const commitEl = document.getElementById('last-commit');
@@ -47,5 +48,5 @@ async function updateBuildInfo() {
 
 (() => {
     const hue = Math.floor(Math.random() * 360);
-    document.documentElement.style.setProperty('--bg', `hsl(${hue}, 8%, 6%)`);
+    document.documentElement.style.setProperty('--bg', `hsl(${hue}, 24%, 6%)`);
 })();
