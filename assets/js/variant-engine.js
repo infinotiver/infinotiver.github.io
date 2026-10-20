@@ -265,7 +265,7 @@
     const EGGS = {
         777: () => overlay(
             "777 — jackpot!",
-            "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            "https://www.youjustgot.com/"
         ),
         404: () => toast(
             "Code 404: look not found. Just kidding, it's right here."
