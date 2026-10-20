@@ -10,7 +10,7 @@
         },
         gov: {
             label: "Gov",
-            h: ["Audiowide", "Unbounded", "Sixtyfour"],
+            h: ["Montserrat", "Poppins", "Oswald"],
             b: ["Figtree", "Lato", "Fira Sans"],
             fallback: { h: "sans-serif", b: "sans-serif" },
         },

@@ -10,7 +10,7 @@
     --g-light: hsl(var(--h) 55% 44%);
     --g-link: hsl(var(--h) 80% 28%);
     color-scheme: light;
-    
+
 }
 
 [data-v="gov"] a:focus-visible {
@@ -26,6 +26,9 @@
     padding: 0.75rem max(1.5rem, calc(50% - 18.5rem));
     background: linear-gradient(var(--g-dark), var(--g-mid));
     border-bottom: 4px solid var(--g-dark);
+    top: 0;
+    position: sticky;
+    z-index: 999;
 }
 
 [data-v="gov"] .nav-mark,
@@ -54,7 +57,7 @@
 
 /* ticker */
 [data-v="gov"] main::before {
-    content: "EACH refresh changes the SITE Design";
+    content: "OFFICIAL NOTICE: THIS WEBSITE'S DESIGN IS SUBJECT TO CHANGE UPON REFRESH";
     display: block;
     overflow: hidden;
     white-space: nowrap;
