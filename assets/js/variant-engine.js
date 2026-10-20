@@ -11,7 +11,7 @@
         gov: {
             label: "Gov",
             h: ["Audiowide", "Unbounded", "Sixtyfour"],
-            b: ["Space Grotesk", "Chakra Petch", "Exo 2"],
+            b: ["Figtree", "Lato", "Fira Sans"],
             fallback: { h: "sans-serif", b: "sans-serif" },
         },
         netscape: {

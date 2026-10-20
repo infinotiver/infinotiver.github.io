@@ -1,6 +1,3 @@
-/* web2 */
-
-/* nav */
 [data-v="web2"] .site-nav {
     margin-top: 1rem;
     padding: 0.5rem 0.75rem 0.5rem 1rem;
@@ -8,12 +5,47 @@
     border-radius: 12px;
     background: linear-gradient(#ffffff24 50%, #0000 50%), hsl(var(--h) 60% 24%);
     box-shadow: inset 0 1px 0 #ffffff40, 0 3px 8px #0006;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+[data-v="web2"] .hero-name {
+    text-shadow: 0 2px 0 #0008;
 }
 
-[data-v="web2"] .nav-mark,
-[data-v="web2"] .site-nav nav a:not(.nav-btn) {
+[data-v="web2"]  a {
+    color: hsl(var(--h) 60% 75%);
+    background: linear-gradient(#ffffff24 50%, #0000 50%), hsl(var(--h) 60% 24%);
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+[data-v="web2"] .social-links a:hover {
     color: #fff;
-    font-weight: 600;
+    text-shadow: 0 0 8px hsl(var(--h) 80% 60%);
+}
+
+
+[data-v="web2"] .work h2 {
+    color: hsl(var(--h) 80% 72%);
+    font-weight: 700;
+    text-shadow: 0 1px 0 #0008;
+}
+
+
+
+[data-v="web2"] .work-code {
+    color: hsl(var(--h) 60% 75%);
+}
+
+[data-v="web2"] .site-footer {
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.75rem 0.5rem 1rem;
+    border: 1px solid hsl(var(--h) 60% 14%);
+    border-radius: 12px;
+    background: linear-gradient(#ffffff24 50%, #0000 50%), hsl(var(--h) 60% 24%);
+    box-shadow: inset 0 1px 0 #ffffff40, 0 3px 8px #0006;
+    color: #ffffffb3;
     text-shadow: 0 1px 0 #0006;
 }
 

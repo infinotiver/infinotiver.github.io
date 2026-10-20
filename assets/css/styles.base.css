@@ -53,16 +53,12 @@ main,
 .site-footer {
   max-width: 40rem;
   margin: 0 auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 
-/* # nav */
 .site-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.75rem 1.5rem;
 }
 
 .nav-mark {
@@ -292,12 +288,7 @@ main,
 /* # responsive */
 @media (max-width: 480px) {
 
-  .site-nav,
-  main,
-  .site-footer {
-    padding-left: 1.125rem;
-    padding-right: 1.125rem;
-  }
+  
 
   .site-nav {
     padding-top: 1.375rem;
