@@ -10,6 +10,7 @@
     --g-light: hsl(var(--h) 55% 44%);
     --g-link: hsl(var(--h) 80% 28%);
     color-scheme: light;
+    
 }
 
 [data-v="gov"] a:focus-visible {
@@ -84,7 +85,7 @@
 }
 
 [data-v="gov"] .hero-name {
-    font-family: var(--sans);
+    font-family: var(--fh);
     font-weight: 700;
 }
 

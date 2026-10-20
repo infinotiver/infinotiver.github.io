@@ -128,11 +128,12 @@ main,
   margin: 0 auto;
   color: var(--muted);
 }
+
 .web-info {
-  color: var(--muted-2);
-    font-size: 0.8rem;
-    transition: color 0.15s ease;
+  font-size: 0.8rem;
+  transition: color 0.15s ease;
 }
+
 .social-links {
   display: flex;
   justify-content: center;
@@ -292,7 +293,7 @@ main,
 /* # responsive */
 @media (max-width: 480px) {
 
-  
+
 
   .site-nav {
     padding-top: 1.375rem;
@@ -373,14 +374,23 @@ main,
 /* # dock */
 #dock,
 #dock-toggle {
+  --dock-bg: light-dark(#f4f4f5, #141417);
+  --dock-hover: light-dark(#e4e4e7, #232329);
+  --dock-control-bg: light-dark(#e4e4e7, #232329);
+  --dock-control-hover: light-dark(#d4d4d8, #32323a);
+  --dock-border: light-dark(#d4d4d8, #2e2e33);
+  --dock-control-border: light-dark(#c4c4cc, #3f3f46);
+  --dock-fg: light-dark(#18181b, #f4f4f5);
+  --dock-muted: light-dark(#52525b, #a1a1aa);
+
   position: fixed !important;
   right: 1rem !important;
   z-index: 9999 !important;
   align-items: center;
-  background: #141417 !important;
-  color: #f4f4f5 !important;
+  background: var(--dock-bg) !important;
+  color: var(--dock-fg) !important;
   font: var(--text-xs) / 1 system-ui, sans-serif !important;
-  border: 0.0625rem solid #2e2e33 !important;
+  border: 0.0625rem solid var(--dock-border) !important;
   border-radius: var(--radius-btn) !important;
 }
 
@@ -400,8 +410,7 @@ main,
 
 #dock-toggle:hover,
 #dock-toggle[aria-expanded="true"] {
-  background: #232329 !important;
-  border-color: #52525b !important;
+  background: var(--dock-hover) !important;
 }
 
 #dock-toggle code {
@@ -429,9 +438,9 @@ main,
 #dock select,
 #dock button {
   font: inherit !important;
-  color: #f4f4f5 !important;
-  background: #232329 !important;
-  border: 0.0625rem solid #3f3f46 !important;
+  color: var(--dock-fg) !important;
+  background: var(--dock-control-bg) !important;
+  border: 0.0625rem solid var(--dock-control-border) !important;
   border-radius: 0.25rem !important;
   padding: 0.25rem 0.5rem !important;
   text-decoration: none !important;
@@ -440,12 +449,18 @@ main,
 
 #dock select:hover,
 #dock button:hover {
-  background: #32323a !important;
+  color: var(--dock-fg) !important;
+  background: var(--dock-control-hover) !important;
 }
 
 #dock select {
   max-width: 6.5rem;
   text-overflow: ellipsis;
+}
+
+#dock select option {
+  color: var(--dock-fg);
+  background: var(--dock-bg);
 }
 
 #dock input[type="range"] {
@@ -458,14 +473,14 @@ main,
 }
 
 #dock span {
-  color: #a1a1aa !important;
+  color: var(--dock-muted) !important;
   padding: 0 0.125rem;
   user-select: none;
 }
 
 #dock-toggle:focus-visible,
 #dock :focus-visible {
-  outline: 0.125rem solid #fff;
+  outline: 0.125rem solid var(--dock-fg);
   outline-offset: 0.125rem;
 }
 
