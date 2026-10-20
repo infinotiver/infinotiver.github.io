@@ -1,27 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Infino (@infinotiver)</title>
-    <link rel="stylesheet" href="assets/style.css" />
+    <meta name="description"
+        content="Infino (@infinotiver) is a developer who builds for fun with React, TypeScript and Python." />
+    <meta name="author" content="Infinotiver" />
+    <meta name="keywords" content="infinotiver, Infino, developer portfolio, React, TypeScript, Python" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0a0a0b" />
+    <link rel="canonical" href="https://infinotiver.com/" />
+
+    <!-- Open Graph / social previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Infino" />
+    <meta property="og:title" content="Infino (@infinotiver)" />
+    <meta property="og:description"
+        content="I build for fun, mostly with React, TypeScript and Python. Selected work, bots and tools." />
+    <meta property="og:url" content="https://infinotiver.is-a.dev/" />
+    <meta property="og:image" content="https://infinotiver.is-a.dev/assets/logo_new.webp" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Infino (@infinotiver)" />
+    <meta name="twitter:description"
+        content="I build for fun, mostly with React, TypeScript and Python. Selected work, bots and tools." />
+    <meta name="twitter:image" content="https://infinotiver.is-a.dev/assets/logo_new.webp" />
+
+    <link rel="stylesheet" href="assets/css/styles.base.css" />
+
+    <link rel="stylesheet" href="assets/css/variants/basic.css" />
+    <link rel="stylesheet" href="assets/css/variants/gov.css" />
+    <link rel="stylesheet" href="assets/css/variants/netscape.css" />
+    <link rel="stylesheet" href="assets/css/variants/retromac.css" />
+    <link rel="stylesheet" href="assets/css/variants/terminal.css" />
+    <link rel="stylesheet" href="assets/css/variants/web2.css" />
+
     <link rel="shortcut icon" href="assets/logo_new.webp" type="image/webp" />
     <link rel="apple-touch-icon" href="assets/logo_new.webp" />
-    <meta name="description" content="Infinotiver — developer portfolio." />
-    <meta name="author" content="Infinotiver" />
-    <meta name="theme-color" content="#0a0a0b" />
+
+    <!-- Fonts are loaded on demand by variant-engine.js -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <script src="assets/oneko.js"></script>
+
+    <script src="assets/js/oneko.js"></script>
 </head>
 
 <body>
-
     <header class="site-nav">
         <a href="#home" class="nav-mark">
             <img src="assets/logo_new.webp" alt="" width="20" height="20" loading="eager" decoding="async" />
@@ -35,23 +63,46 @@
 
     <main>
         <section id="home" class="hero">
-            <h1 class="hero-name" data-alt="Pr0njal">Infino</h1>
+            <h1 class="hero-name">Infino</h1>
             <p class="hero-bio">
-                I build for fun - mostly with React,
-                TypeScript, and Python (and ship stuff no one asked for)
+                I build for fun - mostly with React, TypeScript, and Python (side projects are my
+                main quest)
             </p>
             <div class="social-links">
                 <a href="https://github.com/infinotiver" title="GitHub" data-name="@infinotiver" target="_blank"
                     rel="noopener">
                     <i class="fa-brands fa-github"></i>
                 </a>
-              
+
                 <a href="https://discord.com/users/900992402356043806" title="Discord" data-name="@mavvvy.fr"
                     target="_blank" rel="noopener">
                     <i class="fa-brands fa-discord"></i>
                 </a>
-              
             </div>
+        </section>
+
+        <section id="about" class="work">
+            <h2>Experience</h2>
+            <ul class="work-list">
+                <li class="work-item">
+                    <div class="work-item-row">
+                        <h3>Student Leader at AI Student Community</h3>
+                    </div>
+                    <p>
+                        AI Student Community (AISC) is a national digital initiative by CBSE and Intel India
+                        connecting over 85,000 students across the country.
+                    </p>
+                    <p>
+                        Worked with the team to run the community and expand student access to practical AI
+                        education.
+                    </p>
+                    <p>
+                        Also audited the community platform backend and reported critical API security
+                        vulnerabilities (IDOR and CSRF) to the administrators.
+                    </p>
+                    <p class="work-stack">Jan 2026 – Jun 2026</p>
+                </li>
+            </ul>
         </section>
 
         <section id="work" class="work">
@@ -60,7 +111,6 @@
             <ul class="work-list">
                 <li class="work-item">
                     <div class="work-item-row">
-
                         <h3>Tessarect Discord Bot</h3>
                         <a class="work-code" href="https://github.com/infinotiver/tessarect-bot" target="_blank"
                             rel="noopener"><i class="fa-brands fa-github"></i></a>
@@ -106,18 +156,6 @@
                     <p class="work-stack">React</p>
                 </li>
 
-                <li class="work-item">
-                    <div class="work-item-row">
-                        <a class="work-item-link" href="https://mind-sink-6llu.onrender.com" target="_blank"
-                            rel="noopener">
-                            <h3>Mind Sink <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
-                        </a>
-                        <a class="work-code" href="https://github.com/infinotiver/mind-sink" target="_blank"
-                            rel="noopener"><i class="fa-brands fa-github"></i></a>
-                    </div>
-                    <p>An ad-free, distraction-minimal space for collecting creative inspiration.</p>
-                    <p class="work-stack">React · MongoDB · shadcn/ui</p>
-                </li>
 
                 <li class="work-item">
                     <div class="work-item-row">
@@ -145,28 +183,40 @@
                     <p>A VS Code extension for your status bar</p>
                     <p class="work-stack">TypeScript</p>
                 </li>
-
-
             </ul>
         </section>
-
     </main>
 
     <footer class="site-footer">
-        <span>© 2024–26 Infinotiver</span>
+        <span>© 2024–2026 Pranjal (Infinotiver)</span>
         <span class="footer-meta">
             <code id="last-commit">--</code> · updated <span id="last-update">--</span>
-            · <a href="navigator.html" aria-label="version navigator">navigator</a>
+            <span>· <a href="navigator.html" aria-label="version navigator">archives</a></span>
         </span>
+
         <span>
-            PS: click the cat to change it, or
-            <button type="button" onclick="window.oneko && window.oneko.nextBreed()">change it here</button>
+            PS: click the cat to <button type="button" onclick="window.oneko && window.oneko.nextBreed()">change
+                it</button> or
+
+            <button type="button" onclick="window.oneko && window.oneko.toggle()">toggle cat</button>
         </span>
     </footer>
+    <button id="dock-toggle" type="button" aria-controls="dock" aria-expanded="false" aria-label="Open design controls">
+        <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+        <code id="seed-badge">#-----</code>
+    </button>
 
-
-    <script src="assets/script.min.js"></script>
-
+    <div id="dock" role="group" aria-label="Design controls" aria-hidden="true">
+        <select id="dv" aria-label="Variant"></select>
+        <select id="dh" aria-label="Heading font"></select>
+        <select id="db" aria-label="Body font"></select>
+        <span>hue</span>
+        <input id="dc" type="range" min="0" max="359" aria-label="Accent hue" />
+        <button id="dr" type="button">Shuffle</button>
+    </div>
+    <script src="assets/js/variant-engine.js"></script>
+    <script src="assets/js/variant.terminal.js"></script>
+    <script src="assets/js/script.min.js"></script>
 </body>
 
 </html>

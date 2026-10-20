@@ -1,0 +1,288 @@
+/* terminal */
+
+/* variant */
+[data-v="terminal"] {
+    --bg: hsl(var(--h, 120) 45% 4%);
+    --fg: hsl(var(--h, 120) 80% 65%);
+    --muted: hsl(var(--h, 120) 30% 45%);
+    --muted-2: hsl(var(--h, 120) 25% 35%);
+    --border: hsl(var(--h, 120) 40% 20%);
+    --accent: hsl(var(--h, 120) 90% 60%);
+    --glow: color-mix(in srgb, var(--fg) 35%, transparent);
+    --fringe-a: hsl(calc(var(--h, 120) + 150) 90% 60% / 0.55);
+    --fringe-b: hsl(calc(var(--h, 120) - 150) 90% 60% / 0.55);
+}
+
+[data-v="terminal"] body {
+    background-color: var(--bg);
+    background-image: radial-gradient(ellipse at 50% 30%, hsl(var(--h, 120) 50% 9%), var(--bg) 72%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+    padding-inline: clamp(1.5rem, 8vw, 6rem);
+    /* Pushes entire site inward from screen edges */
+}
+
+[data-v="terminal"] :is(.site-nav, main, .site-footer, .footer-meta) {
+    max-width: 48rem;
+    text-shadow: 0 0 0.3rem var(--glow);
+    transform: perspective(60rem) rotateX(1deg) rotateZ(-0.4deg) skewX(-1.5deg);
+    transform-origin: center top;
+    /* Changed from 'top left' so it skews evenly from the middle */
+    animation: crt-flick 7s infinite;
+}
+
+/* scanlines + vignette; below #dock (9999) so the dock is untouched */
+[data-v="terminal"]::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    pointer-events: none;
+    background:
+        repeating-linear-gradient(0deg, rgb(0 0 0 / 0.28) 0 1px, transparent 1px 3px),
+        radial-gradient(ellipse at center, transparent 50%, rgb(0 0 0 / 0.7) 100%);
+}
+
+[data-v="terminal"] :is(.site-nav, main, .site-footer) {
+    max-width: 48rem;
+    margin-left: 0;
+    text-shadow: 0 0 0.3rem var(--glow);
+    animation: crt-flick 7s infinite;
+}
+
+[data-v="terminal"] ::selection {
+    background: var(--fg);
+    color: var(--bg);
+}
+
+/* nav */
+[data-v="terminal"] .site-nav {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px dashed var(--border);
+}
+
+[data-v="terminal"] .nav-mark {
+    gap: 0;
+    color: var(--fg);
+}
+
+[data-v="terminal"] .nav-mark img {
+    display: none;
+}
+
+[data-v="terminal"] .nav-mark::before {
+    content: "root@";
+    color: var(--muted);
+}
+
+[data-v="terminal"] .nav-mark::after {
+    content: ":~$";
+    color: var(--muted);
+}
+
+[data-v="terminal"] .site-nav nav {
+    gap: 1rem;
+}
+
+[data-v="terminal"] .site-nav nav a {
+    color: var(--muted);
+    text-transform: lowercase;
+}
+
+[data-v="terminal"] .site-nav nav a:not(.nav-btn)::before {
+    content: "[ ";
+}
+
+[data-v="terminal"] .site-nav nav a:not(.nav-btn)::after {
+    content: " ]";
+}
+
+[data-v="terminal"] .site-nav nav a:hover {
+    color: var(--fg);
+}
+
+[data-v="terminal"] .site-nav nav a.nav-btn {
+    background: transparent;
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    padding: 0.2rem 0.5rem;
+}
+
+[data-v="terminal"] .site-nav nav a.nav-btn:hover {
+    background: var(--fg);
+    color: var(--bg);
+    text-shadow: none;
+    opacity: 1;
+}
+
+/* main */
+[data-v="terminal"] .hero {
+    padding: 2rem 0 2.5rem;
+    text-align: left;
+}
+
+[data-v="terminal"] .hero-name {
+    color: var(--fg);
+    text-shadow: -0.09rem 0 var(--fringe-a), 0.09rem 0 var(--fringe-b), 0 0 0.75rem var(--glow);
+}
+
+[data-v="terminal"] .hero-name::before {
+    content: "$ whoami";
+    display: block;
+    font-size: var(--text-sm);
+    line-height: 2;
+    color: var(--muted);
+    text-shadow: none;
+}
+
+[data-v="terminal"] .hero-name::after {
+    content: "█";
+    margin-left: 0.1em;
+    animation: crt-blink 1s steps(1) infinite;
+}
+
+[data-v="terminal"] .hero-bio {
+    margin: 0;
+    color: var(--muted);
+}
+
+[data-v="terminal"] .social-links {
+    justify-content: flex-start;
+}
+
+[data-v="terminal"] .social-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--muted);
+}
+
+[data-v="terminal"] .social-links a::after {
+    content: attr(data-name);
+    font-size: var(--text-sm);
+}
+
+[data-v="terminal"] .social-links a:hover {
+    color: var(--fg);
+}
+
+[data-v="terminal"] .work h2 {
+
+    margin-bottom: 0.75rem;
+}
+
+[data-v="terminal"] .work h2::before {
+    content: "$ ls ./";
+    font-size: var(--text-sm);
+    color: var(--muted);
+}
+
+[data-v="terminal"] .work h2::after {
+    content: ".txt";
+    font-size: var(--text-sm);
+    color: var(--muted);
+}
+
+[data-v="terminal"] .work-item {
+    padding: 0.625rem 0;
+    border-bottom: 1px dotted var(--border);
+}
+
+[data-v="terminal"] .work-item:last-child {
+    border-bottom: none;
+}
+
+[data-v="terminal"] .work-item h3 {
+    color: var(--fg);
+    font-size: 1.05rem;
+}
+
+[data-v="terminal"] .work-item h3::before {
+    content: "▸ ";
+    color: var(--muted);
+}
+
+[data-v="terminal"] .work-item:hover .work-item-link h3 {
+    background: var(--fg);
+    color: var(--bg);
+    text-decoration: none;
+    text-shadow: none;
+}
+
+[data-v="terminal"] .work-item p {
+    color: var(--muted);
+}
+
+[data-v="terminal"] .work-stack {
+    color: var(--muted-2);
+}
+
+[data-v="terminal"] .work-stack::before {
+    content: "// ";
+}
+
+[data-v="terminal"] .work-code {
+    color: var(--muted);
+}
+
+[data-v="terminal"] .work-code:hover {
+    color: var(--fg);
+}
+
+/* footer */
+[data-v="terminal"] .site-footer {
+    align-items: flex-start;
+    text-align: left;
+    border-top: 1px dashed var(--border);
+    color: var(--muted-2);
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+/* meta */
+[data-v="terminal"] .footer-meta {
+    justify-content: flex-start;
+}
+
+[data-v="terminal"] .site-footer a:hover,
+[data-v="terminal"] .site-footer button:hover {
+    color: var(--fg);
+}
+
+/* animation */
+@keyframes crt-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes crt-flick {
+
+    0%,
+    92%,
+    94%,
+    97%,
+    100% {
+        opacity: 1;
+        transform: perspective(60rem) rotateX(1deg) rotateZ(-0.4deg) skewX(-1.5deg);
+    }
+
+    93% {
+        opacity: 0.8;
+        transform: perspective(60rem) rotateX(1deg) rotateZ(-0.4deg) skewX(-4deg) translateX(3px);
+    }
+
+    96% {
+        opacity: 0.9;
+        transform: perspective(60rem) rotateX(1deg) rotateZ(-0.4deg) skewX(0.5deg) translateX(-2px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    [data-v="terminal"] :is(.site-nav, main, .site-footer),
+    [data-v="terminal"] .hero-name::after {
+        animation: none;
+    }
+}

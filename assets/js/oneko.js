@@ -9,7 +9,9 @@
     if (isReducedMotion) return;
 
     const scriptEl = document.currentScript;
-    const basePath = scriptEl ? scriptEl.src.replace(/[^/]+$/, "") : "./";
+    const basePath = scriptEl
+        ? new URL("../", scriptEl.src).href
+        : "./assets/";
 
     // Sprite layout for the original oneko.gif (8 cols x 4 rows, no gap)
     const gifSpriteSets = {
@@ -76,8 +78,6 @@
     };
 
     // Sprite layout for other breed PNGs (8 cols x 4 rows, 1px gap).
-    // This is a DIFFERENT grid arrangement from gifSpriteSets as taken from
-    // https://github.com/ABSanthosh/neko-ts
     const breedSpriteSets = {
         idle: [[0, 0]],
         alert: [[-7, 0]],
@@ -139,11 +139,9 @@
             [-3, -2],
         ],
     };
-
     // gap = pixel gap between cells in the sheet.
     const breeds = {
         cat: { src: basePath + "breeds/oneko.gif", gap: 0, spriteSets: gifSpriteSets },
-
         ace: { src: basePath + "breeds/ace.png", gap: 1, spriteSets: breedSpriteSets },
         black: { src: basePath + "breeds/black.png", gap: 1, spriteSets: breedSpriteSets },
         calico: { src: basePath + "breeds/calico.png", gap: 1, spriteSets: breedSpriteSets },
@@ -154,11 +152,13 @@
 
     const nekoEl = document.createElement("div");
 
-    let nekoPosX = 32;
-    let nekoPosY = 32;
+    // Configurable spawn position (Supports script tag dataset attributes or defaults to bottom-right)
+    let nekoPosX = scriptEl?.dataset.x ? parseInt(scriptEl.dataset.x, 10) : window.innerWidth - 32;
+    let nekoPosY = scriptEl?.dataset.y ? parseInt(scriptEl.dataset.y, 10) : window.innerHeight - 32;
 
-    let mousePosX = 0;
-    let mousePosY = 0;
+    // Prevent cat from instantly sprinting to (0,0) on load
+    let mousePosX = nekoPosX;
+    let mousePosY = nekoPosY;
 
     let frameCount = 0;
     let idleTime = 0;
@@ -167,6 +167,7 @@
     let currentBreed = breedNames[0];
     let currentGap = breeds[currentBreed].gap;
     let currentSpriteSets = breeds[currentBreed].spriteSets;
+    let isHidden = false;
 
     const nekoSpeed = 10;
 
@@ -181,6 +182,35 @@
     function nextBreed() {
         const i = breedNames.indexOf(currentBreed);
         applyBreed(breedNames[(i + 1) % breedNames.length]);
+    }
+
+    // Hide, Show, Toggle, and SetPosition API functions
+    function hide() {
+        isHidden = true;
+        nekoEl.style.display = "none";
+    }
+
+    function show() {
+        isHidden = false;
+        nekoEl.style.display = "block";
+    }
+
+    function toggle() {
+        if (isHidden) {
+            show();
+        } else {
+            hide();
+        }
+        return !isHidden;
+    }
+
+    function setPosition(x, y) {
+        nekoPosX = x;
+        nekoPosY = y;
+        mousePosX = x;
+        mousePosY = y;
+        nekoEl.style.left = `${nekoPosX - 16}px`;
+        nekoEl.style.top = `${nekoPosY - 16}px`;
     }
 
     function init() {
@@ -207,14 +237,21 @@
             mousePosY = event.clientY;
         });
 
-        // Lets you build your own switcher UI (dropdown, buttons, etc.)
+        // Global switcher and state UI controls
         window.oneko = {
             breeds: breedNames.slice(),
             get current() {
                 return currentBreed;
             },
+            get hidden() {
+                return isHidden;
+            },
             setBreed: (name) => applyBreed(name),
             nextBreed,
+            hide,
+            show,
+            toggle,
+            setPosition,
         };
 
         window.requestAnimationFrame(onAnimationFrame);
@@ -223,7 +260,6 @@
     let lastFrameTimestamp;
 
     function onAnimationFrame(timestamp) {
-        // Stops execution if the neko element is removed from DOM
         if (!nekoEl.isConnected) {
             return;
         }
@@ -232,7 +268,9 @@
         }
         if (timestamp - lastFrameTimestamp > 100) {
             lastFrameTimestamp = timestamp;
-            frame();
+            if (!isHidden) {
+                frame();
+            }
         }
         window.requestAnimationFrame(onAnimationFrame);
     }
@@ -241,7 +279,6 @@
         const frames = currentSpriteSets[name];
         if (!frames) return;
         const sprite = frames[frame % frames.length];
-        // cell pitch = sprite size (32px) + gap between cells for this breed
         const step = 32 + currentGap;
         nekoEl.style.backgroundPosition = `${sprite[0] * step}px ${sprite[1] * step}px`;
     }
@@ -254,7 +291,6 @@
     function idle() {
         idleTime += 1;
 
-        // every ~ 20 seconds
         if (
             idleTime > 10 &&
             Math.floor(Math.random() * 200) == 0 &&
@@ -323,7 +359,6 @@
 
         if (idleTime > 1) {
             setSprite("alert", 0);
-            // count down after being alerted before moving
             idleTime = Math.min(idleTime, 7);
             idleTime -= 1;
             return;
@@ -346,8 +381,6 @@
         nekoEl.style.top = `${nekoPosY - 16}px`;
     }
 
-    // Ensure document.body exists before we try to append to it,
-    // in case this script runs from <head> without defer/async.
     if (document.body) {
         init();
     } else {

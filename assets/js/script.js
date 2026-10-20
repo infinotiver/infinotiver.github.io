@@ -34,7 +34,7 @@ async function updateBuildInfo() {
         const localDate = date ? new Date(date).toLocaleString('en-US', {
             year: 'numeric',
             day: 'numeric',
-            
+
         }) : null;
 
         const commitEl = document.getElementById('last-commit');
@@ -46,7 +46,3 @@ async function updateBuildInfo() {
     }
 }
 
-(() => {
-    const hue = Math.floor(Math.random() * 360);
-    document.documentElement.style.setProperty('--bg', `hsl(${hue}, 24%, 6%)`);
-})();
