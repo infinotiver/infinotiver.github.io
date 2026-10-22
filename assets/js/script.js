@@ -24,25 +24,68 @@ document.addEventListener('DOMContentLoaded', () => {
     updateBuildInfo();
 });
 
+const BUILD_KEY = 'build-info';
+const BUILD_TTL = 10 * 60 * 1000;
+
+function readCache() {
+    // just in case storage is blocked, corrupt etc
+    try {
+        return JSON.parse(localStorage.getItem(BUILD_KEY))
+    } catch {
+        return null; // dont throw an error
+    }
+
+}
+
+function writeCache(data) {
+    try {
+        localStorage.setItem(BUILD_KEY, JSON.stringify(data))
+
+    } catch {
+        // swallow silently 
+    }
+}
+
+function renderBuildInfo({ sha, date } = {}) {
+    const localDate = date ? new Date(date).toLocaleString('en-US', {
+        month: 'short',
+        year: 'numeric',
+        day: 'numeric',
+    }) : null;
+    const commitEl = document.getElementById('last-commit');
+    const updateEl = document.getElementById('last-update');
+    if (commitEl) commitEl.textContent = sha || 'N/A';
+    if (updateEl) updateEl.textContent = localDate || 'N/A';
+}
+
+// reuse cache inside the TTL (Time to live) to avoid the rate limit
 async function updateBuildInfo() {
+    const cached = readCache();
+    if (cached && Date.now() < cached.next) {
+        renderBuildInfo(cached);
+        return;
+    }
+
     try {
         const res = await fetch('https://api.github.com/repos/infinotiver/infinotiver.github.io/commits?per_page=1');
         if (!res.ok) throw new Error(`GitHub API ${res.status}`);
         const [commit] = await res.json();
-        const sha = commit?.sha.substring(0, 7);
-        const date = commit?.commit.author.date;
-        const localDate = date ? new Date(date).toLocaleString('en-US', {
-            year: 'numeric',
-            day: 'numeric',
-
-        }) : null;
-
-        const commitEl = document.getElementById('last-commit');
-        const updateEl = document.getElementById('last-update');
-        if (commitEl) commitEl.textContent = sha || 'N/A';
-        if (updateEl) updateEl.textContent = localDate || 'N/A';
+        const data = {
+            sha: commit?.sha.substring(0, 7),
+            date: commit?.commit.author.date,
+            next: Date.now() + BUILD_TTL,
+        };
+        writeCache(data);
+        renderBuildInfo(data);
     } catch (err) {
         console.error('Error fetching GitHub data:', err);
+        // keep old data and delay the next attempt
+        if (cached) {
+            writeCache({ ...cached, next: Date.now() + BUILD_TTL });
+            renderBuildInfo(cached);
+        } else {
+            renderBuildInfo();
+        }
     }
 }
 

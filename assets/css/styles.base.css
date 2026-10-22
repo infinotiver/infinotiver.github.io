@@ -293,7 +293,9 @@ main,
 /* # responsive */
 @media (max-width: 480px) {
 
-
+  main {
+    padding: 1rem;
+  }
 
   .site-nav {
     padding-top: 1.375rem;
