@@ -203,10 +203,17 @@
             <button type="button" onclick="window.oneko && window.oneko.toggle()">toggle cat</button>
         </span>
     </footer>
-    <button id="dock-toggle" type="button" aria-controls="dock" aria-expanded="false" aria-label="Open design controls">
-        <i class="fa-solid fa-sliders" aria-hidden="true"></i>
-        <code id="seed-badge">#-----</code>
-    </button>
+    <div id="dock-bar">
+        <button id="dp" type="button" aria-pressed="false">
+            <i class="fa-solid fa-thumbtack" aria-hidden="true"></i>
+            <span id="dp-text">pin</span>
+        </button>
+        <button id="dock-toggle" type="button" aria-controls="dock" aria-expanded="false"
+            aria-label="Open design controls">
+            <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+            <code id="seed-badge">#-----</code>
+        </button>
+    </div>
 
     <div id="dock" role="group" aria-label="Design controls" aria-hidden="true">
         <select id="dv" aria-label="Variant"></select>
@@ -215,10 +222,8 @@
         <span>hue</span>
         <input id="dc" type="range" min="0" max="359" aria-label="Accent hue" />
         <button id="dr" type="button">Shuffle</button>
-        <button id="dp" type="button" aria-pressed="false">Pin</button>
     </div>
     <script src="assets/js/variant-engine.js"></script>
-    <script src="assets/js/variant.terminal.js"></script>
     <script src="assets/js/script.min.js"></script>
     <!-- Cloudflare Web Analytics -->
     <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js'

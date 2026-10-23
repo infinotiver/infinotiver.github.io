@@ -381,7 +381,8 @@ main,
 
 /* # dock */
 #dock,
-#dock-toggle {
+#dock-toggle,
+#dp {
   /* fixed colors: follows the OS theme only, never the variant or hue */
   --dock-bg: #141417;
   --dock-hover: #232329;
@@ -409,7 +410,8 @@ main,
 @media (prefers-color-scheme: light) {
 
   #dock,
-  #dock-toggle {
+  #dock-toggle,
+  #dp {
     --dock-bg: #f4f4f5;
     --dock-hover: #e4e4e7;
     --dock-control-bg: #e4e4e7;
@@ -423,8 +425,19 @@ main,
   }
 }
 
-#dock-toggle {
-  bottom: 1rem !important;
+/* pin + code badge sit in one fixed bar, each is a normal button inside it */
+#dock-bar {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 9999;
+  display: flex;
+  gap: 0.375rem;
+}
+
+#dock-toggle,
+#dp {
+  position: static !important;
   display: inline-flex !important;
   gap: 0.45rem;
   padding: 0.5rem 0.75rem !important;
@@ -432,12 +445,19 @@ main,
   cursor: pointer;
 }
 
-#dock-toggle i {
+#dock-toggle i,
+#dp i {
   color: var(--dock-accent) !important;
   font-size: 0.75rem;
 }
 
+/* unpinned pin icon is muted, pinned one takes the accent */
+#dp[aria-pressed="false"] i {
+  color: var(--dock-muted) !important;
+}
+
 #dock-toggle:hover,
+#dp:hover,
 #dock-toggle[aria-expanded="true"] {
   background: var(--dock-hover) !important;
 }
@@ -508,6 +528,7 @@ main,
 }
 
 #dock-toggle:focus-visible,
+#dp:focus-visible,
 #dock :focus-visible {
   outline: 0.125rem solid var(--dock-fg);
   outline-offset: 0.125rem;
@@ -515,13 +536,13 @@ main,
 
 @media (max-width: 30rem) {
 
-  #dock,
-  #dock-toggle {
+  #dock {
     right: 0.75rem !important;
   }
 
-  #dock-toggle {
-    bottom: 0.75rem !important;
+  #dock-bar {
+    right: 0.75rem;
+    bottom: 0.75rem;
   }
 
   #dock {

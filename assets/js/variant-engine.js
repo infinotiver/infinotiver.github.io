@@ -1,6 +1,13 @@
 (() => {
     "use strict";
 
+    // variant modules are resolved next to this script
+    const SCRIPT_URL = document.currentScript?.src
+        || new URL("assets/js/variant-engine.js", location.href).href;
+
+    // variants that ship an init()/destroy() module in variants/<name>.js (append when one is added)
+    const MODULES = new Set(["terminal", "netscape"]);
+
     const VARIANTS = {
         default: {
             label: "Default",
@@ -171,14 +178,63 @@
         updatePinButton();
     }
 
-    // the button reads "Unpin" only while the current look is the stored one
+    // shows "pinned" only while the current look is the stored one
     function updatePinButton() {
         const button = $("dp");
         if (!button) return;
 
         const pinned = readPin() === state.code;
-        button.textContent = pinned ? "Unpin" : "Pin";
+        const text = $("dp-text");
+        if (text) text.textContent = pinned ? "pinned" : "pin";
+        button.title = pinned
+            ? "Pinned: this look returns on every visit. Click to unpin"
+            : "Pin this look for return visits";
         button.setAttribute("aria-pressed", String(pinned));
+    }
+
+    const motionOff = matchMedia("(prefers-reduced-motion: reduce)");
+
+    // View Transitions where supported, a plain swap otherwise or with reduced motion
+    function swap(change) {
+        if (document.startViewTransition && !motionOff.matches) {
+            document.startViewTransition(change);
+        } else {
+            change();
+        }
+    }
+
+    // variant modules: destroy the old one on every change, lazy-load only the active one
+    let activeName = "";
+    let activeModule = null;
+    let moduleToken = 0;
+
+    async function syncModule() {
+        if (state.variant === activeName) return;
+
+        const name = state.variant;
+        const token = ++moduleToken;
+        activeName = name;
+
+        if (activeModule) {
+            try {
+                activeModule.destroy?.();
+            } catch (error) {
+                console.error(`destroy() failed for ${activeName}`, error);
+            }
+            activeModule = null;
+        }
+
+        if (!MODULES.has(name)) return;
+
+        try {
+            const module = await import(new URL(`variants/${name}.js`, SCRIPT_URL).href);
+            // the look changed again while loading, so this module is stale
+            if (token !== moduleToken) return;
+            module.init?.();
+            activeModule = module;
+        } catch (error) {
+            console.error(`init() failed for ${name}`, error);
+        }
     }
 
     // a pending egg must not fire after the look has changed
@@ -215,6 +271,7 @@
         }
 
         updateDock();
+        syncModule();
     }
 
     function loadCode(code) {
@@ -420,24 +477,23 @@
 
     if ($("dv")) {
         $("dv").addEventListener("change", (event) => {
+            // fonts are index based, so the picked fonts carry over to the new style
             state.variant = event.target.value;
-            state.head = 0;
-            state.body = 0;
-            apply();
+            swap(() => apply());
         });
     }
 
     if ($("dh")) {
         $("dh").addEventListener("change", (event) => {
             state.head = Number(event.target.value);
-            apply();
+            swap(() => apply());
         });
     }
 
     if ($("db")) {
         $("db").addEventListener("change", (event) => {
             state.body = Number(event.target.value);
-            apply();
+            swap(() => apply());
         });
     }
 
@@ -450,7 +506,7 @@
 
     if ($("dr")) {
         $("dr").addEventListener("click", () => {
-            loadCode(Math.floor(Math.random() * N));
+            swap(() => loadCode(Math.floor(Math.random() * N)));
         });
     }
 
