@@ -4,7 +4,7 @@
     const VARIANTS = {
         default: {
             label: "Default",
-            h: ["Fraunces", "Instrument Serif",  "Young Serif"],
+            h: ["Fraunces", "Instrument Serif", "Young Serif"],
             b: ["Inter", "Geist", "Hanken Grotesk"],
             fallback: { h: "serif", b: "sans-serif" },
         },
@@ -142,7 +142,11 @@
         }
     }
 
+    // a pending egg must not fire after the look has changed
+    let eggTimer;
+
     function apply({ updateCode = true } = {}) {
+        clearTimeout(eggTimer);
         const config = VARIANTS[state.variant];
 
         if (!config) {
@@ -414,7 +418,7 @@
     loadCode(initialCode);
 
     if (!fromLink && luckyEnabled() && EGGS[initialCode]) {
-        setTimeout(() => EGGS[initialCode](), 800);
+        eggTimer = setTimeout(() => EGGS[initialCode](), 800);
     }
 
     window.variantEngine = {

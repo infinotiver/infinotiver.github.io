@@ -9,11 +9,13 @@
     top: 0;
     z-index: 999;
 }
+
 [data-v="web2"] .hero-name {
     text-shadow: 0 2px 0 #0008;
 }
 
-[data-v="web2"]  a {
+/* pill style only on icon links and repo links, not on every anchor */
+[data-v="web2"] :is(.social-links a, .work-code) {
     color: hsl(var(--h) 60% 75%);
     background: linear-gradient(#ffffff24 50%, #0000 50%), hsl(var(--h) 60% 24%);
     padding: 4px 12px;
@@ -49,7 +51,13 @@
     text-shadow: 0 1px 0 #0006;
 }
 
+/* nav links sit on the dark glass bar, so they need a light color */
+[data-v="web2"] .site-nav nav a:not(.nav-btn) {
+    color: hsl(var(--h) 60% 85%);
+}
+
 [data-v="web2"] .nav-mark::after {
+    content: "beta";
     align-self: flex-start;
     padding: 0 0.375rem;
     border-radius: 4px;

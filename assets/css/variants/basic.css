@@ -29,8 +29,8 @@
 }
 
 [data-v="basic"] a:hover {
-    text-decoration-color: hsl(var(--h) 50% 50%);
-    color: hsl(var(--h) 100% 50%);
+    text-decoration-color: var(--accent);
+    color: var(--accent);
 }
 
 /* nav */
@@ -72,7 +72,7 @@
 }
 
 [data-v="basic"] .site-nav nav a.nav-btn:hover {
-    background-color: hsl(var(--h, 210), 80%, 55%);
+    background-color: var(--accent);
     color: #000;
     opacity: 1;
 }

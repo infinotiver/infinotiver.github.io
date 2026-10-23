@@ -1,26 +1,44 @@
+/* terminal glyph corruption on the hero name (interim; moves into a variant module later) */
+(() => {
+    const el = document.querySelector('.hero-name');
+    if (!el) return;
 
-const n = document.querySelector('.hero-name');
+    const root = document.documentElement;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    const base = el.textContent;
+    const symbols = '#%@&?';
+    let timer = 0;
+    let restore = 0;
+    let glitched = '';
 
-if (n) {
-    const t = n.textContent;
+    const glitch = () => {
+        // skip while the hover swap is running or showing another text
+        if (el.classList.contains('is-swapping') || el.textContent !== base) return;
 
-    setInterval(() => {
-        if (
-            document.documentElement.dataset.v !== 'terminal' ||
-            matchMedia('(prefers-reduced-motion: reduce)').matches
-        ) return;
+        const i = Math.random() * base.length | 0;
+        glitched = base.slice(0, i) + symbols[Math.random() * symbols.length | 0] + base.slice(i + 1);
+        el.textContent = glitched;
 
-        const i = Math.random() * t.length | 0;
-        const symbols = '#%@&?';
-
-        n.textContent =
-            t.slice(0, i) +
-            symbols[Math.random() * symbols.length | 0] +
-            t.slice(i + 1);
-
-        setTimeout(() => {
-            n.textContent = t;
+        restore = setTimeout(() => {
+            if (el.textContent === glitched) el.textContent = base;
         }, 90);
+    };
 
-    }, 1500);
-}
+    // run only while the terminal variant is active and motion is allowed
+    const sync = () => {
+        const on = root.dataset.v === 'terminal' && !reduce.matches;
+
+        if (on && !timer) {
+            timer = setInterval(glitch, 1500);
+        } else if (!on && timer) {
+            clearInterval(timer);
+            clearTimeout(restore);
+            timer = 0;
+            if (el.textContent === glitched) el.textContent = base;
+        }
+    };
+
+    new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['data-v'] });
+    reduce.addEventListener('change', sync);
+    sync();
+})();

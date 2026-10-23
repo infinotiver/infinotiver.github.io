@@ -30,6 +30,7 @@
     left: 0;
     right: 0;
     z-index: 100;
+    width: 100%;
     max-width: none;
     margin: 0;
     height: 1.25rem;
@@ -244,7 +245,6 @@
     justify-content: space-between;
     align-items: center;
     gap: 0.25rem 0.75rem;
-    width: min(37rem, calc(100% - 3rem));
     margin: 1.75rem auto 3rem;
     padding: 0.25rem 0.75rem;
     text-align: left;
@@ -262,10 +262,6 @@
 }
 
 @media (max-width: 480px) {
-    [data-v="retromac"] .site-footer {
-        width: calc(100% - 2.25rem);
-    }
-
     [data-v="retromac"] .work-stack {
         display: none;
     }

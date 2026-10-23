@@ -10,7 +10,8 @@
   --serif: var(--fh);
   --sans: var(--fb);
 
-  --accent: hsl(var(--h, 210) 80% 55%);
+  /* light enough to pass AA (4.5:1) as text on the dark backgrounds at any hue */
+  --accent: hsl(var(--h, 210) 85% 72%);
 
   --radius-btn: 0.5rem;
   --text-xs: 0.8125rem;
@@ -21,8 +22,9 @@
   color-scheme: dark;
 }
 
-/* Default variant uses the dynamic --h hue for its background */
-[data-v="default"] {
+/* Default variant uses the dynamic --h hue for its background; also the no-JS look */
+[data-v="default"],
+:root:not([data-v]) {
   --bg: hsl(var(--h, 240) 24% 6%);
 }
 
@@ -49,11 +51,15 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
+/* one column and one gutter for nav, main and footer; --pad only changes in :root */
 .site-nav,
 main,
 .site-footer {
-  padding: var(--pad);
+  width: min(40rem, 100% - 2 * var(--pad));
+  margin-inline: auto;
+  padding-block: var(--pad);
 }
+
 .site-nav {
   display: flex;
   align-items: center;
@@ -292,8 +298,8 @@ main,
 /* # responsive */
 @media (max-width: 480px) {
 
-  main {
-    padding: 1rem;
+  :root {
+    --pad: 1.125rem;
   }
 
   .site-nav {
@@ -328,11 +334,8 @@ main,
 
 @media (max-width: 360px) {
 
-  .site-nav,
-  main,
-  .site-footer {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  :root {
+    --pad: 1rem;
   }
 
   .site-nav nav {
@@ -367,7 +370,11 @@ main,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
     transition: none !important;
   }
 }
@@ -375,14 +382,17 @@ main,
 /* # dock */
 #dock,
 #dock-toggle {
-  --dock-bg: light-dark(#f4f4f5, #141417);
-  --dock-hover: light-dark(#e4e4e7, #232329);
-  --dock-control-bg: light-dark(#e4e4e7, #232329);
-  --dock-control-hover: light-dark(#d4d4d8, #32323a);
-  --dock-border: light-dark(#d4d4d8, #2e2e33);
-  --dock-control-border: light-dark(#c4c4cc, #3f3f46);
-  --dock-fg: light-dark(#18181b, #f4f4f5);
-  --dock-muted: light-dark(#52525b, #a1a1aa);
+  /* fixed colors: follows the OS theme only, never the variant or hue */
+  --dock-bg: #141417;
+  --dock-hover: #232329;
+  --dock-control-bg: #232329;
+  --dock-control-hover: #32323a;
+  --dock-border: #2e2e33;
+  --dock-control-border: #3f3f46;
+  --dock-fg: #f4f4f5;
+  --dock-muted: #a1a1aa;
+  --dock-accent: #60a5fa;
+  color-scheme: dark;
 
   position: fixed !important;
   right: 1rem !important;
@@ -395,6 +405,24 @@ main,
   border-radius: var(--radius-btn) !important;
 }
 
+/* media query instead of light-dark(): works in older browsers too */
+@media (prefers-color-scheme: light) {
+
+  #dock,
+  #dock-toggle {
+    --dock-bg: #f4f4f5;
+    --dock-hover: #e4e4e7;
+    --dock-control-bg: #e4e4e7;
+    --dock-control-hover: #d4d4d8;
+    --dock-border: #d4d4d8;
+    --dock-control-border: #c4c4cc;
+    --dock-fg: #18181b;
+    --dock-muted: #52525b;
+    --dock-accent: #2563eb;
+    color-scheme: light;
+  }
+}
+
 #dock-toggle {
   bottom: 1rem !important;
   display: inline-flex !important;
@@ -405,7 +433,7 @@ main,
 }
 
 #dock-toggle i {
-  color: var(--accent) !important;
+  color: var(--dock-accent) !important;
   font-size: 0.75rem;
 }
 
@@ -469,7 +497,7 @@ main,
   margin: 0 0.25rem !important;
   width: 4rem;
   height: 0.25rem;
-  accent-color: var(--accent);
+  accent-color: var(--dock-accent);
   cursor: pointer;
 }
 

@@ -22,12 +22,13 @@
     /* Pushes entire site inward from screen edges */
 }
 
-[data-v="terminal"] :is(.site-nav, main, .site-footer, .footer-meta) {
-    max-width: 48rem;
+/* body padding is the gutter here, so width ignores --pad; footer-meta is not skewed again */
+[data-v="terminal"] :is(.site-nav, main, .site-footer) {
+    width: min(48rem, 100%);
+    margin-left: 0;
     text-shadow: 0 0 0.3rem var(--glow);
     transform: perspective(60rem) rotateX(1deg) rotateZ(-0.4deg) skewX(-1.5deg);
     transform-origin: center top;
-    /* Changed from 'top left' so it skews evenly from the middle */
     animation: crt-flick 7s infinite;
 }
 
@@ -43,13 +44,6 @@
         radial-gradient(ellipse at center, transparent 50%, rgb(0 0 0 / 0.7) 100%);
 }
 
-[data-v="terminal"] :is(.site-nav, main, .site-footer) {
-    max-width: 48rem;
-    margin-left: 0;
-    text-shadow: 0 0 0.3rem var(--glow);
-    animation: crt-flick 7s infinite;
-}
-
 [data-v="terminal"] ::selection {
     background: var(--fg);
     color: var(--bg);
@@ -57,7 +51,7 @@
 
 /* nav */
 [data-v="terminal"] .site-nav {
-    padding: 1rem 1.5rem;
+    padding: 1rem 0;
     border-bottom: 1px dashed var(--border);
 }
 
