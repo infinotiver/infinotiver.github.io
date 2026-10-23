@@ -171,3 +171,56 @@
         text-indent: 0;
     }
 }
+
+/* gov cookie banner */
+#gov-cookie {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 8000;
+    /* below the dock (9999) */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    padding: 1rem max(var(--pad, 1rem), calc(50% - 20rem));
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    background: hsl(var(--h, 210) 60% 20%);
+    color: #fff;
+    border-top: 4px solid #fd0;
+    font-family: var(--sans);
+    animation: gov-up 0.3s ease-out;
+}
+
+#gov-cookie p {
+    margin: 0;
+}
+
+#gov-cookie button {
+    min-height: 44px;
+    padding: 0 1.25rem;
+    font: inherit;
+    font-weight: 700;
+    background: #fd0;
+    color: #000;
+    border: 0;
+    border-radius: 0;
+    box-shadow: 0 2px 0 #000;
+    cursor: pointer;
+}
+
+#gov-cookie button:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+}
+
+@keyframes gov-up {
+    from {
+        transform: translateY(100%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #gov-cookie {
+        animation: none;
+    }
+}

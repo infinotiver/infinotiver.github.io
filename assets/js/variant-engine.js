@@ -6,7 +6,7 @@
         || new URL("assets/js/variant-engine.js", location.href).href;
 
     // variants that ship an init()/destroy() module in variants/<name>.js (append when one is added)
-    const MODULES = new Set(["terminal", "netscape", "retromac"]);
+    const MODULES = new Set(["terminal", "netscape", "retromac", "gov"]);
 
     const VARIANTS = {
         default: {

@@ -13,7 +13,7 @@
   /* light enough to pass AA (4.5:1) as text on the dark backgrounds at any hue */
   --accent: hsl(var(--h, 210) 85% 72%);
 
-  --radius-btn: 0.5rem;
+  --radius-btn: 0.6rem;
   --text-xs: 0.8125rem;
   --text-sm: 0.875rem;
   --gap-xs: 0.5rem;
@@ -378,12 +378,10 @@ main,
     transition: none !important;
   }
 }
-
-/* # dock */
+/* Dock */
 #dock,
 #dock-toggle,
 #dp {
-  /* fixed colors: follows the OS theme only, never the variant or hue */
   --dock-bg: #141417;
   --dock-hover: #232329;
   --dock-control-bg: #232329;
@@ -392,9 +390,9 @@ main,
   --dock-control-border: #3f3f46;
   --dock-fg: #f4f4f5;
   --dock-muted: #a1a1aa;
-  --dock-accent: #60a5fa;
-  color-scheme: dark;
+  --dock-accent: var(--accent);
 
+  color-scheme: dark;
   position: fixed !important;
   right: 1rem !important;
   z-index: 9999 !important;
@@ -402,11 +400,10 @@ main,
   background: var(--dock-bg) !important;
   color: var(--dock-fg) !important;
   font: var(--text-xs) / 1 system-ui, sans-serif !important;
-  border: 0.0625rem solid var(--dock-border) !important;
-  border-radius: var(--radius-btn) !important;
+  border: 1px solid var(--dock-border) !important;
+  border-radius: 0.875rem !important;
 }
 
-/* media query instead of light-dark(): works in older browsers too */
 @media (prefers-color-scheme: light) {
 
   #dock,
@@ -420,27 +417,32 @@ main,
     --dock-control-border: #c4c4cc;
     --dock-fg: #18181b;
     --dock-muted: #52525b;
-    --dock-accent: #2563eb;
+    --dock-accent: var(--accent);
+
     color-scheme: light;
   }
 }
 
-/* pin + code badge sit in one fixed bar, each is a normal button inside it */
+/* Bottom action bar */
 #dock-bar {
   position: fixed;
   right: 1rem;
   bottom: 1rem;
   z-index: 9999;
   display: flex;
+  align-items: center;
   gap: 0.375rem;
 }
 
+/* Toggle and pin buttons */
 #dock-toggle,
 #dp {
   position: static !important;
   display: inline-flex !important;
-  gap: 0.45rem;
-  padding: 0.5rem 0.75rem !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem !important;
   text-decoration: none !important;
   cursor: pointer;
 }
@@ -451,7 +453,6 @@ main,
   font-size: 0.75rem;
 }
 
-/* unpinned pin icon is muted, pinned one takes the accent */
 #dp[aria-pressed="false"] i {
   color: var(--dock-muted) !important;
 }
@@ -471,10 +472,12 @@ main,
   text-decoration: none !important;
 }
 
+/* Open controls panel */
 #dock {
-  bottom: 3.375rem !important;
+  bottom: 3.5rem !important;
   display: none;
-  gap: 0.375rem;
+  align-items: center;
+  gap: 0.5rem;
   flex-wrap: wrap;
   max-width: calc(100vw - 2rem);
   padding: 0.375rem !important;
@@ -484,14 +487,15 @@ main,
   display: inline-flex;
 }
 
+/* Selects and buttons */
 #dock select,
 #dock button {
   font: inherit !important;
   color: var(--dock-fg) !important;
   background: var(--dock-control-bg) !important;
-  border: 0.0625rem solid var(--dock-control-border) !important;
-  border-radius: 0.25rem !important;
-  padding: 0.25rem 0.5rem !important;
+  border: 1px solid var(--dock-control-border) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.375rem 0.5rem !important;
   text-decoration: none !important;
   cursor: pointer;
 }
@@ -503,7 +507,7 @@ main,
 }
 
 #dock select {
-  max-width: 6.5rem;
+  max-width: 7rem;
   text-overflow: ellipsis;
 }
 
@@ -512,41 +516,46 @@ main,
   background: var(--dock-bg);
 }
 
+/* Hue slider */
 #dock input[type="range"] {
   padding: 0 !important;
-  margin: 0 0.25rem !important;
-  width: 4rem;
-  height: 0.25rem;
+  margin: 0 0.125rem !important;
+  width: 4.5rem;
+  height: 1rem;
   accent-color: var(--dock-accent);
   cursor: pointer;
 }
 
 #dock span {
   color: var(--dock-muted) !important;
-  padding: 0 0.125rem;
+  padding: 0;
   user-select: none;
 }
 
+/* Keyboard focus */
 #dock-toggle:focus-visible,
 #dp:focus-visible,
 #dock :focus-visible {
-  outline: 0.125rem solid var(--dock-fg);
-  outline-offset: 0.125rem;
+  outline: 2px solid var(--dock-accent);
+  outline-offset: 2px;
 }
 
+/* Mobile */
 @media (max-width: 30rem) {
-
   #dock {
     right: 0.75rem !important;
+    bottom: 3.25rem !important;
+    max-width: calc(100vw - 1.5rem);
+    gap: 0.375rem;
   }
 
   #dock-bar {
     right: 0.75rem;
     bottom: 0.75rem;
+    gap: 0.25rem;
   }
 
-  #dock {
-    bottom: 3rem !important;
-    max-width: calc(100vw - 1.5rem);
+  #dock select {
+    max-width: 6rem;
   }
 }
