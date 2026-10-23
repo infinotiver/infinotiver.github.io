@@ -172,7 +172,7 @@
 
         if (badge) {
             badge.textContent = "#" + String(state.code).padStart(5, "0");
-            badge.title = "Click to copy design link";
+            badge.title = canShare() ? "Click to share design link" : "Click to copy design link";
         }
 
         updatePinButton();
@@ -459,17 +459,30 @@
 
         setDockOpen(false);
     }
+    // touch devices get the share sheet, desktop keeps copy
+    const canShare = () =>
+        !!navigator.share && matchMedia("(pointer: coarse)").matches;
 
     if (badge) {
         badge.style.cursor = "pointer";
         badge.addEventListener("click", async (event) => {
             event.stopPropagation();
             const url = getShareURL();
+            const tag = "#" + String(state.code).padStart(5, "0");
 
             try {
-                await navigator.clipboard.writeText(url);
-                toast(`Copied link for #${String(state.code).padStart(5, "0")}`);
-            } catch {
+                if (canShare()) {
+                    await navigator.share({
+                        title: "Infinotiver's portfolio",
+                        text: `My look ${tag}`,
+                        url,
+                    });
+                } else {
+                    await navigator.clipboard.writeText(url);
+                    toast(`Copied link for ${tag}`);
+                }
+            } catch (error) {
+                if (error.name === "AbortError") return; // user closed the sheet
                 toast(url);
             }
         });
