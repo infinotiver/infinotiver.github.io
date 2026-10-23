@@ -57,13 +57,40 @@
     const fromLink = params.has("c");
     const parsedCode = Number(params.get("c"));
 
+    // pin: storage may be blocked, so every access is guarded
+    const PIN_KEY = "pin";
+
+    function readPin() {
+        try {
+            const raw = localStorage.getItem(PIN_KEY);
+            const value = Number(raw);
+            return raw !== null && Number.isInteger(value) && value >= 0 && value < N
+                ? value
+                : null;
+        } catch {
+            return null;
+        }
+    }
+
+    function writePin(code) {
+        try {
+            if (code === null) localStorage.removeItem(PIN_KEY);
+            else localStorage.setItem(PIN_KEY, String(code));
+        } catch {
+            // blocked storage: pin just won't persist
+        }
+    }
+
+    // ?c= wins for this visit only, then the pinned code, then a random roll
+    const pinnedCode = fromLink ? null : readPin();
+
     const initialCode = fromLink
         ? (
             Number.isSafeInteger(parsedCode)
                 ? ((parsedCode % N) + N) % N
                 : 0
         )
-        : Math.floor(Math.random() * N);
+        : pinnedCode ?? Math.floor(Math.random() * N);
 
     const root = document.documentElement;
     const $ = (id) => document.getElementById(id);
@@ -140,6 +167,18 @@
             badge.textContent = "#" + String(state.code).padStart(5, "0");
             badge.title = "Click to copy design link";
         }
+
+        updatePinButton();
+    }
+
+    // the button reads "Unpin" only while the current look is the stored one
+    function updatePinButton() {
+        const button = $("dp");
+        if (!button) return;
+
+        const pinned = readPin() === state.code;
+        button.textContent = pinned ? "Unpin" : "Pin";
+        button.setAttribute("aria-pressed", String(pinned));
     }
 
     // a pending egg must not fire after the look has changed
@@ -415,9 +454,19 @@
         });
     }
 
+    if ($("dp")) {
+        $("dp").addEventListener("click", () => {
+            const pinned = readPin() === state.code;
+            writePin(pinned ? null : state.code);
+            updatePinButton();
+            toast(pinned ? "Unpinned: new look on every visit" : "Pinned: this look stays on return visits");
+        });
+    }
+
     loadCode(initialCode);
 
-    if (!fromLink && luckyEnabled() && EGGS[initialCode]) {
+    // eggs only on a random roll, never on a shared link or a pinned look
+    if (!fromLink && pinnedCode === null && luckyEnabled() && EGGS[initialCode]) {
         eggTimer = setTimeout(() => EGGS[initialCode](), 800);
     }
 
