@@ -18,18 +18,40 @@
     background-image: radial-gradient(ellipse at 50% 30%, hsl(var(--h, 120) 50% 9%), var(--bg) 72%);
     background-attachment: fixed;
     overflow-x: hidden;
-    padding-inline: clamp(1.5rem, 8vw, 6rem);
-    /* Pushes entire site inward from screen edges */
 }
 
-/* body padding is the gutter here, so width ignores --pad; footer-meta is not skewed again */
-[data-v="terminal"] :is(.site-nav, main, .site-footer) {
+/* the module wraps nav, main and footer in .term-screen: one centered box that scrolls
+   by itself, with a single skew so nothing deforms. No outline, no frame. */
+[data-v="terminal"] body.term-on {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.term-screen {
     width: min(48rem, 100%);
-    margin-left: 0;
+    height: min(100%, 44rem);
+    padding-inline: 1.25rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
     text-shadow: 0 0 0.3rem var(--glow);
-    transform: perspective(60rem) rotateX(1deg) rotateZ(-0.4deg) skewX(-1.5deg);
-    transform-origin: center top;
+    transform: perspective(70rem) rotateX(1deg) rotateZ(-0.3deg) skewX(-1deg);
     animation: crt-flick 7s infinite;
+}
+
+.term-screen::-webkit-scrollbar {
+    display: none;
+}
+
+/* inside the screen the three blocks are plain, full-width, untransformed */
+[data-v="terminal"] .term-screen :is(.site-nav, main, .site-footer) {
+    width: 100%;
+    margin: 0;
+    padding-inline: 0;
 }
 
 /* scanlines + vignette; below #dock (9999) so the dock is untouched */
@@ -50,7 +72,11 @@
 }
 
 /* nav */
+/* links sit right after the prompt: root@Infinotiver:~$ [ work ] [ email ] */
 [data-v="terminal"] .site-nav {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     padding: 1rem 0;
     border-bottom: 1px dashed var(--border);
 }
@@ -58,24 +84,28 @@
 [data-v="terminal"] .nav-mark {
     gap: 0;
     color: var(--fg);
+    text-transform: capitalize;
 }
 
 [data-v="terminal"] .nav-mark img {
     display: none;
 }
 
+/* capitalize only the name; the prompt parts stay as typed */
 [data-v="terminal"] .nav-mark::before {
     content: "root@";
     color: var(--muted);
+    text-transform: none;
 }
 
 [data-v="terminal"] .nav-mark::after {
     content: ":~$";
     color: var(--muted);
+    text-transform: none;
 }
 
 [data-v="terminal"] .site-nav nav {
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 [data-v="terminal"] .site-nav nav a {
@@ -83,31 +113,39 @@
     text-transform: lowercase;
 }
 
-[data-v="terminal"] .site-nav nav a:not(.nav-btn)::before {
+/* every link in terminal is wrapped in [ ] */
+[data-v="terminal"] :is(.site-nav nav a, .work-code, .work-item-link, .site-footer a)::before {
     content: "[ ";
+    color: var(--muted);
 }
 
-[data-v="terminal"] .site-nav nav a:not(.nav-btn)::after {
+[data-v="terminal"] :is(.site-nav nav a, .work-code, .work-item-link, .site-footer a)::after {
     content: " ]";
+    color: var(--muted);
+}
+
+[data-v="terminal"] .work-item-link {
+    gap: 0.25rem;
 }
 
 [data-v="terminal"] .site-nav nav a:hover {
     color: var(--fg);
 }
 
+/* the email button is a plain bracketed link here, no box */
 [data-v="terminal"] .site-nav nav a.nav-btn {
     background: transparent;
     color: var(--fg);
-    border: 1px solid var(--border);
+    border: 0;
     border-radius: 0;
-    padding: 0.2rem 0.5rem;
+    padding: 0;
 }
 
 [data-v="terminal"] .site-nav nav a.nav-btn:hover {
-    background: var(--fg);
-    color: var(--bg);
-    text-shadow: none;
+    background: transparent;
+    color: var(--fg);
     opacity: 1;
+    text-decoration: underline;
 }
 
 /* main */
@@ -152,8 +190,12 @@
     color: var(--muted);
 }
 
+[data-v="terminal"] .social-links a::before {
+    content: "[";
+}
+
 [data-v="terminal"] .social-links a::after {
-    content: attr(data-name);
+    content: attr(data-name) " ]";
     font-size: var(--text-sm);
 }
 
@@ -244,6 +286,54 @@
     color: var(--fg);
 }
 
+/* prompt, injected by variants/terminal.js; lives inside main, so inside the screen */
+[data-v="terminal"] .term-prompt {
+    margin-top: 1rem;
+    padding-bottom: 2rem;
+    font-size: var(--text-sm);
+}
+
+[data-v="terminal"] .term-log {
+    margin: 0 0 0.5rem;
+    color: var(--muted);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+[data-v="terminal"] .term-cmd {
+    color: var(--fg);
+}
+
+[data-v="terminal"] .term-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+[data-v="terminal"] .term-line label {
+    color: var(--muted);
+}
+
+[data-v="terminal"] .term-input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.25rem 0;
+    font: inherit;
+    color: var(--fg);
+    caret-color: var(--fg);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px dashed var(--border);
+    border-radius: 0;
+    letter-spacing: inherit;
+    text-shadow: inherit;
+}
+
+[data-v="terminal"] .term-input:focus-visible {
+    outline: 1px solid var(--fg);
+    outline-offset: 2px;
+}
+
 /* animation */
 @keyframes crt-blink {
     50% {
@@ -259,23 +349,23 @@
     97%,
     100% {
         opacity: 1;
-        transform: perspective(60rem) rotateX(1deg) rotateZ(-0.4deg) skewX(-1.5deg);
+        transform: perspective(70rem) rotateX(1deg) rotateZ(-0.3deg) skewX(-1deg);
     }
 
     93% {
-        opacity: 0.8;
-        transform: perspective(60rem) rotateX(1deg) rotateZ(-0.4deg) skewX(-4deg) translateX(3px);
+        opacity: 0.85;
+        transform: perspective(70rem) rotateX(1deg) rotateZ(-0.3deg) skewX(-2.5deg) translateX(3px);
     }
 
     96% {
-        opacity: 0.9;
-        transform: perspective(60rem) rotateX(1deg) rotateZ(-0.4deg) skewX(0.5deg) translateX(-2px);
+        opacity: 0.92;
+        transform: perspective(70rem) rotateX(1deg) rotateZ(-0.3deg) skewX(0.3deg) translateX(-2px);
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
 
-    [data-v="terminal"] :is(.site-nav, main, .site-footer),
+    .term-screen,
     [data-v="terminal"] .hero-name::after {
         animation: none;
     }
