@@ -2,9 +2,9 @@
   --bg: #0a0a0b;
   --fg: #fafafa;
   --muted: #a1a1aa;
-  --muted-2: #6c6c72;
+  --muted-2: #8b8b93;
   --border: #232326;
-
+  --h: 210;
   --fh: Georgia, serif;
   --fb: system-ui, sans-serif;
   --serif: var(--fh);
@@ -16,6 +16,7 @@
   --text-xs: 0.8125rem;
   --text-sm: 0.875rem;
   --gap-xs: 0.5rem;
+  --pad: 1.5rem;
 
   color-scheme: dark;
 }
@@ -51,10 +52,8 @@ a:focus-visible {
 .site-nav,
 main,
 .site-footer {
-  max-width: 40rem;
-  margin: 0 auto;
+  padding: var(--pad);
 }
-
 .site-nav {
   display: flex;
   align-items: center;
