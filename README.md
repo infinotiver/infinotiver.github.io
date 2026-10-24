@@ -3,6 +3,20 @@ aka Infino
 
 hi i'm a frontend developer and a self-taught programmer. i like to make websites and web apps, along with some backend stuff. i code for fun and for learning new things. currently loving linux and cybersecurity.
 
+
+
+![Default](assets/images/default.png)
+
+
+| Basic | Government | Netscape |
+|:---:|:---:|:---:|
+| ![Basic](assets/images/basic.png) | ![Government](assets/images/gov.png) | ![Netscape](assets/images/netscape.png) |
+
+| Retro Mac | Terminal | Web 2.0 |
+|:---:|:---:|:---:|
+| ![Retro Mac](assets/images/retromac.png) | ![Terminal](assets/images/terminal.png) | ![Web 2.0](assets/images/web2.png) |
+
+
 ## how does this website work?
 
 ### what is the "code"?
