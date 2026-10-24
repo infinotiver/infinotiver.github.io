@@ -54,7 +54,18 @@ function renderBuildInfo({ sha, date } = {}) {
     }) : null;
     const commitEl = document.getElementById('last-commit');
     const updateEl = document.getElementById('last-update');
-    if (commitEl) commitEl.textContent = sha || 'N/A';
+    if (commitEl) {
+        if (sha) {
+            const link = document.createElement('a');
+            link.href = `https://github.com/infinotiver/infinotiver.github.io/commit/${sha}`;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = sha;
+            commitEl.replaceChildren(link);
+        } else {
+            commitEl.textContent = 'N/A';
+        }
+    }
     if (updateEl) updateEl.textContent = localDate || 'N/A';
 }
 

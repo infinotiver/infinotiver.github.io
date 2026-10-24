@@ -288,17 +288,22 @@
         element.style.cssText = [
             "position:fixed",
             "left:50%",
-            "bottom:72px", // above the dock bar
+            "bottom:72px",
             "transform:translateX(-50%)",
             "z-index:10001",
             "max-width:calc(100vw - 32px)",
             "overflow-wrap:anywhere",
-            "background:#111",
-            "color:#fff",
+            "background:rgba(255,255,255,0.75)", /* fallback for older browsers */
+            "background:color-mix(in srgb, Canvas, transparent 25%)", /* native light/dark adaption */
+            "backdrop-filter:blur(20px)",
+            "-webkit-backdrop-filter:blur(20px)", /* Safari support */
+            "color:CanvasText", /* native light/dark text adaption */
             "padding:10px 16px",
             "border-radius:10px",
             "font:14px system-ui,sans-serif",
+            "box-shadow:0 4px 30px rgba(0,0,0,0.1), 0 0 1px rgba(0,0,0,0.2)", /* creates contrast */
         ].join(";");
+
 
         document.body.appendChild(element);
         setTimeout(() => element.remove(), 3500);
