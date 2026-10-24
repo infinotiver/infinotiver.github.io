@@ -170,10 +170,10 @@
     function updateBadge() {
         const badge = $("seed-badge");
 
-        if (badge) {
-            badge.textContent = "#" + String(state.code).padStart(5, "0");
-            badge.title = canShare() ? "Click to share design link" : "Click to copy design link";
-        }
+        if (badge) badge.textContent = "#" + String(state.code).padStart(5, "0");
+
+        const share = $("ds");
+        if (share) share.title = canShare() ? "Share this look" : "Copy a link to this look";
 
         updatePinButton();
     }
@@ -288,7 +288,7 @@
         element.style.cssText = [
             "position:fixed",
             "left:50%",
-            "bottom:24px",
+            "bottom:72px", // above the dock bar
             "transform:translateX(-50%)",
             "z-index:10001",
             "max-width:calc(100vw - 32px)",
@@ -374,7 +374,6 @@
 
     const dock = $("dock");
     const toggle = $("dock-toggle");
-    const badge = $("seed-badge");
 
     function setDockOpen(open) {
         if (!dock || !toggle) return;
@@ -463,10 +462,8 @@
     const canShare = () =>
         !!navigator.share && matchMedia("(pointer: coarse)").matches;
 
-    if (badge) {
-        badge.style.cursor = "pointer";
-        badge.addEventListener("click", async (event) => {
-            event.stopPropagation();
+    if ($("ds")) {
+        $("ds").addEventListener("click", async () => {
             const url = getShareURL();
             const tag = "#" + String(state.code).padStart(5, "0");
 
@@ -486,6 +483,25 @@
                 toast(url);
             }
         });
+    }
+
+    // the code label folds away while scrolling down and returns on scroll up or at the top;
+    // capture catches inner scrollers too (terminal scrolls its own screen)
+    const dockBar = $("dock-bar");
+
+    if (dockBar) {
+        let lastY = 0;
+
+        document.addEventListener("scroll", (event) => {
+            const target = event.target;
+            if (target.closest?.("#dock")) return;
+
+            const y = target === document ? window.scrollY : target.scrollTop;
+            if (Math.abs(y - lastY) < 4) return;
+
+            dockBar.classList.toggle("is-scrolled", y > 48 && y > lastY);
+            lastY = y;
+        }, { capture: true, passive: true });
     }
 
     if ($("dv")) {

@@ -1,7 +1,9 @@
 // oneko.js: https://github.com/adryd325/oneko.js
 // breeds and sprite layouts from https://github.com/ABSanthosh/neko-ts
-
 (function oneko() {
+    
+    // cat can't follow a finger, so skip it on touch
+    if (matchMedia("(pointer: coarse)").matches) return;
     const isReducedMotion =
         window.matchMedia(`(prefers-reduced-motion: reduce)`) === true ||
         window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
@@ -153,7 +155,8 @@
     const nekoEl = document.createElement("div");
 
     // Configurable spawn position (Supports script tag dataset attributes or defaults to bottom-right)
-    let nekoPosX = scriptEl?.dataset.x ? parseInt(scriptEl.dataset.x, 10) : window.innerWidth - 32;
+    // spawn bottom-left; the dock lives bottom-right
+    let nekoPosX = scriptEl?.dataset.x ? parseInt(scriptEl.dataset.x, 10) : 32;
     let nekoPosY = scriptEl?.dataset.y ? parseInt(scriptEl.dataset.y, 10) : window.innerHeight - 32;
 
     // Prevent cat from instantly sprinting to (0,0) on load
@@ -233,6 +236,9 @@
         document.body.appendChild(nekoEl);
 
         document.addEventListener("mousemove", function (event) {
+            // over the dock the target stays at its last spot, so it never parks on the controls
+            if (event.target.closest?.("#dock, #dock-bar")) return;
+
             mousePosX = event.clientX;
             mousePosY = event.clientY;
         });

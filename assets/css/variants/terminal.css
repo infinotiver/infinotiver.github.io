@@ -273,7 +273,7 @@
     border-top: 1px dashed var(--border);
     color: var(--muted-2);
     padding-top: 1.5rem;
-    padding-bottom: 2rem;
+    padding-bottom: var(--dock-clear);
 }
 
 /* meta */

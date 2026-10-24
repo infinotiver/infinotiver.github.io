@@ -41,7 +41,7 @@
 }
 
 [data-v="web2"] .site-footer {
-    margin-bottom: 1rem;
+    margin-bottom: var(--dock-clear);
     padding: 0.5rem 0.75rem 0.5rem 1rem;
     border: 1px solid hsl(var(--h) 60% 14%);
     border-radius: 12px;
