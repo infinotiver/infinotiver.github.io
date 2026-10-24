@@ -3,17 +3,33 @@ const TITLE_H = 22; // px, matches the striped title bar drawn in retromac.css
 
 let windows = [];
 let drag = null;
-function randomPosition(win, placed) {
-    const rect = win.getBoundingClientRect();
-    const margin = 24;
+const EDGE = 12;     // px kept free at the left/right edges (room for the shadow)
+const TOP = 32;      // px, clears the fixed menu bar
+const BOTTOM = 64;   // px, clears the fixed dock bar
 
-    const maxX = Math.max(0, window.innerWidth - rect.width - margin);
-    const maxY = Math.max(24, window.innerHeight - rect.height - 24);
+/* viewport-space [min, max] range a window's top-left may take */
+function bounds(rect) {
+    const minX = EDGE;
+    const minY = TOP;
+    return {
+        minX,
+        minY,
+        maxX: Math.max(minX, window.innerWidth - rect.width - EDGE - 2),
+        maxY: Math.max(minY, window.innerHeight - rect.height - BOTTOM),
+    };
+}
+
+/* picks a viewport position fully inside the screen, so no scrolling is needed to reach a window */
+function randomPosition(rect, placed) {
+    const b = bounds(rect);
+    const pick = () => ({
+        x: b.minX + Math.random() * (b.maxX - b.minX),
+        y: b.minY + Math.random() * (b.maxY - b.minY),
+    });
 
     // Try several positions to avoid overlapping windows too much
     for (let i = 0; i < 60; i++) {
-        const x = margin + Math.random() * Math.max(0, maxX - margin);
-        const y = margin + Math.random() * Math.max(0, maxY - margin);
+        const { x, y } = pick();
 
         const overlaps = placed.some((p) =>
             x < p.x + p.width + 24 &&
@@ -26,10 +42,7 @@ function randomPosition(win, placed) {
     }
 
     // Fall back to a random position if the viewport is crowded
-    return {
-        x: margin + Math.random() * Math.max(0, maxX - margin),
-        y: margin + Math.random() * Math.max(0, maxY - margin),
-    };
+    return pick();
 }
 
 /* drag: grab the title bar, move with a transform so layout never shifts */
@@ -57,8 +70,16 @@ function onMove(event) {
     if (!drag || event.pointerId !== drag.id) return;
 
     const { win } = drag;
-    win._x = event.clientX - drag.x;
-    win._y = event.clientY - drag.y;
+    // keep the window inside the viewport horizontally and below the menu bar
+    const rect = win.getBoundingClientRect();
+    const b = bounds(rect);
+    const x = event.clientX - drag.x;
+    const y = event.clientY - drag.y;
+    const left = rect.left - (win._x || 0); // layout position without the transform
+    const top = rect.top - (win._y || 0);
+
+    win._x = Math.min(Math.max(x, b.minX - left), b.maxX - left);
+    win._y = Math.max(y, b.minY - top);
     win.style.transform = `translate(${win._x}px, ${win._y}px)`;
 }
 
@@ -72,19 +93,22 @@ function onUp(event) {
 export function init() {
     windows = [...document.querySelectorAll('.hero, .work')];
 
+    // small screens: windows stay stacked in normal flow, no random placement or dragging
+    if (window.matchMedia('(max-width: 40rem)').matches) return;
+
     const placed = [];
 
     for (const win of windows) {
         win._x = 0;
         win._y = 0;
 
-        // Get dimensions before assigning the randomized position
+        // layout rect (no transform yet); the translate is relative to it
         const rect = win.getBoundingClientRect();
-        const pos = randomPosition(win, placed);
+        const pos = randomPosition(rect, placed);
 
-        win._x = pos.x;
-        win._y = pos.y;
-        win.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+        win._x = pos.x - rect.left;
+        win._y = pos.y - rect.top;
+        win.style.transform = `translate(${win._x}px, ${win._y}px)`;
 
         placed.push({
             x: pos.x,
