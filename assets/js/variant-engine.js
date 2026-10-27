@@ -91,13 +91,17 @@
     // ?c= wins for this visit only, then the pinned code, then a random roll
     const pinnedCode = fromLink ? null : readPin();
 
-    const initialCode = fromLink
-        ? (
-            Number.isSafeInteger(parsedCode)
-                ? ((parsedCode % N) + N) % N
-                : 0
-        )
-        : pinnedCode ?? Math.floor(Math.random() * N);
+
+    const initialCode = window.__initialVariantCode ?? (
+        fromLink
+            ? (
+                Number.isSafeInteger(parsedCode)
+                    ? ((parsedCode % N) + N) % N
+                    : 0
+            )
+            : pinnedCode ?? Math.floor(Math.random() * N)
+    );
+
 
     const root = document.documentElement;
     const $ = (id) => document.getElementById(id);

@@ -27,6 +27,51 @@
     <meta name="twitter:description"
         content="I build for fun, mostly with React, TypeScript and Python. Selected work, bots and tools." />
     <meta name="twitter:image" content="https://infinotiver.com/assets/logo_new.webp" />
+    <!-- pre-paint theme bootstrap -->
+    <script>
+        (() => {
+            const variants = [
+                "default", "gov", "netscape", "basic",
+                "terminal", "web2", "retromac"
+            ];
+            const N = variants.length * 3 * 3 * 360;
+            const params = new URLSearchParams(location.search);
+            let code;
+
+            if (params.has("c")) {
+                const parsed = Number(params.get("c"));
+                code = Number.isSafeInteger(parsed)
+                    ? ((parsed % N) + N) % N
+                    : 0;
+            } else {
+                let pin = null;
+
+                try {
+                    const raw = localStorage.getItem("pin");
+                    const value = Number(raw);
+                    if (
+                        raw !== null &&
+                        Number.isInteger(value) &&
+                        value >= 0 &&
+                        value < N
+                    ) pin = value;
+                } catch { }
+
+                code = pin ?? Math.floor(Math.random() * N);
+            }
+
+            window.__initialVariantCode = code;
+
+            let n = (code * 8191) % N;
+            const hue = n % 360;
+            n = Math.floor(n / 360);
+            n = Math.floor(n / 3);
+            n = Math.floor(n / 3);
+
+            document.documentElement.dataset.v = variants[n];
+            document.documentElement.style.setProperty("--h", hue);
+        })();
+    </script>
 
     <link rel="stylesheet" href="assets/css/styles.base.css" />
 

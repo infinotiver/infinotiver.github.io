@@ -385,7 +385,7 @@ main,
 #dock,
 #dock-toggle,
 #ds {
-  --dock-bg: hsla(240, 8%, 8%, 0.75);
+  --dock-bg: hsl(240, 8%, 8%);
   --dock-hover: #232329;
   --dock-control-bg: #232329;
   --dock-control-hover: #32323a;
@@ -401,7 +401,6 @@ main,
   z-index: 9999 !important;
   align-items: center;
   background: var(--dock-bg) !important;
-  backdrop-filter: blur(20px);
   color: var(--dock-fg) !important;
   font: var(--text-xs) / 1 system-ui, sans-serif !important;
   border: 1px solid var(--dock-border) !important;
