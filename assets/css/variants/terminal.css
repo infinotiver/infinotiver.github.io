@@ -15,13 +15,14 @@
 
 [data-v="terminal"] body {
     background-color: var(--bg);
-    background-image: radial-gradient(ellipse at 50% 30%, hsl(var(--h, 120) 50% 9%), var(--bg) 72%);
+    background-image: radial-gradient(ellipse at 50% 30%,
+            hsl(var(--h, 120) 50% 9%),
+            var(--bg) 72%);
     background-attachment: fixed;
     overflow-x: hidden;
 }
 
-/* the module wraps nav, main and footer in .term-screen: one centered box that scrolls
-   by itself, with a single skew so nothing deforms. No outline, no frame. */
+/* centered terminal screen */
 [data-v="terminal"] body.term-on {
     display: flex;
     justify-content: center;
@@ -38,6 +39,8 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     scrollbar-width: none;
+    font-size: 1rem;
+    line-height: 1.7;
     text-shadow: 0 0 0.3rem var(--glow);
     transform: perspective(70rem) rotateX(1deg) rotateZ(-0.3deg) skewX(-1deg);
     animation: crt-flick 7s infinite;
@@ -47,14 +50,14 @@
     display: none;
 }
 
-/* inside the screen the three blocks are plain, full-width, untransformed */
+/* full-width page sections */
 [data-v="terminal"] .term-screen :is(.site-nav, main, .site-footer) {
     width: 100%;
     margin: 0;
     padding-inline: 0;
 }
 
-/* scanlines + vignette; below #dock (9999) so the dock is untouched */
+/* scanlines + vignette */
 [data-v="terminal"]::after {
     content: "";
     position: fixed;
@@ -62,8 +65,12 @@
     z-index: 9000;
     pointer-events: none;
     background:
-        repeating-linear-gradient(0deg, rgb(0 0 0 / 0.28) 0 1px, transparent 1px 3px),
-        radial-gradient(ellipse at center, transparent 50%, rgb(0 0 0 / 0.7) 100%);
+        repeating-linear-gradient(0deg,
+            rgb(0 0 0 / 0.28) 0 1px,
+            transparent 1px 3px),
+        radial-gradient(ellipse at center,
+            transparent 50%,
+            rgb(0 0 0 / 0.7) 100%);
 }
 
 [data-v="terminal"] ::selection {
@@ -72,7 +79,6 @@
 }
 
 /* nav */
-/* links sit right after the prompt: root@Infinotiver:~$ [ work ] [ email ] */
 [data-v="terminal"] .site-nav {
     justify-content: flex-start;
     flex-wrap: wrap;
@@ -85,13 +91,14 @@
     gap: 0;
     color: var(--fg);
     text-transform: capitalize;
+    font-size: 1rem;
+    line-height: 1.7;
 }
 
 [data-v="terminal"] .nav-mark img {
     display: none;
 }
 
-/* capitalize only the name; the prompt parts stay as typed */
 [data-v="terminal"] .nav-mark::before {
     content: "root@";
     color: var(--muted);
@@ -111,28 +118,38 @@
 [data-v="terminal"] .site-nav nav a {
     color: var(--muted);
     text-transform: lowercase;
+    font-size: 0.9rem;
+    line-height: 1.8;
 }
 
-/* every link in terminal is wrapped in [ ] */
-[data-v="terminal"] :is(.site-nav nav a, .work-code, .work-item-link, .site-footer a)::before {
+/* bracketed links */
+[data-v="terminal"] :is(.site-nav nav a,
+    .work-code,
+    .work-item-link,
+    .site-footer a)::before {
     content: "[ ";
     color: var(--muted);
 }
 
-[data-v="terminal"] :is(.site-nav nav a, .work-code, .work-item-link, .site-footer a)::after {
+[data-v="terminal"] :is(.site-nav nav a,
+    .work-code,
+    .work-item-link,
+    .site-footer a)::after {
     content: " ]";
     color: var(--muted);
 }
 
 [data-v="terminal"] .work-item-link {
     gap: 0.25rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
 }
 
 [data-v="terminal"] .site-nav nav a:hover {
     color: var(--fg);
 }
 
-/* the email button is a plain bracketed link here, no box */
+/* email button */
 [data-v="terminal"] .site-nav nav a.nav-btn {
     background: transparent;
     color: var(--fg);
@@ -156,13 +173,18 @@
 
 [data-v="terminal"] .hero-name {
     color: var(--fg);
-    text-shadow: -0.09rem 0 var(--fringe-a), 0.09rem 0 var(--fringe-b), 0 0 0.75rem var(--glow);
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 1.25;
+    text-shadow:
+        -0.09rem 0 var(--fringe-a),
+        0.09rem 0 var(--fringe-b),
+        0 0 0.75rem var(--glow);
 }
 
 [data-v="terminal"] .hero-name::before {
     content: "$ whoami";
     display: block;
-    font-size: var(--text-sm);
+    font-size: 0.875rem;
     line-height: 2;
     color: var(--muted);
     text-shadow: none;
@@ -173,10 +195,20 @@
     margin-left: 0.1em;
     animation: crt-blink 1s steps(1) infinite;
 }
+[data-v="terminal"] .hero-name {
+    letter-spacing: 0.06em;
+}
+
+[data-v="terminal"] .hero-name::before,
+[data-v="terminal"] .hero-name::after {
+    letter-spacing: normal;
+}
 
 [data-v="terminal"] .hero-bio {
     margin: 0;
     color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
 }
 
 [data-v="terminal"] .social-links {
@@ -188,6 +220,8 @@
     align-items: center;
     gap: 0.4rem;
     color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
 }
 
 [data-v="terminal"] .social-links a::before {
@@ -196,32 +230,34 @@
 
 [data-v="terminal"] .social-links a::after {
     content: attr(data-name) " ]";
-    font-size: var(--text-sm);
 }
 
 [data-v="terminal"] .social-links a:hover {
     color: var(--fg);
 }
 
+/* project heading */
 [data-v="terminal"] .work h2 {
-
     margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1.6;
 }
 
 [data-v="terminal"] .work h2::before {
     content: "$ ls ./";
-    font-size: var(--text-sm);
+    font-size: 0.875rem;
     color: var(--muted);
 }
 
 [data-v="terminal"] .work h2::after {
     content: ".txt";
-    font-size: var(--text-sm);
+    font-size: 0.875rem;
     color: var(--muted);
 }
 
+/* project list */
 [data-v="terminal"] .work-item {
-    padding: 0.625rem 0;
+    padding: 0.75rem 0;
     border-bottom: 1px dotted var(--border);
 }
 
@@ -231,13 +267,10 @@
 
 [data-v="terminal"] .work-item h3 {
     color: var(--fg);
-    font-size: 1.05rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
 }
 
-[data-v="terminal"] .work-item h3::before {
-    content: "▸ ";
-    color: var(--muted);
-}
 
 [data-v="terminal"] .work-item:hover .work-item-link h3 {
     background: var(--fg);
@@ -248,10 +281,14 @@
 
 [data-v="terminal"] .work-item p {
     color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
 }
 
 [data-v="terminal"] .work-stack {
     color: var(--muted-2);
+    font-size: 0.875rem;
+    line-height: 1.8;
 }
 
 [data-v="terminal"] .work-stack::before {
@@ -260,6 +297,8 @@
 
 [data-v="terminal"] .work-code {
     color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
 }
 
 [data-v="terminal"] .work-code:hover {
@@ -274,6 +313,8 @@
     color: var(--muted-2);
     padding-top: 1.5rem;
     padding-bottom: var(--dock-clear);
+    font-size: 0.875rem;
+    line-height: 1.8;
 }
 
 /* meta */
@@ -286,11 +327,12 @@
     color: var(--fg);
 }
 
-/* prompt, injected by variants/terminal.js; lives inside main, so inside the screen */
+/* interactive terminal prompt */
 [data-v="terminal"] .term-prompt {
     margin-top: 1rem;
     padding-bottom: 2rem;
-    font-size: var(--text-sm);
+    font-size: 0.9rem;
+    line-height: 1.8;
 }
 
 [data-v="terminal"] .term-log {
@@ -298,6 +340,8 @@
     color: var(--muted);
     white-space: pre-wrap;
     overflow-wrap: anywhere;
+    font-size: 0.9rem;
+    line-height: 1.8;
 }
 
 [data-v="terminal"] .term-cmd {
@@ -308,6 +352,8 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.8;
 }
 
 [data-v="terminal"] .term-line label {
@@ -349,17 +395,20 @@
     97%,
     100% {
         opacity: 1;
-        transform: perspective(70rem) rotateX(1deg) rotateZ(-0.3deg) skewX(-1deg);
+        transform:
+            perspective(70rem) rotateX(1deg) rotateZ(-0.3deg) skewX(-1deg);
     }
 
     93% {
         opacity: 0.85;
-        transform: perspective(70rem) rotateX(1deg) rotateZ(-0.3deg) skewX(-2.5deg) translateX(3px);
+        transform:
+            perspective(70rem) rotateX(1deg) rotateZ(-0.3deg) skewX(-2.5deg) translateX(3px);
     }
 
     96% {
         opacity: 0.92;
-        transform: perspective(70rem) rotateX(1deg) rotateZ(-0.3deg) skewX(0.3deg) translateX(-2px);
+        transform:
+            perspective(70rem) rotateX(1deg) rotateZ(-0.3deg) skewX(0.3deg) translateX(-2px);
     }
 }
 

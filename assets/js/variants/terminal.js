@@ -58,10 +58,10 @@ const COMMANDS = {
 function run(input, log) {
     const [name, ...rest] = input.trim().split(/\s+/);
     if (!name) return;
-
+    
     log.append(Object.assign(document.createElement('div'), {
         className: 'term-cmd',
-        textContent: `$ ${input}`,
+        textContent: `root@Infinotiver:~$ ${input}`,
     }));
 
     if (name === 'clear') {
