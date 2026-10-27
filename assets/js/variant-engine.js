@@ -572,6 +572,13 @@
         },
         loadCode,
         apply,
+        // for testing purposes.
+        // testEgg(code) {
+        //     EGGS[code]?.();
+        // },
+        // testToast(message) {
+        //     toast(message);
+        // },
         shuffle() {
             loadCode(Math.floor(Math.random() * N));
         },

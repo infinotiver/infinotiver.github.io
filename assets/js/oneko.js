@@ -1,7 +1,7 @@
 // oneko.js: https://github.com/adryd325/oneko.js
 // breeds and sprite layouts from https://github.com/ABSanthosh/neko-ts
 (function oneko() {
-    
+
     // cat can't follow a finger, so skip it on touch
     if (matchMedia("(pointer: coarse)").matches) return;
     const isReducedMotion =
@@ -154,10 +154,10 @@
 
     const nekoEl = document.createElement("div");
 
-    // Configurable spawn position (Supports script tag dataset attributes or defaults to bottom-right)
-    // spawn bottom-left; the dock lives bottom-right
-    let nekoPosX = scriptEl?.dataset.x ? parseInt(scriptEl.dataset.x, 10) : 32;
-    let nekoPosY = scriptEl?.dataset.y ? parseInt(scriptEl.dataset.y, 10) : window.innerHeight - 32;
+    // Configurable spawn position (Supports script tag dataset attributes or defaults to top-left)
+    // spawn top-left
+    let nekoPosX = scriptEl?.dataset.x ? parseInt(scriptEl.dataset.x, 10) : 56;
+    let nekoPosY = scriptEl?.dataset.y ? parseInt(scriptEl.dataset.y, 10) : 56;
 
     // Prevent cat from instantly sprinting to (0,0) on load
     let mousePosX = nekoPosX;
@@ -170,7 +170,21 @@
     let currentBreed = breedNames[0];
     let currentGap = breeds[currentBreed].gap;
     let currentSpriteSets = breeds[currentBreed].spriteSets;
-    let isHidden = false;
+    let isHidden = false; // manual hide/show API state
+    let isAutoHidden = false;
+
+    let windowFocused = document.hasFocus();
+    let pointerInside = true;
+
+    function updateVisibility() {
+        isAutoHidden =
+            document.visibilityState !== "visible" ||
+            !windowFocused ||
+            !pointerInside;
+
+        nekoEl.style.display =
+            isHidden || isAutoHidden ? "none" : "block";
+    }
 
     const nekoSpeed = 10;
 
@@ -190,12 +204,12 @@
     // Hide, Show, Toggle, and SetPosition API functions
     function hide() {
         isHidden = true;
-        nekoEl.style.display = "none";
+        updateVisibility();
     }
 
     function show() {
         isHidden = false;
-        nekoEl.style.display = "block";
+        updateVisibility();
     }
 
     function toggle() {
@@ -234,13 +248,36 @@
         nekoEl.addEventListener("click", nextBreed);
 
         document.body.appendChild(nekoEl);
+        // Hide when the tab or browser window loses focus.
+        document.addEventListener("visibilitychange", updateVisibility);
 
+        window.addEventListener("blur", () => {
+            windowFocused = false;
+            updateVisibility();
+        });
+
+        window.addEventListener("focus", () => {
+            windowFocused = true;
+            updateVisibility();
+        });
+
+        // Hide when the cursor leaves the webpage.
+        document.documentElement.addEventListener("mouseleave", () => {
+            pointerInside = false;
+            updateVisibility();
+        });
+
+        document.documentElement.addEventListener("mouseenter", () => {
+            pointerInside = true;
+            updateVisibility();
+        });
+
+        updateVisibility();
         document.addEventListener("mousemove", function (event) {
-            // over the dock the target stays at its last spot, so it never parks on the controls
-            if (event.target.closest?.("#dock, #dock-bar")) return;
 
             mousePosX = event.clientX;
             mousePosY = event.clientY;
+            idleTime = 0;
         });
 
         // Global switcher and state UI controls
@@ -258,14 +295,22 @@
             show,
             toggle,
             setPosition,
+            zones
         };
-
+        // keep the cat on screen after a resize
+        window.addEventListener("resize", () => {
+            nekoPosX = Math.min(Math.max(16, nekoPosX), window.innerWidth - 16);
+            nekoPosY = Math.min(Math.max(16, nekoPosY), window.innerHeight - 16);
+            nekoEl.style.left = `${nekoPosX - 16}px`;
+            nekoEl.style.top = `${nekoPosY - 16}px`;
+        });
         window.requestAnimationFrame(onAnimationFrame);
     }
 
     let lastFrameTimestamp;
 
     function onAnimationFrame(timestamp) {
+
         if (!nekoEl.isConnected) {
             return;
         }
@@ -274,7 +319,7 @@
         }
         if (timestamp - lastFrameTimestamp > 100) {
             lastFrameTimestamp = timestamp;
-            if (!isHidden) {
+            if (!isHidden && !isAutoHidden) {
                 frame();
             }
         }
@@ -348,11 +393,111 @@
         }
         idleAnimationFrame += 1;
     }
+    // adding an axis-aligned bounding box to keep cat out of certain elements
+    // basically clamp the cat so once cursor goes out of bounds the cat stays inside the frame's max dimensions
 
+    const KEEP_OUT = "#dock-bar, #dock.is-open, .ns-status, #gov-cookie";
+    const MARGIN = 32; // a little breathing space
+    // current rects, padded; hidden elements have 0 size and are skipped
+    const onScreen = (v, max) => Math.min(Math.max(16, v), max - 16);
+    // overlapping boxes become one, so pushing out of one never lands inside another
+    function merge(list) {
+        for (let i = 0; i < list.length; i++) {
+            for (let j = i + 1; j < list.length; j++) {
+                const p = list[i];
+                const q = list[j];
+                if (p.l < q.r && q.l < p.r && p.t < q.b && q.t < p.b) {
+                    list[i] = { l: Math.min(p.l, q.l), t: Math.min(p.t, q.t), r: Math.max(p.r, q.r), b: Math.max(p.b, q.b) };
+                    list.splice(j, 1);
+                    i = -1; // rescan: the new box may overlap others
+                    break;
+                }
+            }
+        }
+        return list;
+    }
+    function zones() {
+        return merge(
+            [...document.querySelectorAll(KEEP_OUT)]
+                .map((el) => el.getBoundingClientRect())
+                .filter((r) => r.width > 0 && r.height > 0)
+                .map((r) => ({ l: r.left - MARGIN, t: r.top - MARGIN, r: r.right + MARGIN, b: r.bottom + MARGIN }))
+        );
+    }
+    // this is to move a point out of one zone through its nearest edge that is ON SCREEN
+    // z is zone, x and y are co-ordinates
+    function pushOut(x, y, z) {
+        // check if x is left of l (left) or right of r (right), or y is above t (top) or below b (bottom)
+        if (x <= z.l || x >= z.r || y <= z.t || y >= z.b) return [x, y]; // already outside
+
+        const maxX = innerWidth - 16;
+        const maxY = innerHeight - 16;
+        // measure distances and drop exits that land off-screen.
+        // [distance, newX, newY]
+        const options = [
+            [x - z.l, z.l, y],
+            [z.r - x, z.r, y],
+            [y - z.t, x, z.t],
+            [z.b - y, x, z.b],
+        ].filter(([, px, py]) => px >= 16 && px <= maxX && py >= 16 && py <= maxY);
+
+        if (!options.length) return [x, y];
+        options.sort((a, b) => a[0] - b[0]); // give the smallest distance
+        return [options[0][1], options[0][2]];
+
+
+    }
+    // run pushOut() for each zone
+    // zs is a list from zones()
+
+    function clampOut(x, y, zs) {
+        // loop over zones and run pushOut for each
+        for (const z of zs) [x, y] = pushOut(x, y, z);
+        return [x, y];
+    }
+
+    // temporary: draw the boxes the cat avoids (delete when done)
+    const dbg = [];
+    function drawDebug(rects) {
+        while (dbg.length < rects.length) {
+            const d = document.createElement("div");
+            d.style.cssText = "position:fixed;pointer-events:none;z-index:2147483646;background:#f003;border:1px solid red";
+            document.body.appendChild(d);
+            dbg.push(d);
+        }
+        dbg.forEach((d, i) => {
+            const z = rects[i];
+            d.style.display = z ? "block" : "none";
+            if (z) Object.assign(d.style, { left: z.l + "px", top: z.t + "px", width: z.r - z.l + "px", height: z.b - z.t + "px" });
+        });
+    }
     function frame() {
         frameCount += 1;
-        const diffX = nekoPosX - mousePosX;
-        const diffY = nekoPosY - mousePosY;
+        const zs = zones();
+        // drawDebug(zs)
+        // dock may be open under an idle cat so nudge it out first
+        // Smoothly escape an obstacle that appeared under the cat.
+        const inside = zs.find(
+            z =>
+                nekoPosX > z.l &&
+                nekoPosX < z.r &&
+                nekoPosY > z.t &&
+                nekoPosY < z.b
+        );
+
+        if (inside) {
+            const targetY = inside.t;
+            nekoPosY = Math.max(targetY, nekoPosY - nekoSpeed);
+
+            setSprite("N", frameCount);
+            nekoEl.style.top = `${nekoPosY - 16}px`;
+            return;
+        }
+        // chase the nearest allowed point, not the mouse itself
+
+        const [tx, ty] = clampOut(mousePosX, mousePosY, zs);
+        const diffX = nekoPosX - tx;
+        const diffY = nekoPosY - ty;
         const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
 
         if (distance < nekoSpeed || distance < 48) {
@@ -377,11 +522,28 @@
         direction += diffX / distance < -0.5 ? "E" : "";
         setSprite(direction, frameCount);
 
-        nekoPosX -= (diffX / distance) * nekoSpeed;
-        nekoPosY -= (diffY / distance) * nekoSpeed;
+        // step toward the target
+        const prevX = nekoPosX;
+        const prevY = nekoPosY;
+        let x = onScreen(prevX - (diffX / distance) * nekoSpeed, innerWidth);
+        let y = onScreen(prevY - (diffY / distance) * nekoSpeed, innerHeight);
 
-        nekoPosX = Math.min(Math.max(16, nekoPosX), window.innerWidth - 16);
-        nekoPosY = Math.min(Math.max(16, nekoPosY), window.innerHeight - 16);
+        // blocked by a zone: run along its wall at full speed, not at the leftover speed
+        const [cx, cy] = clampOut(x, y, zs);
+        if (cx !== x && cy === y) {
+            // vertical wall: run up or down it (if the target is level, pick the roomier way)
+            const dir = Math.sign(ty - prevY) || (prevY > innerHeight / 2 ? -1 : 1);
+            x = cx;
+            y = onScreen(prevY + dir * nekoSpeed, innerHeight);
+        } else if (cy !== y && cx === x) {
+            // horizontal wall: run left or right along it
+            const dir = Math.sign(tx - prevX) || (prevX > innerWidth / 2 ? -1 : 1);
+            x = onScreen(prevX + dir * nekoSpeed, innerWidth);
+            y = cy;
+        }
+
+        // final guard: never end a step inside a zone
+        [nekoPosX, nekoPosY] = clampOut(x, y, zs);
 
         nekoEl.style.left = `${nekoPosX - 16}px`;
         nekoEl.style.top = `${nekoPosY - 16}px`;
