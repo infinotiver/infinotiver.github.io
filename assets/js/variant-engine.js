@@ -243,6 +243,16 @@
 
     // a pending egg must not fire after the look has changed
     let eggTimer;
+    // swap the variant stylesheet when the variant changes
+    function loadVariantCss(v) {
+        document.getElementById("variant-css")?.remove();
+        if (v === "default") return;
+        const l = document.createElement("link");
+        l.rel = "stylesheet";
+        l.id = "variant-css";
+        l.href = `assets/css/variants/${v}.css`;
+        document.head.appendChild(l);
+    }
 
     function apply({ updateCode = true } = {}) {
         clearTimeout(eggTimer);
@@ -253,6 +263,7 @@
         }
 
         root.dataset.v = state.variant;
+        loadVariantCss(state.variant)
 
         root.style.setProperty(
             "--fh",

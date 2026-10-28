@@ -27,6 +27,9 @@
     <meta name="twitter:description"
         content="I build for fun, mostly with React, TypeScript and Python. Selected work, bots and tools." />
     <meta name="twitter:image" content="https://infinotiver.com/assets/logo_new.webp" />
+
+    <link rel="stylesheet" href="assets/css/styles.base.css" />
+    
     <!-- pre-paint theme bootstrap -->
     <script>
         (() => {
@@ -71,16 +74,17 @@
             document.documentElement.dataset.v = variants[n];
             document.documentElement.style.setProperty("--h", hue);
         })();
+        const v = variants[n];
+        if (v!=="default") {
+            const l = document.createElement("link")
+            l.rel = "stylesheet";
+            l.id = "variant-css";
+            l.href = `assets/css/variants/${v}.css`;
+            document.head.appendChild(l)
+        }
     </script>
 
-    <link rel="stylesheet" href="assets/css/styles.base.css" />
 
-    <link rel="stylesheet" href="assets/css/variants/basic.css" />
-    <link rel="stylesheet" href="assets/css/variants/gov.css" />
-    <link rel="stylesheet" href="assets/css/variants/netscape.css" />
-    <link rel="stylesheet" href="assets/css/variants/retromac.css" />
-    <link rel="stylesheet" href="assets/css/variants/terminal.css" />
-    <link rel="stylesheet" href="assets/css/variants/web2.css" />
 
     <link rel="shortcut icon" href="assets/logo_new.webp" type="image/webp" />
     <link rel="apple-touch-icon" href="assets/logo_new.webp" />
