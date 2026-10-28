@@ -1,9 +1,11 @@
+// hero name swaps to the hovered/focused link's handle
 document.addEventListener('DOMContentLoaded', () => {
     const name = document.querySelector('.hero-name');
     const socialLinks = document.querySelectorAll('.social-links a');
 
     if (name && socialLinks.length) {
         const original = name.textContent;
+        const canHover = matchMedia('(hover: hover)').matches; // skip stuck hover on touch
         let swapTimeout;
 
         const swapTo = (text) => {
@@ -16,44 +18,34 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         socialLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => swapTo(link.dataset.name || original));
-            link.addEventListener('mouseleave', () => swapTo(original));
+            const on = () => swapTo(link.dataset.name || original);
+            const off = () => swapTo(original);
+            if (canHover) {
+                link.addEventListener('mouseenter', on);
+                link.addEventListener('mouseleave', off);
+            }
+            link.addEventListener('focus', on); // keyboard users
+            link.addEventListener('blur', off);
         });
     }
 
-    updateBuildInfo();
+    showBuildInfo();
 });
 
-const BUILD_KEY = 'build-info';
-const BUILD_TTL = 10 * 60 * 1000;
-
-function readCache() {
-    // just in case storage is blocked, corrupt etc
-    try {
-        return JSON.parse(localStorage.getItem(BUILD_KEY))
-    } catch {
-        return null; // dont throw an error
-    }
-
-}
-
-function writeCache(data) {
-    try {
-        localStorage.setItem(BUILD_KEY, JSON.stringify(data))
-
-    } catch {
-        // swallow silently 
-    }
-}
-
-function renderBuildInfo({ sha, date } = {}) {
-    const localDate = date ? new Date(date).toLocaleString('en-US', {
-        month: 'short',
-        year: 'numeric',
-        day: 'numeric',
-    }) : null;
+// pov you are smart /jk
+// no fetch to api just read from /build.json thats written by gh actions on deployment.
+async function showBuildInfo() {
     const commitEl = document.getElementById('last-commit');
     const updateEl = document.getElementById('last-update');
+    let sha, date;
+
+    try {
+        const res = await fetch('build.json');
+        if (res.ok) ({ sha, date } = await res.json());
+    } catch {
+        // missing locally, show N/A
+    }
+
     if (commitEl) {
         if (sha) {
             const link = document.createElement('a');
@@ -66,37 +58,5 @@ function renderBuildInfo({ sha, date } = {}) {
             commitEl.textContent = 'N/A';
         }
     }
-    if (updateEl) updateEl.textContent = localDate || 'N/A';
+    if (updateEl) updateEl.textContent = date || 'N/A';
 }
-
-// reuse cache inside the TTL (Time to live) to avoid the rate limit
-async function updateBuildInfo() {
-    const cached = readCache();
-    if (cached && Date.now() < cached.next) {
-        renderBuildInfo(cached);
-        return;
-    }
-
-    try {
-        const res = await fetch('https://api.github.com/repos/infinotiver/infinotiver.github.io/commits?per_page=1');
-        if (!res.ok) throw new Error(`GitHub API ${res.status}`);
-        const [commit] = await res.json();
-        const data = {
-            sha: commit?.sha.substring(0, 7),
-            date: commit?.commit.author.date,
-            next: Date.now() + BUILD_TTL,
-        };
-        writeCache(data);
-        renderBuildInfo(data);
-    } catch (err) {
-        console.error('Error fetching GitHub data:', err);
-        // keep old data and delay the next attempt
-        if (cached) {
-            writeCache({ ...cached, next: Date.now() + BUILD_TTL });
-            renderBuildInfo(cached);
-        } else {
-            renderBuildInfo();
-        }
-    }
-}
-
