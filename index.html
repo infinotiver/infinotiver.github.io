@@ -81,6 +81,7 @@
                 l.rel = "stylesheet";
                 l.id = "variant-css";
                 l.href = `assets/css/variants/${v}.css`;
+                l.blocking = "render"; 
                 document.head.appendChild(l);
             }
         })();
