@@ -54,6 +54,14 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
+/* icons: sized to text, colored by the parent */
+.icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -0.125em;
+}
+
 /* one column and one gutter for nav, main and footer; --pad only changes in :root */
 .site-nav,
 main,
@@ -212,7 +220,7 @@ main,
   overflow-wrap: anywhere;
 }
 
-.work-item-link i {
+.work-item-link .icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -361,7 +369,7 @@ main,
     font-size: 1.0625rem;
   }
 
-  .work-item-link i {
+  .work-item-link .icon {
     width: 0.875rem;
     height: 0.875rem;
     font-size: 0.625rem;
@@ -381,6 +389,7 @@ main,
     transition: none !important;
   }
 }
+
 /* Dock */
 #dock,
 #dock-toggle,
@@ -449,17 +458,18 @@ main,
   text-decoration: none !important;
   cursor: pointer;
 }
+
 /* ds is the share btn */
 /* dp is pin btn */
 
-#dock-toggle i,
-#ds i,
-#dp i {
+#dock-toggle .icon,
+#ds .icon,
+#dp .icon {
   color: var(--dock-accent) !important;
   font-size: 0.75rem;
 }
 
-#dp[aria-pressed="false"] i {
+#dp[aria-pressed="false"] .icon {
   color: var(--dock-muted) !important;
 }
 
@@ -571,7 +581,7 @@ main,
   background: var(--dock-bg);
 }
 
-#dock > :not(select) {
+#dock> :not(select) {
   order: 2;
 }
 

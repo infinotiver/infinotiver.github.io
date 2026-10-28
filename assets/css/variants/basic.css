@@ -169,7 +169,7 @@
     font-size: 0.875rem;
 }
 
-[data-v="basic"] .work-item-link i {
+[data-v="basic"] .work-item-link .icon {
     display: none;
 }
 

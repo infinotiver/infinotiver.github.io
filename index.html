@@ -29,7 +29,7 @@
     <meta name="twitter:image" content="https://infinotiver.com/assets/logo_new.webp" />
 
     <link rel="stylesheet" href="assets/css/styles.base.css" />
-    
+
     <!-- pre-paint theme bootstrap -->
     <script>
         (() => {
@@ -93,8 +93,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
     <script src="assets/js/oneko.js" defer></script>
 </head>
 
@@ -120,12 +118,12 @@
             <div class="social-links">
                 <a href="https://github.com/infinotiver" title="GitHub" data-name="@infinotiver" target="_blank"
                     rel="noopener">
-                    <i class="fa-brands fa-github"></i>
+                       <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#github"></use></svg>
                 </a>
 
                 <a href="https://discord.com/users/900992402356043806" title="Discord" data-name="@mavvvy.fr"
                     target="_blank" rel="noopener">
-                    <i class="fa-brands fa-discord"></i>
+                       <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#discord"></use></svg>
                 </a>
             </div>
             <p class="web-info">this site picks a new look on each visit. try refreshing or explore styles in
@@ -170,7 +168,7 @@
                     <div class="work-item-row">
                         <h3>Tessarect Discord Bot</h3>
                         <a class="work-code" href="https://github.com/infinotiver/tessarect-bot" target="_blank"
-                            rel="noopener"><i class="fa-brands fa-github"></i></a>
+                            rel="noopener">   <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#github"></use></svg></a>
                     </div>
                     <p>A powerful moderation, economy and utility bot for your discord server.</p>
                     <p class="work-stack">discord.py · mongodb</p>
@@ -183,7 +181,7 @@
                             <h3>WakaDash <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
                         </a>
                         <a class="work-code" href="https://github.com/infinotiver/wakadash" target="_blank"
-                            rel="noopener"><i class="fa-brands fa-github"></i></a>
+                            rel="noopener">   <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#github"></use></svg></a>
                     </div>
                     <p>A React Native client for viewing WakaTime statistics on Android.</p>
                     <p class="work-stack">ReactNative · Expo · TypeScript</p>
@@ -195,7 +193,7 @@
                             <h3>Slangtype <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
                         </a>
                         <a class="work-code" href="https://github.com/infinotiver/slangtype" target="_blank"
-                            rel="noopener"><i class="fa-brands fa-github"></i></a>
+                            rel="noopener">   <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#github"></use></svg></a>
                     </div>
                     <p>A typing speed test with slang word sets and AI-assisted modes.</p>
                     <p class="work-stack">React · NeonDB · Framer Motion</p>
@@ -207,7 +205,7 @@
                             <h3>Karret OS <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
                         </a>
                         <a class="work-code" href="https://github.com/infinotiver/karretos" target="_blank"
-                            rel="noopener"><i class="fa-brands fa-github"></i></a>
+                            rel="noopener">   <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#github"></use></svg></a>
                     </div>
                     <p>A minimalist, browser-based WebOS built as a portfolio.</p>
                     <p class="work-stack">React</p>
@@ -221,7 +219,7 @@
                             <h3>Emergency Numbers Lookup <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
                         </a>
                         <a class="work-code" href="https://github.com/infinotiver/emergency-numbers" target="_blank"
-                            rel="noopener"><i class="fa-brands fa-github"></i></a>
+                            rel="noopener">   <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#github"></use></svg></a>
                     </div>
                     <p>A small utility that surfaces the right emergency number for your location.</p>
                     <p class="work-stack">React · Tailwind</p>
@@ -235,7 +233,7 @@
                             <h3>Memento Mori Status <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
                         </a>
                         <a class="work-code" href="https://github.com/infinotiver/memento-mori-status" target="_blank"
-                            rel="noopener"><i class="fa-brands fa-github"></i></a>
+                            rel="noopener">   <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#github"></use></svg></a>
                     </div>
                     <p>A VS Code extension for your status bar</p>
                     <p class="work-stack">TypeScript</p>
@@ -260,12 +258,12 @@
     </footer>
     <div id="dock-bar">
         <button id="ds" type="button">
-            <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+               <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#share-nodes"></use></svg>
             <span>share</span>
         </button>
         <button id="dock-toggle" type="button" aria-controls="dock" aria-expanded="false"
             aria-label="Open design controls">
-            <i class="fa-solid fa-gear" aria-hidden="true"></i>
+               <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#gear"></use></svg>
             <code id="seed-badge">#-----</code>
         </button>
     </div>
@@ -278,7 +276,9 @@
         <input id="dc" type="range" min="0" max="359" aria-label="Accent hue" />
         <button id="dr" type="button">Shuffle</button>
         <button id="dp" type="button" aria-pressed="false">
-            <i class="fa-solid fa-thumbtack" aria-hidden="true"></i>
+            <svg class="icon" aria-hidden="true">
+                <use href="assets/icons.svg#thumbtack"></use>
+            </svg>
             <span id="dp-text">pin</span>
         </button>
     </div>

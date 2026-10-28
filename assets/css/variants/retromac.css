@@ -211,7 +211,7 @@
     font-weight: 700;
 }
 
-[data-v="retromac"] .work-item-link i {
+[data-v="retromac"] .work-item-link .icon {
     display: none;
 }
 

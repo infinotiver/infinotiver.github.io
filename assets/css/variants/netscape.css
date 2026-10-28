@@ -125,7 +125,7 @@
     border: 1px inset var(--n-hi);
 }
 
-.ns-progress i {
+.ns-progress .icon {
     display: block;
     height: 100%;
     width: 0;
@@ -237,7 +237,7 @@
     color: var(--n-hover);
 }
 
-[data-v="netscape"] .work-item-link i,
+[data-v="netscape"] .work-item-link .icon,
 [data-v="netscape"] .work-item p {
     color: #000;
 }
