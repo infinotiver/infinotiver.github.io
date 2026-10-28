@@ -1,0 +1,46 @@
+   name: Deploy site
+
+   on:
+     push:
+       branches: [main]
+     workflow_dispatch:
+
+   permissions:
+     contents: read
+     pages: write
+     id-token: write
+
+   # one deploy at a time, newest wins
+   concurrency:
+     group: pages
+     cancel-in-progress: true
+
+   jobs:
+     deploy:
+       runs-on: ubuntu-latest
+       environment:
+         name: github-pages
+         url: ${{ steps.deployment.outputs.page_url }}
+       steps:
+         - uses: actions/checkout@v4
+
+         # copy only what should be public
+         - name: Stage site
+           run: |
+             mkdir _site
+             rsync -a --exclude='.git' --exclude='.github' --exclude='_site' \
+               --exclude='build-icons.sh' --exclude='node_modules' ./ _site/
+
+         # sha and date of the commit being deployed
+         - name: Write build.json
+           run: |
+             sha=${GITHUB_SHA::7}
+             date=$(TZ=UTC date -d "$(git log -1 --format=%cI)" '+%b %-d, %Y')
+             printf '{"sha":"%s","date":"%s"}\n' "$sha" "$date" > _site/build.json
+
+         - uses: actions/configure-pages@v5
+         - uses: actions/upload-pages-artifact@v3
+           with:
+             path: _site
+         - id: deployment
+           uses: actions/deploy-pages@v4
