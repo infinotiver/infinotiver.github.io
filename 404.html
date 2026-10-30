@@ -8,19 +8,19 @@
     <title>404</title>
     <link rel="shortcut icon" href="/assets/logo_new.webp" type="image/webp" />
     <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
+        html {
+            min-height: 100%;
             background: #000;
             color-scheme: dark;
         }
 
         body {
-            display: grid;
-            place-items: center;
+            min-height: 100svh;
+            margin: 0;
             padding: 1.5rem;
             box-sizing: border-box;
+            display: grid;
+            place-items: center;
             color: #fff;
             font: 500 0.875rem/1.4 system-ui, sans-serif;
         }
@@ -35,7 +35,7 @@
             text-align: center;
         }
 
-        /* art is hidden until the sprite loads */
+        /* art visibility */
         .a {
             display: none;
         }
@@ -53,9 +53,12 @@
             white-space: nowrap;
         }
 
-        /* big 404 */
+        /* 404 */
         h1 {
+            width: 100%;
             margin: 0;
+            display: grid;
+            place-items: center;
             font: 800 clamp(5rem, 20vw, 10rem) / 0.9 system-ui, sans-serif;
             letter-spacing: -0.05em;
         }
@@ -66,7 +69,22 @@
             max-width: 100%;
         }
 
-        /* joke lines share one letter height */
+        .error-plain {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .avatar {
+            width: 0.72em;
+            height: 0.72em;
+            margin: 0 0.02em;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* joke lines */
         .joke {
             display: grid;
             gap: 0.3rem;
@@ -138,7 +156,7 @@
             color: #fff;
         }
 
-        /* phones: lines fit the width, box shrinks with the letters */
+        /* mobile */
         @media (max-width: 600px) {
             body {
                 padding: 1rem;
@@ -154,8 +172,13 @@
 <body>
     <main>
         <button id="mode" type="button" hidden aria-pressed="false">plain text</button>
-        <h1>
-            <span class="t">404</span>
+
+        <h1 class="error-code">
+            <span class="t error-plain">
+                <span>4</span>
+                <img src="assets/avatars/white-bg.webp" alt="0" class="avatar">
+                <span>4</span>
+            </span>
             <svg class="a" viewBox="0 -800 1386 1000" aria-hidden="true">
                 <use href="#n404" />
             </svg>
