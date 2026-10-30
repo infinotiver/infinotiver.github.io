@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Infino (@infinotiver)</title>
+    <title>infinotiver — Pranjal</title>
     <meta name="description"
-        content="Infino (@infinotiver) is a developer who builds for fun with React, TypeScript and Python." />
+        content="Infinotiver — I build for fun, mostly with React, TypeScript, and Python. Selected projects, bots, and tools." />
     <meta name="author" content="Infinotiver" />
     <meta name="keywords" content="infinotiver, Infino, developer portfolio, React, TypeScript, Python" />
     <meta name="robots" content="index, follow" />
@@ -17,16 +17,17 @@
     <!-- Open Graph / social previews -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Infino" />
-    <meta property="og:title" content="Infino (@infinotiver)" />
+    <meta property="og:title" content="Pranjal (@infinotiver)" />
     <meta property="og:description"
-        content="I build for fun, mostly with React, TypeScript and Python. Selected work, bots and tools." />
+        content="Pranjal | I build for fun, mostly with React, TypeScript and Python. Selected work, bots and tools." />
     <meta property="og:url" content="https://infinotiver.com/" />
-    <meta property="og:image" content="https://infinotiver.com/assets/logo_new.webp" />
+    <meta property="og:image" content="https://infinotiver.com/assets/avatars/white-bg.webp" />
+
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Infino (@infinotiver)" />
+    <meta name="twitter:title" content="Pranjal (@infinotiver)" />
     <meta name="twitter:description"
-        content="I build for fun, mostly with React, TypeScript and Python. Selected work, bots and tools." />
-    <meta name="twitter:image" content="https://infinotiver.com/assets/logo_new.webp" />
+        content="Pranjal | I build for fun, mostly with React, TypeScript and Python. Selected work, bots and tools." />
+    <meta name="twitter:image" content="https://infinotiver.com/assets/avatars/white-bg.webp" />
 
     <link rel="stylesheet" href="assets/css/styles.base.css" />
 
@@ -81,18 +82,23 @@
                 l.rel = "stylesheet";
                 l.id = "variant-css";
                 l.href = `assets/css/variants/${v}.css`;
-                l.blocking = "render"; 
+                l.blocking = "render";
                 document.head.appendChild(l);
             }
+
+            // hide the dock hint for returning visitors before first paint
+            try {
+                if (localStorage.getItem("dock-hint-seen")) {
+                    document.documentElement.classList.add("hint-seen");
+                }
+            } catch { }
         })();
     </script>
 
-
-
     <!-- Favicon configurations -->
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="assets/logo_new.webp" />
+    <link rel="icon" href="assets/avatars/transparent.webp" type="image/webp" />
+    <link rel="shortcut icon" href="assets/avatars/transparent.webp" type="image/webp" />
+    <link rel="apple-touch-icon" href="assets/avatars/transparent-2048x2048.png" />
 
     <!-- Fonts are loaded on demand by variant-engine.js -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -104,7 +110,8 @@
 <body>
     <header class="site-nav">
         <a href="#home" class="nav-mark">
-            <img src="assets/logo64x64.webp" alt="" width="20" height="20" loading="eager" decoding="async" />
+            <!-- not req anymore, img in hero section -->
+            <!-- <img src="assets/avatars/white-bg.png" alt="" width="20" height="20" loading="eager" decoding="async" /> -->
             infinotiver
         </a>
         <nav>
@@ -115,7 +122,11 @@
 
     <main>
         <section id="home" class="hero">
-            <h1 class="hero-name">Infino</h1>
+            <div class="hero-container">
+                <img class="hero-avatar" src="assets/avatars/transparent.webp" alt="Avatar">
+                <h1 class="hero-name">Infinotiver</h1>
+            </div>
+
             <p class="hero-bio">
                 I build for fun - mostly with React, TypeScript, and Python (side projects are my
                 main quest)
@@ -135,8 +146,7 @@
                     </svg>
                 </a>
             </div>
-            <p class="web-info">this site picks a new look on each visit. try refreshing or explore styles in
-                bottom-right corner</p>
+
         </section>
 
         <section id="about" class="work">
@@ -189,7 +199,9 @@
                     <div class="work-item-row">
                         <a class="work-item-link" href="https://github.com/infinotiver/wakadash/releases"
                             target="_blank" rel="noopener">
-                            <h3>WakaDash <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
+                            <h3>WakaDash <svg class="icon" aria-hidden="true">
+                                    <use href="assets/icons.svg#arrow-up-right-from-square"></use>
+                                </svg></h3>
                         </a>
                         <a class="work-code" href="https://github.com/infinotiver/wakadash" target="_blank"
                             rel="noopener"> <svg class="icon" aria-hidden="true">
@@ -203,7 +215,9 @@
                 <li class="work-item">
                     <div class="work-item-row">
                         <a class="work-item-link" href="https://slangtype.vercel.app/" target="_blank" rel="noopener">
-                            <h3>Slangtype <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
+                            <h3>Slangtype <svg class="icon" aria-hidden="true">
+                                    <use href="assets/icons.svg#arrow-up-right-from-square"></use>
+                                </svg></h3>
                         </a>
                         <a class="work-code" href="https://github.com/infinotiver/slangtype" target="_blank"
                             rel="noopener"> <svg class="icon" aria-hidden="true">
@@ -217,7 +231,9 @@
                 <li class="work-item">
                     <div class="work-item-row">
                         <a class="work-item-link" href="https://karretos.vercel.app/" target="_blank" rel="noopener">
-                            <h3>Karret OS <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
+                            <h3>Karret OS <svg class="icon" aria-hidden="true">
+                                    <use href="assets/icons.svg#arrow-up-right-from-square"></use>
+                                </svg></h3>
                         </a>
                         <a class="work-code" href="https://github.com/infinotiver/karretos" target="_blank"
                             rel="noopener"> <svg class="icon" aria-hidden="true">
@@ -233,7 +249,9 @@
                     <div class="work-item-row">
                         <a class="work-item-link" href="http://infinotiver.is-a.dev/emergency-numbers/" target="_blank"
                             rel="noopener">
-                            <h3>Emergency Numbers Lookup <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
+                            <h3>Emergency Numbers Lookup <svg class="icon" aria-hidden="true">
+                                    <use href="assets/icons.svg#arrow-up-right-from-square"></use>
+                                </svg></h3>
                         </a>
                         <a class="work-code" href="https://github.com/infinotiver/emergency-numbers" target="_blank"
                             rel="noopener"> <svg class="icon" aria-hidden="true">
@@ -249,7 +267,9 @@
                         <a class="work-item-link"
                             href="https://marketplace.visualstudio.com/items?itemName=infinotiver.memento-mori-status"
                             target="_blank" rel="noopener">
-                            <h3>Memento Mori Status <i class="fa-solid fa-arrow-up-right-from-square"></i></h3>
+                            <h3>Memento Mori Status <svg class="icon" aria-hidden="true">
+                                    <use href="assets/icons.svg#arrow-up-right-from-square"></use>
+                                </svg></h3>
                         </a>
                         <a class="work-code" href="https://github.com/infinotiver/memento-mori-status" target="_blank"
                             rel="noopener"> <svg class="icon" aria-hidden="true">
@@ -264,7 +284,7 @@
     </main>
 
     <footer class="site-footer">
-        <span>© 2024–2026 Pranjal (Infinotiver)</span>
+        <span>© 2024–2026 infinotiver</span>
         <span class="footer-meta">
             <code id="last-commit">--</code> · updated <span id="last-update">--</span>
             <span>· <a href="navigator.html" aria-label="version navigator">archives</a></span>
@@ -278,6 +298,7 @@
         </span>
     </footer>
     <div id="dock-bar">
+        <p class="web-info">this site picks a new look on each visit. try refreshing or explore styles</p>
         <button id="ds" type="button">
             <svg class="icon" aria-hidden="true">
                 <use href="assets/icons.svg#share-nodes"></use>
@@ -294,9 +315,9 @@
     </div>
 
     <div id="dock" role="group" aria-label="Design controls" aria-hidden="true">
-        <select id="dv" aria-label="Variant"></select>
-        <select id="dh" aria-label="Heading font"></select>
-        <select id="db" aria-label="Body font"></select>
+        <label><span>Style</span><select id="dv"></select></label>
+        <label><span>Heading</span><select id="dh"></select></label>
+        <label><span>Body</span><select id="db"></select></label>
         <span>hue</span>
         <input id="dc" type="range" min="0" max="359" aria-label="Accent hue" />
         <button id="dr" type="button">Shuffle</button>

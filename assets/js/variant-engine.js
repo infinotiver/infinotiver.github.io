@@ -29,8 +29,8 @@
         },
         basic: {
             label: "Basic",
-            h: ["Courier Prime", "Newsreader", "IBM Plex Serif"],
-            b: ["Lora", "Literata", "IBM Plex Mono"],
+            h: ["Lora", "Literata", "IBM Plex Mono"],
+            b: ["Courier Prime", "Newsreader", "IBM Plex Serif"],
             fallback: { h: "serif", b: "serif" },
         },
         terminal: {
@@ -47,10 +47,11 @@
         },
         retromac: {
             label: "Retro Mac",
-            h: ["Silkscreen", "Pixelify Sans", "Press Start 2P"],
-            b: ["Public Sans", "Instrument Sans", "Cousine"],
+            h: ["Silkscreen", "Pixelify Sans", "VT323"],
+            b: ["Inter", "Cousine", "IBM Plex Mono"],
             fallback: { h: "sans-serif", b: "sans-serif" },
         },
+
     };
 
     const NAMES = Object.keys(VARIANTS);
@@ -170,6 +171,9 @@
         url.hash = "";
         return url.href;
     }
+    // touch devices get the share sheet, desktop keeps copy
+    const canShare = () =>
+        !!navigator.share && matchMedia("(pointer: coarse)").matches;
 
     function updateBadge() {
         const badge = $("seed-badge");
@@ -237,7 +241,7 @@
             module.init?.();
             activeModule = module;
         } catch (error) {
-            console.error(`init() failed for ${name}`, error);
+            console.warn(`init() failed for ${name}`, error);
         }
     }
 
@@ -245,13 +249,26 @@
     let eggTimer;
     // swap the variant stylesheet when the variant changes
     function loadVariantCss(v) {
-        document.getElementById("variant-css")?.remove();
-        if (v === "default") return;
-        const l = document.createElement("link");
-        l.rel = "stylesheet";
-        l.id = "variant-css";
-        l.href = `assets/css/variants/${v}.css`;
-        document.head.appendChild(l);
+        const old = document.getElementById("variant-css");
+
+        if (v === "default") {
+            old?.remove();
+            return;
+        }
+
+        const href = `assets/css/variants/${v}.css`;
+        // the bootstrap already loaded this one; replacing it would flash the default look
+        if (old && old.getAttribute("href") === href) return;
+
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = href;
+        // keep the old sheet until the new one is ready
+        link.onload = () => {
+            old?.remove();
+            link.id = "variant-css";
+        };
+        document.head.appendChild(link);
     }
 
     function apply({ updateCode = true } = {}) {
@@ -395,9 +412,17 @@
     const dock = $("dock");
     const toggle = $("dock-toggle");
 
+    // the dock hint is only for first-time visitors; hide it for good once the dock opens
+    const hint = document.querySelector("#dock-bar .web-info");
+    function dismissHint() {
+        if (!hint || hint.classList.contains("is-gone")) return;
+        try { localStorage.setItem("dock-hint-seen", "1"); } catch { }
+        hint.classList.add("is-fading");
+        setTimeout(() => hint.classList.add("is-gone"), 300);
+    }
     function setDockOpen(open) {
         if (!dock || !toggle) return;
-
+        if (open) dismissHint();
         dock.classList.toggle("is-open", open);
         dock.setAttribute("aria-hidden", String(!open));
         toggle.setAttribute("aria-expanded", String(open));
@@ -478,9 +503,6 @@
 
         setDockOpen(false);
     }
-    // touch devices get the share sheet, desktop keeps copy
-    const canShare = () =>
-        !!navigator.share && matchMedia("(pointer: coarse)").matches;
 
     if ($("ds")) {
         $("ds").addEventListener("click", async () => {

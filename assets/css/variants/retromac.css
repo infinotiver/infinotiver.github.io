@@ -9,6 +9,7 @@
     --muted: var(--ink);
     --muted-2: var(--ink);
     --border: var(--ink);
+    --win-w: min(46rem, 92vw);
     color-scheme: light;
 }
 
@@ -22,7 +23,6 @@
     color: var(--paper);
 }
 
-/* nav */
 /* menu bar */
 [data-v="retromac"] .site-nav {
     position: fixed;
@@ -68,16 +68,22 @@
     filter: grayscale(1) contrast(3);
 }
 
-/* windows */
 /* main */
 [data-v="retromac"] main {
     display: grid;
     gap: 1.75rem;
+    width: var(--win-w);
+    margin-inline: auto;
 }
 
+/* windows */
 [data-v="retromac"] .hero,
 [data-v="retromac"] .work {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* window never scrolls, so the title bar stays put */
     padding: 2.75rem 1.25rem 1.25rem;
     text-align: left;
     border: 1px solid var(--ink);
@@ -92,6 +98,17 @@
         var(--paper);
 }
 
+/* window sizes */
+[data-v="retromac"] .work {
+    height: min(58dvh, 34rem);
+}
+
+[data-v="retromac"] .hero {
+    min-height: min(30dvh, 16rem);
+    /* min so small phones don't clip the bio */
+}
+
+/* title */
 [data-v="retromac"] .hero::before,
 [data-v="retromac"] .work::before {
     position: absolute;
@@ -116,6 +133,7 @@
     content: "Selected";
 }
 
+/* zoom box */
 [data-v="retromac"] .hero::after,
 [data-v="retromac"] .work::after {
     content: "";
@@ -133,9 +151,18 @@
         var(--paper);
 }
 
+/* hero */
 [data-v="retromac"] .hero-name {
     font-size: 2.125rem;
     margin-bottom: 0.5rem;
+}
+
+[data-v="retromac"] .hero-avatar {
+    border-radius: 0;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    filter: grayscale(1) contrast(1.4);
+    /* 1-bit look */
 }
 
 [data-v="retromac"] .hero-bio {
@@ -166,6 +193,7 @@
 
 [data-v="retromac"] .social-links a:first-child {
     outline: 2px solid var(--ink);
+    /* default button ring */
     outline-offset: 0;
 }
 
@@ -180,6 +208,11 @@
 }
 
 [data-v="retromac"] .work-list {
+    flex: 1;
+    min-height: 0;
+    /* lets the flex child shrink so overflow can scroll */
+    overflow-y: auto;
+    overscroll-behavior: contain;
     border: 2px solid var(--ink);
 }
 
@@ -200,6 +233,7 @@
     border: 2px solid var(--ink);
     background: var(--paper);
     clip-path: polygon(0 0, 70% 0, 100% 28%, 100% 100%, 0 100%);
+    /* dog-ear doc icon */
 }
 
 [data-v="retromac"] .work-item>* {
@@ -224,7 +258,7 @@
 }
 
 [data-v="retromac"] .work-item:hover {
-    background: var(--ink);
+    background: hsl(var(--h, 180), 50%, 55%);
     color: var(--paper);
 }
 
@@ -237,7 +271,28 @@
     opacity: 1;
 }
 
-/* footer */
+/* scrollbar */
+[data-v="retromac"] .work-list::-webkit-scrollbar {
+    width: 16px;
+}
+
+[data-v="retromac"] .work-list::-webkit-scrollbar-track {
+    background: radial-gradient(var(--ink) 1px, transparent 1px) 0 0 / 4px 4px, var(--paper);
+    border-left: 1px solid var(--ink);
+}
+
+[data-v="retromac"] .work-list::-webkit-scrollbar-thumb {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+}
+
+/* firefox fallback */
+@supports not selector(::-webkit-scrollbar) {
+    [data-v="retromac"] .work-list {
+        scrollbar-color: var(--ink) var(--paper);
+    }
+}
+
 /* status bar */
 [data-v="retromac"] .site-footer {
     flex-direction: row;
@@ -245,6 +300,8 @@
     justify-content: space-between;
     align-items: center;
     gap: 0.25rem 0.75rem;
+    width: var(--win-w);
+    max-width: none;
     margin: 1.75rem auto var(--dock-clear);
     padding: 0.25rem 0.75rem;
     text-align: left;
@@ -261,6 +318,7 @@
     background: none;
 }
 
+/* mobile */
 @media (max-width: 480px) {
     [data-v="retromac"] .work-stack {
         display: none;
