@@ -323,11 +323,22 @@ main,
   cursor: pointer;
 }
 
+.site-footer a.footer-archives {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+}
+
 .site-footer a:hover,
 .site-footer button:hover,
 .site-footer code:hover {
   color: var(--fg);
 }
+
+.site-footer a.footer-archives:hover { border-color: var(--muted-2); }
 
 .footer-top {
   display: flex;
