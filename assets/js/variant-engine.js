@@ -7,30 +7,32 @@
 
     // variants that ship an init()/destroy() module in variants/<name>.js (append when one is added)
     const MODULES = new Set(["terminal", "netscape", "retromac", "gov"]);
+    // fonts missing 500 or 600 load at their default weight
+    const SINGLE_WEIGHT = new Set(["Young Serif", "Tinos", "Crimson Text", "Geist Pixel", "Courier Prime", "VT323", "Varela Round", "Silkscreen", "DotGothic16", "Cousine", "Space Mono"]);
 
     const VARIANTS = {
         default: {
             label: "Default",
-            h: ["Fraunces", "Instrument Serif", "Young Serif"],
+            h: ["Inter Tight", "Manrope", "Space Grotesk"],
             b: ["Inter", "Geist", "Hanken Grotesk"],
-            fallback: { h: "serif", b: "sans-serif" },
+            fallback: { h: "sans-serif", b: "sans-serif" },
         },
         gov: {
             label: "Gov",
             h: ["Montserrat", "Poppins", "Oswald"],
-            b: ["Figtree", "Lato", "Fira Sans"],
+            b: ["Figtree", "Public Sans", "Fira Sans"],
             fallback: { h: "sans-serif", b: "sans-serif" },
         },
         netscape: {
             label: "Netscape",
-            h: ["Tinos", "Libre Baskerville", "Gelasio"],
+            h: ["Tinos", "Gelasio", "Crimson Text"],
             b: ["Arimo", "Open Sans", "Source Sans 3"],
             fallback: { h: "serif", b: "sans-serif" },
         },
         basic: {
             label: "Basic",
-            h: ["Lora", "Literata", "IBM Plex Mono"],
-            b: ["Courier Prime", "Newsreader", "IBM Plex Serif"],
+            h: ["Lora", "Geist Pixel", "Courier Prime"],
+            b: ["Source Serif 4", "Newsreader", "IBM Plex Serif"],
             fallback: { h: "serif", b: "serif" },
         },
         terminal: {
@@ -42,16 +44,15 @@
         web2: {
             label: "Web 2.0",
             h: ["Varela Round", "Nunito", "Rubik"],
-            b: ["Open Sans", "Lato", "Nunito Sans"],
+            b: ["Mulish", "Red Hat Text", "Albert Sans"],
             fallback: { h: "sans-serif", b: "sans-serif" },
         },
         retromac: {
             label: "Retro Mac",
-            h: ["Silkscreen", "Pixelify Sans", "VT323"],
-            b: ["Inter", "Cousine", "IBM Plex Mono"],
+            h: ["Silkscreen", "DotGothic16", "Tiny5"],
+            b: ["Instrument Sans", "Cousine", "Space Mono"],
             fallback: { h: "sans-serif", b: "sans-serif" },
         },
-
     };
 
     const NAMES = Object.keys(VARIANTS);
@@ -128,7 +129,8 @@
         const link = document.createElement("link");
         link.id = id;
         link.rel = "stylesheet";
-        link.href = `https://fonts.googleapis.com/css2?family=${family}&display=swap`;
+        const weights = SINGLE_WEIGHT.has(fontName) ? "" : ":wght@400;500;600";
+        link.href = `https://fonts.googleapis.com/css2?family=${family}${weights}&display=swap`;
         document.head.appendChild(link);
     }
 

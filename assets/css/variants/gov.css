@@ -123,7 +123,7 @@
 }
 
 [data-v="gov"] .work-item h3 {
-    font-family: var(--sans);
+    font-family: var(--fb);
     font-weight: 700;
     color: var(--g-link);
     text-decoration: underline;
@@ -188,7 +188,7 @@
     background: hsl(var(--h, 210) 60% 20%);
     color: #fff;
     border-top: 4px solid #fd0;
-    font-family: var(--sans);
+    font-family: var(--fb);
     animation: gov-up 0.3s ease-out;
 }
 

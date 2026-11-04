@@ -43,7 +43,7 @@
 [data-v="retromac"] .site-nav nav a.nav-btn {
     padding: 0 0.5rem;
     line-height: 1.1875rem;
-    font-family: var(--serif);
+    font-family: var(--fh);
     font-weight: 700;
     background: none;
     border-radius: 0;
@@ -119,7 +119,7 @@
     line-height: 22px;
     padding: 0 0.625rem;
     background: var(--paper);
-    font-family: var(--serif);
+    font-family: var(--fh);
     font-size: 1.2rem;
     font-weight: 900;
     white-space: nowrap;
@@ -180,7 +180,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.125rem 1rem;
-    font-family: var(--serif);
+    font-family: var(--fh);
     font-size: var(--text-sm);
     color: var(--ink);
     border: 1px solid var(--ink);

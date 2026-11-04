@@ -2,24 +2,26 @@
 
 /* variant */
 [data-v="basic"] {
-    --bg: hsl(var(--h), 16%, 10%);
+    --bg: #0d0d0d;
     --fg: #fafafa;
-    --muted: #a1a1aa;
-    --muted-2: #71717a;
-    --border: #27272a;
+    --muted: #a3a3a3;
+    --muted-2: #737373;
+    --border: #242424;
+    --accent: hsl(var(--h) 80% 55%);
     color-scheme: dark;
 }
 
 [data-v="basic"] body {
     font-size: 0.9375rem;
     line-height: 1.7;
+    text-transform: lowercase;
 }
 
 /* layout */
 [data-v="basic"] .site-nav,
 [data-v="basic"] main,
 [data-v="basic"] .site-footer {
-    max-width: 34rem;
+    max-width: 31rem;
 }
 
 /* links */
@@ -38,9 +40,9 @@
 /* nav */
 [data-v="basic"] .site-nav {
     justify-content: flex-start;
-    gap: 0.5rem;
-    padding-top: 3.5rem;
-    padding-bottom: 1.5rem;
+    gap: 1rem;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
     border-bottom: none;
 }
 
@@ -49,7 +51,7 @@
 }
 
 [data-v="basic"] .site-nav nav {
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 [data-v="basic"] .site-nav nav a {
@@ -57,11 +59,7 @@
 }
 
 [data-v="basic"] .site-nav nav a::before {
-    content: "/ ";
-    color: var(--muted-2);
-    display: inline-block;
-    margin-right: 0.25rem;
-    text-decoration: none;
+    display: none;
 }
 
 [data-v="basic"] .site-nav nav a:hover {
@@ -69,12 +67,18 @@
 }
 
 [data-v="basic"] .site-nav nav a.nav-btn {
-    background: #18181b;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
     color: var(--accent);
     border: 1px solid var(--border);
     border-radius: 3px;
     padding: 0.25rem 0.5rem;
+    line-height: 1;
+    text-align: center;
     text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 [data-v="basic"] .site-nav nav a.nav-btn::before {
@@ -83,37 +87,40 @@
 
 [data-v="basic"] .site-nav nav a.nav-btn:hover {
     background-color: var(--accent);
+    border-color: var(--accent);
     color: #000;
     opacity: 1;
 }
 
 /* hero */
 [data-v="basic"] .hero {
-    padding: 0 0 2.5rem;
+    padding: 0 0 3rem;
     text-align: left;
 }
 
 [data-v="basic"] .hero-name {
-    font-family: var(--serif);
+    font-family: var(--fh);
     font-size: 2.25rem;
     font-weight: 800;
     line-height: 1.25;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
+
 [data-v="basic"] .hero-avatar {
     display: none;
 }
+
 [data-v="basic"] .hero-bio {
     margin: 0;
     color: var(--muted);
-    max-width: 48ch;
+    max-width: 45ch;
 }
 
 [data-v="basic"] .social-links {
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 0.875rem;
-    margin-top: 1rem;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
 }
 
 [data-v="basic"] .social-links a {
@@ -122,18 +129,18 @@
 
 /* section headings */
 [data-v="basic"] .work h2 {
-    font-family: var(--serif);
+    font-family: var(--fh);
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.3;
     color: var(--fg);
-    margin: 0 0 1.5rem;
+    margin: 0 0 1rem;
 }
 
 /* experience / selected work entries */
 [data-v="basic"] .work-item {
-    padding: 0 0 1.5rem;
-    margin: 0 0 1.5rem;
+    padding: 0 0 1.25rem;
+    margin: 0 0 1.25rem;
     border-bottom: 1px solid var(--border);
 }
 
@@ -143,7 +150,7 @@
 }
 
 [data-v="basic"] .work-item h3 {
-    font-family: var(--sans);
+    font-family: var(--fh);
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.5;
@@ -223,4 +230,55 @@
 
 [data-v="basic"] .site-footer a {
     color: var(--accent);
+}
+
+/* the selected work list is deliberately quiet and compact */
+[data-v="basic"] .work+.work {
+    padding-bottom: 2rem;
+}
+
+[data-v="basic"] .work+.work .work-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+[data-v="basic"] .work+.work .work-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 9.5rem;
+    margin: 0;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: #151515;
+}
+
+[data-v="basic"] .work+.work .work-item:last-child {
+    min-height: 0;
+    padding: 0.625rem 1rem;
+}
+
+[data-v="basic"] .work+.work .work-item-row {
+    min-height: 2rem;
+}
+
+[data-v="basic"] .work+.work .work-item p {
+    margin-top: 0.5rem;
+}
+
+[data-v="basic"] .work+.work .work-stack {
+    margin-top: auto;
+    padding-top: 0.75rem;
+}
+
+[data-v="basic"] .work+.work .work-item:hover {
+    border-color: #363636;
+}
+
+@media (max-width: 520px) {
+    [data-v="basic"] .work+.work .work-list {
+        grid-template-columns: 1fr;
+    }
 }

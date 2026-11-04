@@ -7,8 +7,6 @@
   --h: 210;
   --fh: Georgia, serif;
   --fb: system-ui, sans-serif;
-  --serif: var(--fh);
-  --sans: var(--fb);
 
   --accent: hsl(var(--h, 210) 85% 80%);
   --radius-btn: 0.6rem;
@@ -37,7 +35,7 @@ body {
   margin: 0;
   background: var(--bg, #0a0a0b);
   color: var(--fg);
-  font-family: var(--sans);
+  font-family: var(--fb);
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -142,11 +140,11 @@ main,
 }
 
 .hero-name {
-  font-family: var(--serif);
+  font-family: var(--fh);
   font-weight: 400;
   font-size: clamp(2.5rem, 6vw, 3.5rem);
   line-height: 1.1;
-    min-width: 0;
+  min-width: 0;
   margin: 0;
   cursor: default;
   transition: opacity 0.18s ease;
@@ -160,6 +158,18 @@ main,
   /* max-width: 46ch; */
   /* margin: 0 auto; */
   color: var(--muted);
+}
+
+[data-v="default"] .hero-name {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+[data-v="default"] .hero-bio {
+  color: var(--muted);
+  /* max-width: 34rem; */
+  /* text-wrap: balance; */
 }
 
 .social-links {
@@ -188,7 +198,6 @@ main,
 }
 
 .work h2 {
-  font-family: var(--serif);
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--muted);
@@ -226,7 +235,6 @@ main,
 }
 
 .work-item h3 {
-  /* font-family: var(--serif); */
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.3;
@@ -241,6 +249,14 @@ main,
   height: 0.75rem;
   color: var(--muted-2);
   transform: translateY(-2px) translateX(4px);
+  transition: opacity 0.15s ease;
+}
+
+[data-v="default"] .work-item-link .icon { opacity: 0; }
+[data-v="default"] .work-item:hover .work-item-link .icon,
+[data-v="default"] .work-item:focus-within .work-item-link .icon { opacity: 1; }
+@media (hover: none) {
+  [data-v="default"] .work-item-link .icon { opacity: 1; }
 }
 
 .work-item:hover .work-item-link h3 {
@@ -285,8 +301,8 @@ main,
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.625rem;
-  padding-top: 2rem;
+  gap: 0.25rem;
+  padding-top: 1.25rem;
   padding-bottom: var(--dock-clear);
   border-top: 1px solid var(--border);
   text-align: left;
@@ -313,13 +329,17 @@ main,
   color: var(--fg);
 }
 
-/* Footer metadata row */
-.footer-meta {
+.footer-top {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.25rem 0.75rem;
+}
+
+.footer-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 
