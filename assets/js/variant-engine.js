@@ -250,25 +250,48 @@
     // a pending egg must not fire after the look has changed
     let eggTimer;
     // swap the variant stylesheet when the variant changes
+    let cssRequestToken = 0;
+    let pendingCssLink = null;
+
     function loadVariantCss(v) {
         const old = document.getElementById("variant-css");
+        const href = v === "default" ? null : `assets/css/variants/${v}.css`;
+        const abs = href && new URL(href, location.href).href;
 
-        if (v === "default") {
+        // slider tick while this sheet is loading: keep the download and its token
+        if (abs && pendingCssLink?.href === abs) return;
+
+        // any other request cancels whatever was loading
+        const token = ++cssRequestToken;
+        pendingCssLink?.remove();
+        pendingCssLink = null;
+
+        if (!href) {
             old?.remove();
             return;
         }
 
-        const href = `assets/css/variants/${v}.css`;
-        // the bootstrap already loaded this one; replacing it would flash the default look
-        if (old && old.getAttribute("href") === href) return;
+        // already active (bootstrap link counts): nothing to load
+        if (old?.href === abs) return;
 
         const link = document.createElement("link");
         link.rel = "stylesheet";
         link.href = href;
+        pendingCssLink = link;
+
         // keep the old sheet until the new one is ready
         link.onload = () => {
+            if (token !== cssRequestToken || link !== pendingCssLink) {
+                link.remove();
+                return;
+            }
             old?.remove();
             link.id = "variant-css";
+            pendingCssLink = null;
+        };
+        link.onerror = () => {
+            if (link === pendingCssLink) pendingCssLink = null;
+            link.remove();
         };
         document.head.appendChild(link);
     }
