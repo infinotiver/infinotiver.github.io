@@ -704,3 +704,8 @@ html.hint-seen #dock-bar .web-info {
     gap: 0.375rem;
   }
 }
+@media (hover: none) and (pointer: coarse) {
+    .site-footer > span:last-child {
+        display: none;
+    }
+}

@@ -15,27 +15,26 @@
         }
 
         body {
+            padding: clamp(1rem, 4svh, 3rem) clamp(1.25rem, 5vw, 3rem);
+            box-sizing: border-box;
             min-height: 100svh;
             margin: 0;
-            padding: 1.5rem;
-            box-sizing: border-box;
             display: grid;
-            place-items: center;
+            grid-template-columns: minmax(0, 40rem);
+            place-content: center;
+            justify-items: center;
+            gap: clamp(1rem, 3svh, 2.5rem);
+            overflow-x: clip;
             color: #fff;
             font: 500 0.875rem/1.4 system-ui, sans-serif;
         }
 
-        /* page column */
-        main {
-            --size: clamp(1.5rem, 5.5vw, 3.2rem);
-            width: min(40rem, 100%);
-            display: grid;
-            justify-items: center;
-            gap: clamp(0.9rem, 3vw, 1.5rem);
-            text-align: center;
+        body>svg {
+            position: absolute;
+            width: 0;
+            height: 0;
         }
 
-        /* art visibility */
         .a {
             display: none;
         }
@@ -53,57 +52,51 @@
             white-space: nowrap;
         }
 
-        /* 404 */
+        main {
+            width: 100%;
+            display: grid;
+            justify-items: center;
+            gap: clamp(1rem, 3vw, 1.5rem);
+            text-align: center;
+        }
+
         h1 {
             width: 100%;
+            box-sizing: border-box;
             margin: 0;
             display: grid;
             place-items: center;
-            font: 800 clamp(5rem, 20vw, 10rem) / 0.9 system-ui, sans-serif;
+            font: 800 clamp(5rem, 28vw, 10rem) / 0.9 system-ui, sans-serif;
             letter-spacing: -0.05em;
+            padding-inline: 0.5rem;
         }
 
         h1 .a {
-            height: clamp(5rem, 20vw, 10rem);
-            width: auto;
+            height: clamp(4rem, min(28vw, 18svh), 14rem);
+            overflow: visible;
             max-width: 100%;
+            fill: transparent;
+            stroke: #fff;
+            stroke-width: 6;
+            stroke-linejoin: round;
+            transition: fill 0.25s;
         }
 
-        .error-plain {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            white-space: nowrap;
+        h1:hover .a {
+            fill: #fff;
         }
 
-        .avatar {
-            width: 0.72em;
-            height: 0.72em;
-            margin: 0 0.02em;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        /* joke lines */
-        .joke {
+        .message {
             display: grid;
             gap: 0.3rem;
-            justify-items: center;
-            width: 100%;
+        }
+
+        .joke {
             margin: 0;
+            font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+            color: #d4d4d4;
         }
 
-        .joke .t {
-            font-size: 1rem;
-        }
-
-        .joke .a {
-            height: var(--size);
-            width: auto;
-            max-width: 100%;
-        }
-
-        /* links */
         nav {
             display: flex;
             flex-wrap: wrap;
@@ -116,17 +109,10 @@
             align-items: center;
             color: #fff;
             background: #222;
-            font-size: 0.8rem;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
+            padding: 0.55rem 1.1rem;
             border-radius: 999px;
+            text-decoration: none;
             transition: background 0.15s, color 0.15s;
-        }
-
-        nav .a {
-            height: 2rem;
-            width: auto;
-            max-width: 100%;
         }
 
         nav a:hover,
@@ -136,63 +122,50 @@
             outline: none;
         }
 
-        /* style toggle */
-        #mode {
-            position: absolute;
-            left: 1rem;
-            top: 1rem;
-            font: inherit;
-            font-size: 0.75rem;
-            color: #aaa;
-            background: #444;
-            border-radius: 8px;
-            border: none;
-            padding: 0.3rem 0.8rem;
-            cursor: pointer;
+        nav .a {
+            height: 1.5rem;
+            width: auto;
+            max-width: 100%;
         }
 
-        #mode:hover,
-        #mode:focus-visible {
-            color: #fff;
+        .surprise {
+            --cols: 80;
+            --rows: 36;
+            --art: max(0.25rem,
+                    min(calc(min(26rem, 100vw - 2.5rem) / (var(--cols) * 0.6)),
+                        calc((100svh - 24rem) / var(--rows))));
+            width: min(100%, 26rem);
+
+            display: grid;
+            place-items: center;
+            opacity: 0.8;
         }
 
-        /* mobile */
-        @media (max-width: 600px) {
-            body {
-                padding: 1rem;
-            }
-
-            .joke .a {
-                height: auto;
-            }
+        .surprise pre {
+            margin: 0;
+            max-width: 100%;
+            overflow: visible;
+            font: var(--art) / 1 monospace;
+            white-space: pre;
         }
     </style>
 </head>
 
 <body>
     <main>
-        <button id="mode" type="button" hidden aria-pressed="false">plain text</button>
-
-        <h1 class="error-code">
-            <span class="t error-plain">
-                <span>4</span>
-                <img src="assets/avatars/white-bg.webp" alt="0" class="avatar">
-                <span>4</span>
+        <h1>
+            <span class="wrap">
+                <span class="t">404</span>
+                <svg class="a" viewBox="0 -800 1386 1000" aria-hidden="true">
+                    <use href="#n404" />
+                </svg>
             </span>
-            <svg class="a" viewBox="0 -800 1386 1000" aria-hidden="true">
-                <use href="#n404" />
-            </svg>
         </h1>
-        <p class="joke">
-            <span class="t">you either mistyped or i deleted that page</span>
-            <svg class="a" viewBox="0 -782 15363 1049" aria-hidden="true">
-                <use href="#j1" />
-            </svg>
-            <span class="t">but let's agree to blame it on you</span>
-            <svg class="a" viewBox="0 -782 12412 1049" aria-hidden="true">
-                <use href="#j2" />
-            </svg>
-        </p>
+        <div class="message">
+            <p class="joke">
+                did you type random letters again?
+            </p>
+        </div>
         <nav>
             <a href="/">
                 <span class="t">Home</span>
@@ -208,33 +181,24 @@
             </a>
         </nav>
     </main>
+    <section class="surprise" aria-live="polite" aria-label="Surprise">
+        <pre id="animation"></pre>
+    </section>
 
     <script>
-        // Load the handwriting sprite; on any failure the plain text stays
-        const root = document.documentElement;
-        const btn = document.getElementById("mode");
-        let art = false;
-
-        const isPlain = () => { try { return localStorage.getItem("404-plain") === "1"; } catch { return false; } };
-        const savePlain = v => { try { localStorage.setItem("404-plain", v ? "1" : "0"); } catch { } };
-
-        // Switch between handwriting and plain text
-        const show = on => {
-            art = on;
-            root.toggleAttribute("data-art", on);
-            btn.textContent = on ? "plain text" : "handwriting";
-            btn.setAttribute("aria-pressed", String(!on));
-        };
-
         fetch("/assets/404-sprite.svg")
             .then(r => (r.ok ? r.text() : Promise.reject()))
             .then(svg => {
                 document.body.insertAdjacentHTML("afterbegin", svg);
-                btn.hidden = false;
-                show(!isPlain());
-                btn.onclick = () => { show(!art); savePlain(!art); };
+                document.documentElement.setAttribute("data-art", "");
             })
             .catch(() => { });
+
+        import("/assets/js/surprise/rickroll.js")
+            .then(({ startRickroll }) => startRickroll(document.getElementById("animation")))
+            .catch(() => {
+                document.getElementById("animation").textContent = "surprise unavailable";
+            });
     </script>
 </body>
 
